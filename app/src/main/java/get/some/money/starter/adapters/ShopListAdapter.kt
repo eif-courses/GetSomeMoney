@@ -8,7 +8,7 @@ import android.view.View.OnClickListener
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.Item
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.shop_item.view.*
@@ -46,13 +46,13 @@ class ShopListAdapter(private val interaction: Interaction? = null) :
 
         fun bind(item: Item) = with(itemView) {
             shop_item_title.text = item.name
-            shop_item_price.text = item.price.toString()
+            shop_item_price.text = "${item.price} eur"
 
             val image:ImageView = this.findViewById(R.id.shop_item_image)
            // Glide.with(this).load("https://s3.amazonaws.com/appsdeveloperblog/Micky.jpg").into(image)
 
             // Glide.with(this).load("http://goo.gl/gEgYUd").into(image);
-            //Picasso.get().load(item.imageURL).into(image)
+            Picasso.get().load(item.imageURL).into(image)
             // TODO: Bind the data with View
         }
     }
