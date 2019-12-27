@@ -5,4 +5,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="price_shop_item">600 eur</string>
     <string name="title_shop_item" />
+    <string name="demo_name">Marius Gžegoževskis</string>
+    <string name="demo_email">m.gzegozevskis@gmail.com</string>
 </resources>

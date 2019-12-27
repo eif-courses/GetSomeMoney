@@ -39,8 +39,9 @@ class ShopListAdapter(private val interaction: Interaction? = null) :
         override fun onClick(v: View?) {
 
             if (adapterPosition == RecyclerView.NO_POSITION) return
-
             val clicked = getItem(adapterPosition)
+            interaction?.item_clicked(clicked)
+
         }
 
         fun bind(item: Item) = with(itemView) {
@@ -53,7 +54,7 @@ class ShopListAdapter(private val interaction: Interaction? = null) :
     }
 
     interface Interaction {
-
+        fun item_clicked(clicked: Item);
     }
 
     private class ItemDC : DiffUtil.ItemCallback<Item>() {
@@ -61,18 +62,14 @@ class ShopListAdapter(private val interaction: Interaction? = null) :
             oldItem: Item,
             newItem: Item
         ): Boolean {
-            TODO(
-                "not implemented"
-            )
+            return oldItem == newItem;
         }
 
         override fun areContentsTheSame(
             oldItem: Item,
             newItem: Item
         ): Boolean {
-            TODO(
-                "not implemented"
-            )
+            return oldItem.equals(newItem);
         }
     }
 }
