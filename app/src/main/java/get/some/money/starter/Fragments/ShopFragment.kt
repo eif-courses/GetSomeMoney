@@ -7,16 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
 
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.ShopViewModel
-import get.some.money.starter.adapters.ShopListAdapter
+import get.some.money.starter.Adapters.ShopListAdapter
 import kotlinx.android.synthetic.main.fragment_shop.*
 
 /**
