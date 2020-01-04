@@ -10,4 +10,9 @@
         android:name="get.some.money.starter.Fragments.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/gameplayFragment"
+        android:name="get.some.money.starter.Fragments.GameplayFragment"
+        android:label="fragment_gameplay"
+        tools:layout="@layout/fragment_gameplay" />
 </navigation>

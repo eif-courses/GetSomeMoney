@@ -7,16 +7,16 @@
         <item
             android:id="@+id/shopFragment"
             android:icon="@drawable/home"
-        android:title="Pagrindinis"/>
+        android:title="General"/>
 
 
     </group>
-    <item android:title="HELLO">
+    <item android:title="Game Zone">
         <menu>
             <item
-                android:id="@+id/nav_finish"
+                android:id="@+id/gameplayFragment"
                 android:icon="@drawable/ic_launcher_foreground"
-                android:title="OKEY"/>
+                android:title="Start game"/>
         </menu>
     </item>
 </menu>
