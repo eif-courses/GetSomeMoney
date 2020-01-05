@@ -4,6 +4,8 @@ package get.some.money.starter.Fragments
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -15,8 +17,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import get.some.money.starter.Models.GameObject
+import get.some.money.starter.Models.User
 
 import get.some.money.starter.R
+import get.some.money.starter.ViewModels.GameViewModel
+import get.some.money.starter.ViewModels.ShopViewModel
+import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_gameplay.*
 import kotlinx.android.synthetic.main.fragment_gameplay.view.*
 import kotlin.random.Random
@@ -27,8 +42,10 @@ import kotlin.random.Random
 class GameplayFragment : Fragment() {
 
     lateinit var mediaPlayer: MediaPlayer
-
+    lateinit var model: GameViewModel
+    lateinit var userModel: UserViewModel
     var images = listOf<ImageView>()
+    val RC_SIGN_IN = 123
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,26 +58,66 @@ class GameplayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mediaPlayer = MediaPlayer.create(view.context, R.raw.collect)
-        images = listOf(view.house, view.house2, view.house3, view.house3, view.house4, view.house5, view.house6, view.house7, view.house8, view.house9)
-        gameBoard.setBackgroundResource(R.drawable.level1)
+      val fireAuth = FirebaseAuth.getInstance()
+      model = ViewModelProviders.of(this)[GameViewModel::class.java]
 
-        var stars = listOf(R.drawable.star_01,
-            R.drawable.star_02,
-            R.drawable.star_03,
-            R.drawable.star_04,
-            R.drawable.star_05,
-            R.drawable.star_06)
+      userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+
+      val providers = arrayListOf(
+        AuthUI.IdpConfig.EmailBuilder().build(),
+        AuthUI.IdpConfig.GoogleBuilder().build()
+      )
+
+// Create and launch sign-in intent
+      startActivityForResult(
+        AuthUI.getInstance()
+          .createSignInIntentBuilder()
+          .setAvailableProviders(providers)
+          .build(),
+        RC_SIGN_IN)
+
+
+
+
+
+
+
+
+
+
+      mediaPlayer = MediaPlayer.create(view.context, R.raw.collect)
+      images = listOf(view.house, view.house2, view.house3, view.house3, view.house4, view.house5, view.house6, view.house7, view.house8, view.house9)
+      gameBoard.setBackgroundResource(R.drawable.level1)
+
+
+//      model.loadGameScore().observe(this, Observer {
+//        your_score.text = "$it"
+//      })
+
+//
+//        var stars = listOf(
+//            R.drawable.star_02,
+//            R.drawable.star_03,
+//            R.drawable.star_04,
+//            R.drawable.star_05,
+//            R.drawable.star_06)
+//
+//
+//
+
+      val listOfgameObejcts = model.loadGameObjects().value
         var i = 3
-
         object : CountDownTimer(3000, 1000){
             override fun onFinish() {
                 time_remaining.text = "GO"
-                for (house in images){
+              var index = 0
+              for (house in images){
                     house.visibility = View.VISIBLE
-                    house.setImageDrawable(ResourcesCompat.getDrawable(resources, stars.get(Random.nextInt(stars.size)), null))
-                    //house.setBackgroundResource()
+                    house.setImageDrawable(ResourcesCompat.getDrawable(resources, listOfgameObejcts!!.get(index).image, null))
+                    if(index < 8){
+                      index++
+                    }
                 }
             }
             override fun onTick(millisUntilFinished: Long) {
@@ -110,10 +167,38 @@ class GameplayFragment : Fragment() {
     }
 
     private fun handleTouch(image: ImageView) {
-        mediaPlayer.start()
-        collectItemTimer(image).start()
+      mediaPlayer.start()
+      collectItemTimer(image).start()
+
     }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    if (requestCode == RC_SIGN_IN) {
+      val response = IdpResponse.fromResultIntent(data)
+
+      if (resultCode == Activity.RESULT_OK) {
+        // Successfully signed in
+        val us = FirebaseAuth.getInstance().currentUser
+        userModel.saveUser(User("Marius", "500", us?.uid.toString(), 500, 555, 30))
+        userModel.getUser(us?.uid.toString()).observe(this, Observer {
+          your_score.text = it.score
+          println("=====================================$it")
+        }
+        )
+
+
+
+        // ...
+      } else {
+        // Sign in failed. If response is null the user canceled the
+        // sign-in flow using the back button. Otherwise check
+        // response.getError().getErrorCode() and handle the error.
+        // ...
+      }
+    }
+  }
 
     private fun collectItemTimer(v: View?): CountDownTimer {
         val timer = object : CountDownTimer(100, 100) {
