@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/shopFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/shopFragment"
@@ -15,4 +15,9 @@
         android:name="get.some.money.starter.Fragments.GameplayFragment"
         android:label="fragment_gameplay"
         tools:layout="@layout/fragment_gameplay" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="get.some.money.starter.Fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
