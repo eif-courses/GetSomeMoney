@@ -25,6 +25,8 @@ class UserViewModel : ViewModel(){
     }
     return user
   }
+  fun updateScore(score: Int, uuid: String) = repository.updateScore(score, uuid)
+
 
 
 }

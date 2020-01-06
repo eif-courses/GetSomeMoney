@@ -11,8 +11,8 @@ class UserRepository private constructor(){
   companion object {
     val instance: UserRepository by lazy { UserRepository() }
   }
-  fun saveUser(user: User): Task<Void> = db.collection("users").document(user.uuid).set(user)
+  fun saveUser(user: User) = db.collection("users").document(user.uuid).set(user)
   fun getUser(uuid: String) = db.collection("users").document(uuid)
-
+  fun updateScore(score: Int, uuid: String) = db.collection("users").document(uuid).update("score", score)
 
 }

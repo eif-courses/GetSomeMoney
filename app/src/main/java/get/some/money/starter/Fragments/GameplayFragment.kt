@@ -34,6 +34,7 @@ import get.some.money.starter.ViewModels.ShopViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_gameplay.*
 import kotlinx.android.synthetic.main.fragment_gameplay.view.*
+import java.io.ObjectStreamException
 import kotlin.random.Random
 
 /**
@@ -44,8 +45,9 @@ class GameplayFragment : Fragment() {
     lateinit var mediaPlayer: MediaPlayer
     lateinit var model: GameViewModel
     lateinit var userModel: UserViewModel
-    var images = listOf<ImageView>()
-    val RC_SIGN_IN = 123
+    private val uuid = FirebaseAuth.getInstance().currentUser?.uid
+
+  var images = listOf<ImageView>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,38 +60,15 @@ class GameplayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      val fireAuth = FirebaseAuth.getInstance()
       model = ViewModelProviders.of(this)[GameViewModel::class.java]
-
       userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-
-
-      val providers = arrayListOf(
-        AuthUI.IdpConfig.EmailBuilder().build(),
-        AuthUI.IdpConfig.GoogleBuilder().build()
-      )
-
-// Create and launch sign-in intent
-      startActivityForResult(
-        AuthUI.getInstance()
-          .createSignInIntentBuilder()
-          .setAvailableProviders(providers)
-          .build(),
-        RC_SIGN_IN)
-
-
-
-
-
-
-
-
-
-
       mediaPlayer = MediaPlayer.create(view.context, R.raw.collect)
       images = listOf(view.house, view.house2, view.house3, view.house3, view.house4, view.house5, view.house6, view.house7, view.house8, view.house9)
       gameBoard.setBackgroundResource(R.drawable.level1)
 
+      userModel.getUser(uuid.toString()).observe(this, Observer {
+        your_score.text = "${it.score}"
+      })
 
 //      model.loadGameScore().observe(this, Observer {
 //        your_score.text = "$it"
@@ -172,38 +151,14 @@ class GameplayFragment : Fragment() {
 
     }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
 
-    if (requestCode == RC_SIGN_IN) {
-      val response = IdpResponse.fromResultIntent(data)
-
-      if (resultCode == Activity.RESULT_OK) {
-        // Successfully signed in
-        val us = FirebaseAuth.getInstance().currentUser
-        userModel.saveUser(User("Marius", "500", us?.uid.toString(), 500, 555, 30))
-        userModel.getUser(us?.uid.toString()).observe(this, Observer {
-          your_score.text = it.score
-          println("=====================================$it")
-        }
-        )
-
-
-
-        // ...
-      } else {
-        // Sign in failed. If response is null the user canceled the
-        // sign-in flow using the back button. Otherwise check
-        // response.getError().getErrorCode() and handle the error.
-        // ...
-      }
-    }
-  }
 
     private fun collectItemTimer(v: View?): CountDownTimer {
         val timer = object : CountDownTimer(100, 100) {
             override fun onFinish() {
                 v?.visibility = View.GONE
+              //val uuid = FirebaseAuth.getInstance().currentUser?.uid
+              userModel.updateScore(your_score.text.toString().toInt() + 500, uuid!!)
                 //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
