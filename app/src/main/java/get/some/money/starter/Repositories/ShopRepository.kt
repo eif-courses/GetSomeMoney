@@ -3,9 +3,11 @@ package get.some.money.starter.Repositories
 import androidx.lifecycle.MutableLiveData
 import get.some.money.starter.Models.Item
 
-class ShopRepository {
+class ShopRepository private constructor(){
     private val items = MutableLiveData<List<Item>>()
-
+    companion object {
+        val instance: ShopRepository by lazy { ShopRepository() }
+    }
     fun loadItems(): MutableLiveData<List<Item>> {
         val temp = listOf(
             Item(

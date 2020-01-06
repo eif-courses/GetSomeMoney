@@ -8,9 +8,12 @@ import kotlin.random.Random
 
 
 
-class GameRepository {
+class GameRepository private constructor(){
   private val gameObjects = MutableLiveData<List<GameObject>>()
-  private val gameScore = MutableLiveData<Long>()
+
+  companion object {
+    val instance: GameRepository by lazy { GameRepository() }
+  }
 
 
   fun loadGameObjects(): MutableLiveData<List<GameObject>> {
@@ -28,11 +31,5 @@ class GameRepository {
     temp.shuffled()
     gameObjects.value = temp
     return gameObjects
-  }
-  fun loadScore(): MutableLiveData<Long> {
-    return gameScore
-  }
-  fun updateScore(points: Long){
-    gameScore.value = points
   }
 }

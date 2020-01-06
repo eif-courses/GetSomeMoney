@@ -6,7 +6,7 @@ import get.some.money.starter.Models.GameObject
 import get.some.money.starter.Repositories.GameRepository
 
 class GameViewModel : ViewModel(){
-  private val repository = GameRepository()
+  private val repository = GameRepository.instance
   fun loadGameObjects():LiveData<List<GameObject>> = repository.loadGameObjects()
 
 }

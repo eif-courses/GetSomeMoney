@@ -11,7 +11,7 @@ import get.some.money.starter.Repositories.UserRepository
 import java.util.*
 
 class UserViewModel : ViewModel(){
-  private val repository = UserRepository()
+  private val repository = UserRepository.instance
   var user : MutableLiveData<User> = MutableLiveData()
 
   fun saveUser(user: User) = repository.saveUser(user)

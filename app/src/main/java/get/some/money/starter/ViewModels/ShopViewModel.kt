@@ -8,6 +8,6 @@ import get.some.money.starter.Repositories.ShopRepository
 typealias Items = LiveData<List<Item>>
 
 class ShopViewModel : ViewModel() {
-    private val repository = ShopRepository()
+    private val repository = ShopRepository.instance
     fun getItems(): Items = repository.loadItems()
 }
