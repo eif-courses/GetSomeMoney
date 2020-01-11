@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
+import get.some.money.starter.Models.Chain
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.GameViewModel
 import get.some.money.starter.ViewModels.UserViewModel
@@ -47,6 +49,26 @@ class GameplayFragment : Fragment() {
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
     gameBoard.setBackgroundResource(R.drawable.forest)
 
+    val chain = Chain(
+      listOf(
+        R.drawable.prailgintuvas,
+        R.drawable.rozete_on,
+        R.drawable.rozete_off,
+        R.drawable.lempute_01,
+        R.drawable.lempute_02
+      ),
+      listOf(0, 3, 1, 2, 4)
+    )
+
+    var i = 0
+
+    for (img in chain.listImages) {
+      images[i].setBackgroundResource(img)
+      images[i].tag = img
+      i++
+    }
+
+
     var count = 0
     val location = IntArray(2)
 
@@ -56,11 +78,21 @@ class GameplayFragment : Fragment() {
         moveObject(it, -location[0].toFloat() + 50 + (count * 190))
         count++
         mediaPlayer.start()
+
+        //println("${house.getTag()} ir ${chain.listImages[0]}")
+
         house.isClickable = false
+
+        println("${house.tag} ir ${chain.listImages[count-1]}")
+
+        if (house.tag == chain.listImages[2])
+        {
+          Toast.makeText(context, "VALIO", Toast.LENGTH_LONG).show()
+        }
       }
-
-
     }
+
+
   }
 
 

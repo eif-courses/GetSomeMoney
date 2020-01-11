@@ -2,9 +2,7 @@ package get.some.money.starter
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -15,7 +13,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,7 +27,6 @@ import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.User
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_gameplay.*
 import kotlinx.android.synthetic.main.header_layout.*
 
 class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener{
@@ -73,18 +69,18 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     setupNavigation(navController) //setup navigation
     setupActionBar(navController, appBarConfiguration) // setup action bar
     //hear for event changes
-    navController.addOnDestinationChangedListener { _, destination, _ ->
-      val dest: String = try {
-        resources.getResourceName(destination.id)
-      } catch (e: Resources.NotFoundException) {
-        Integer.toString(destination.id)
-      }
-      Toast.makeText(
-        this@MainActivity, "Navigated to $dest",
-        Toast.LENGTH_SHORT
-      ).show()
-      Log.d("NavigationActivity", "Navigated to $dest")
-    }
+//    navController.addOnDestinationChangedListener { _, destination, _ ->
+//      val dest: String = try {
+//        resources.getResourceName(destination.id)
+//      } catch (e: Resources.NotFoundException) {
+//        Integer.toString(destination.id)
+//      }
+//      Toast.makeText(
+//        this@MainActivity, "Navigated to $dest",
+//        Toast.LENGTH_SHORT
+//      ).show()
+//      Log.d("NavigationActivity", "Navigated to $dest")
+//    }
   }
 
   private fun setupActionBar(
