@@ -38,25 +38,25 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   private lateinit var appBarConfiguration: AppBarConfiguration;
   private val RC_SIGN_IN = 123
   lateinit var userModel: UserViewModel
-
+  private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
     AuthUI.IdpConfig.EmailBuilder().build(),
     AuthUI.IdpConfig.GoogleBuilder().build()
   )
 
-
   override fun onStart() {
     super.onStart()
     // Create and launch sign-in intent
-    startActivityForResult(
-      AuthUI.getInstance()
-        .createSignInIntentBuilder()
-        .setAvailableProviders(providers)
-        .build(),
-      RC_SIGN_IN
-    )
+    if (uuid == null) {
+      startActivityForResult(
+        AuthUI.getInstance()
+          .createSignInIntentBuilder()
+          .setAvailableProviders(providers)
+          .build(),
+        RC_SIGN_IN
+      )
+    }
   }
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
