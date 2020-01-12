@@ -62,7 +62,7 @@ class GameplayFragment : Fragment() {
 
     var i = 0
 
-    for (img in chain.listImages) {
+    for (img in chain.listImages.shuffled()) {
       images[i].setBackgroundResource(img)
       images[i].tag = img
       i++
@@ -71,6 +71,9 @@ class GameplayFragment : Fragment() {
 
     var count = 0
     val location = IntArray(2)
+
+
+    val sequence = mutableListOf<Int>()
 
     for (house in images) {
       house.setOnClickListener {
@@ -83,15 +86,38 @@ class GameplayFragment : Fragment() {
 
         house.isClickable = false
 
-        println("${house.tag} ir ${chain.listImages[count-1]}")
+        sequence.add(house.tag.toString().toInt())
 
-        if (house.tag == chain.listImages[2])
-        {
-          Toast.makeText(context, "VALIO", Toast.LENGTH_LONG).show()
+        if(count > 4){
+
+          var complete = 0
+
+          for (index in 0..4){
+            if(sequence.get(index) == chain.listImages.get(index)){
+              complete++
+            }
+          }
+          if(complete == 5){
+            Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
+          }else{
+            Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
+          }
+
+          for (ii in sequence){
+            print("$ii,")
+          }
+          println("------------------------------")
+          for(jg in chain.listImages) {
+            println("$jg,")
+          }
+
+
+          //println("size: ${Arrays.deepEquals(sequence.toTypedArray(), chain.listImages.toTypedArray())}")
+          //Toast.makeText(context, "VALIO", Toast.LENGTH_LONG).show()
         }
+
       }
     }
-
 
   }
 
