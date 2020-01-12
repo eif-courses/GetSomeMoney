@@ -11,13 +11,16 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.Chain
+import get.some.money.starter.Models.Level
 import get.some.money.starter.R
-import get.some.money.starter.ViewModels.GameViewModel
+import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_gameplay.*
 import kotlinx.android.synthetic.main.fragment_gameplay.view.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -25,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_gameplay.view.*
 class GameplayFragment : Fragment() {
 
   lateinit var mediaPlayer: MediaPlayer
-  lateinit var model: GameViewModel
+  lateinit var levelModel: LevelViewModel
   lateinit var userModel: UserViewModel
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -43,7 +46,7 @@ class GameplayFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    model = ViewModelProviders.of(this)[GameViewModel::class.java]
+    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     mediaPlayer = MediaPlayer.create(view.context, R.raw.object_anim)
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
@@ -99,8 +102,18 @@ class GameplayFragment : Fragment() {
           }
           if(complete == 5){
             Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
+            levelModel.save(Level(1, "Gamta", chain.listImages, "Auto","Kas per masina?", Timestamp(Date())))
+
           }else{
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
+            levelModel.getLevels().observe(this, androidx.lifecycle.Observer {
+
+              for(level in it){
+                println(level.name)
+              }
+
+
+            })
           }
 
           for (ii in sequence){
