@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import get.some.money.starter.Models.Chain
+import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.Level
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
@@ -31,8 +31,6 @@ class GameplayFragment : Fragment() {
   lateinit var levelModel: LevelViewModel
   lateinit var userModel: UserViewModel
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
-
-
   var images = listOf<ImageView>()
 
   override fun onCreateView(
@@ -52,31 +50,24 @@ class GameplayFragment : Fragment() {
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
     gameBoard.setBackgroundResource(R.drawable.forest)
 
-    val chain = Chain(
-      listOf(
-        R.drawable.prailgintuvas,
-        R.drawable.rozete_on,
-        R.drawable.rozete_off,
-        R.drawable.lempute_01,
-        R.drawable.lempute_02
-      ),
-      listOf(0, 3, 1, 2, 4)
+    val staticImages = listOf(
+      "https://previews.123rf.com/images/ylivdesign/ylivdesign1801/ylivdesign180103155/93837186-electric-outlet-icon-cartoon-illustration-of-electric-outlet-vector-icon-for-web-.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbvFMFTqeccYcmZtq9sFGL75VXx4aexMM0rytzx8ZFNR-iOujS&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyLMIRmp43eRF0qcX4rFOXjw8__Ktcr63fcA1BRun60I8W_xsE&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9U-eltGPl6h-sDHLIULom_zvHaWHAesM8y0rUy1YlBIiVqsOXMw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3YObYJXEzl1sXgSVbTkJYbsvhRHcxY8aniT3NQKbf7EfrY_rM&s"
     )
-
     var i = 0
-
-    for (img in chain.listImages.shuffled()) {
-      images[i].setBackgroundResource(img)
+    for (img in staticImages.shuffled()) {
+      Picasso.get().load(img).into(images[i])
       images[i].tag = img
       i++
     }
 
-
     var count = 0
     val location = IntArray(2)
 
-
-    val sequence = mutableListOf<Int>()
+    val sequence = mutableListOf<String>()
 
     for (house in images) {
       house.setOnClickListener {
@@ -89,20 +80,26 @@ class GameplayFragment : Fragment() {
 
         house.isClickable = false
 
-        sequence.add(house.tag.toString().toInt())
+        sequence.add(house.tag.toString())
+
+        println("------------------------------------------")
+        println("$sequence")
+        println("------------------------------------------")
+        println("$staticImages")
+        println("------------------------------------------")
 
         if(count > 4){
 
           var complete = 0
-
+            //  1 4 5 3 2
           for (index in 0..4){
-            if(sequence.get(index) == chain.listImages.get(index)){
+            if(sequence[index] == staticImages[index]){
               complete++
             }
           }
           if(complete == 5){
             Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
-            levelModel.save(Level(1, "Gamta", chain.listImages, "Auto","Kas per masina?", Timestamp(Date())))
+            levelModel.save(Level(1, "Gamta", staticImages, "Auto","Kas per masina?", Timestamp(Date())))
 
           }else{
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
@@ -115,18 +112,6 @@ class GameplayFragment : Fragment() {
 
             })
           }
-
-          for (ii in sequence){
-            print("$ii,")
-          }
-          println("------------------------------")
-          for(jg in chain.listImages) {
-            println("$jg,")
-          }
-
-
-          //println("size: ${Arrays.deepEquals(sequence.toTypedArray(), chain.listImages.toTypedArray())}")
-          //Toast.makeText(context, "VALIO", Toast.LENGTH_LONG).show()
         }
 
       }

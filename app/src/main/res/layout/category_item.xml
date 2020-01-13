@@ -11,6 +11,8 @@
         android:id="@+id/category_imageview"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/categoryImageDescription"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/categoryProgress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,24 +24,37 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/title_shop_item"
-        android:textSize="14sp"
+        android:text="@string/category_title"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/category_imageview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Christmas socks" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/categoryProgress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:progress="20"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:progress="60"
+        android:progressDrawable="@drawable/custom_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_imageview" />
+
+    <TextView
+        android:id="@+id/currentProgressPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/completion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryProgress" />
 
     <!-- Card contents -->
 

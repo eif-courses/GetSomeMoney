@@ -9,6 +9,8 @@ import get.some.money.starter.Repositories.LevelRepository
 class LevelViewModel : ViewModel(){
 
   private val tempList = MutableLiveData<List<Level>>()
+  private val levelByCategry = MutableLiveData<List<Level>>()
+
   private val repository = LevelRepository.getInstance
 
   fun save(level: Level) = repository.save(level)
@@ -23,5 +25,20 @@ class LevelViewModel : ViewModel(){
       tempList.value = list
     }
     return tempList
+  }
+
+  fun getLevels(category: String): LiveData<List<Level>> {
+    repository.getLevels().
+      orderBy("timestamp").
+      whereEqualTo("category", category).
+      get().addOnCompleteListener {
+      val list = ArrayList<Level>()
+      for (document in it.result!!) {
+        val level = document.toObject(Level::class.java)
+        list.add(level)
+      }
+      levelByCategry.value = list
+    }
+    return levelByCategry
   }
 }

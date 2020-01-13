@@ -43,7 +43,7 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
 
       val clicked = getItem(adapterPosition)
 
-      interaction?.click_item(clicked)
+      interaction?.clickCategory(clicked)
     }
 
     fun bind(item: Category) = with(itemView) {
@@ -56,7 +56,7 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
   }
 
   interface Interaction {
-    fun click_item(cat: Category)
+    fun clickCategory(cat: Category)
 
   }
 
@@ -65,18 +65,14 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
       oldItem: Category,
       newItem: Category
     ): Boolean {
-      TODO(
-        "not implemented"
-      )
+      return oldItem == newItem;
     }
 
     override fun areContentsTheSame(
       oldItem: Category,
       newItem: Category
     ): Boolean {
-      TODO(
-        "not implemented"
-      )
+      return oldItem.equals(newItem);
     }
   }
 }

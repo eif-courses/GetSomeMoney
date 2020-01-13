@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GetSomeMoney</string>
+    <string name="play">Pradėti žaidimą</string>
+    <string name="shop">Parduotuvė</string>
+    <string name="high_scores">Rekordai</string>
+    <string name="completion">įvykdyta</string>
+    <string name="categoryImageDescription">kategorijosPavadinimas</string>
+    <string name="hello_blank_fragment">eeee</string>
+</resources>

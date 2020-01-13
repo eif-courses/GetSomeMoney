@@ -31,19 +31,32 @@
         android:src="@drawable/borders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/house3"
+        android:id="@+id/house5"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/lempute_02"
+        android:background="@drawable/prailgintuvas"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/house2" />
+        app:layout_constraintStart_toEndOf="@+id/house4" />
+
+    <ImageView
+        android:id="@+id/house4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rozete_on"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/house5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/house3" />
 
     <ImageView
         android:id="@+id/house"
@@ -53,8 +66,7 @@
         android:background="@drawable/rozete_off"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/house5"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/house2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -67,31 +79,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/house3"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/house4" />
+        app:layout_constraintStart_toEndOf="@+id/house" />
 
     <ImageView
-        android:id="@+id/house5"
+        android:id="@+id/house3"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/prailgintuvas"
+        android:background="@drawable/lempute_02"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/house4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/house" />
-
-    <ImageView
-        android:id="@+id/house4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/rozete_on"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/house2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/house5" />
+        app:layout_constraintStart_toEndOf="@+id/house2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -111,13 +111,16 @@
             android:textColor="?attr/colorError"
             android:textSize="50sp"
             android:textStyle="bold" />
+
         <ExpandableListView
             android:id="@+id/expandableListView"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:layout_height="match_parent"
             android:divider="@android:color/darker_gray"
-            android:dividerHeight="0.5dp" />        <TextView
+            android:dividerHeight="0.5dp"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+
+        <TextView
             android:id="@+id/time_remaining"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

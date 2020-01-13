@@ -153,7 +153,7 @@
             <!-- Background -->
             <item>
                 <shape>
-                    <solid android:color="@color/cardview_light_background" />
+                    <solid android:color="@color/white" />
 
                     <corners android:radius="4dp" />
                 </shape>
