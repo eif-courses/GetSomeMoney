@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -26,6 +27,8 @@ import java.util.*
  * A simple [Fragment] subclass.
  */
 class GameplayFragment : Fragment() {
+
+  val args: GameplayFragmentArgs by navArgs()
 
   lateinit var mediaPlayer: MediaPlayer
   lateinit var levelModel: LevelViewModel
@@ -44,19 +47,22 @@ class GameplayFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+
+    for(str in args.imageURL){
+      println("$str")
+    }
+    levelQuestion.text = args.question
+
+
+
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     mediaPlayer = MediaPlayer.create(view.context, R.raw.object_anim)
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
     gameBoard.setBackgroundResource(R.drawable.forest)
 
-    val staticImages = listOf(
-      "https://previews.123rf.com/images/ylivdesign/ylivdesign1801/ylivdesign180103155/93837186-electric-outlet-icon-cartoon-illustration-of-electric-outlet-vector-icon-for-web-.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbvFMFTqeccYcmZtq9sFGL75VXx4aexMM0rytzx8ZFNR-iOujS&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyLMIRmp43eRF0qcX4rFOXjw8__Ktcr63fcA1BRun60I8W_xsE&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9U-eltGPl6h-sDHLIULom_zvHaWHAesM8y0rUy1YlBIiVqsOXMw&s",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3YObYJXEzl1sXgSVbTkJYbsvhRHcxY8aniT3NQKbf7EfrY_rM&s"
-    )
+    val staticImages = args.imageURL.asList()
+
     var i = 0
     for (img in staticImages.shuffled()) {
       Picasso.get().load(img).into(images[i])

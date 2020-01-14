@@ -7,4 +7,6 @@
     <string name="completion">įvykdyta</string>
     <string name="categoryImageDescription">kategorijosPavadinimas</string>
     <string name="hello_blank_fragment">eeee</string>
+    <string name="gold">Auksas:</string>
+    <string name="score">Score:</string>
 </resources>

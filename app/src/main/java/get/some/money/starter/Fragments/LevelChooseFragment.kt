@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,8 +29,6 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
   lateinit var levelViewModel: LevelViewModel
 
 
-
-
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -40,7 +39,7 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    level_textView.text = args.categoryname
+   // level_textView.text = args.categoryname
     levelViewModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
     levelRecycleView = level_recycleview
     levelRecycleView.layoutManager = LinearLayoutManager(context)
@@ -63,9 +62,10 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
   }
 
   override fun click(level: Level) {
-
-
-
+    val temp: Array<String>
+    temp = level.assets.toTypedArray()
+    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question)
+    findNavController().navigate(action)
   }
 
 

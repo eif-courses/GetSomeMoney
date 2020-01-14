@@ -52,10 +52,9 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction{
     model.getLevels().observe(this, Observer {
 
       val list = mutableListOf<Category>()
+      list.clear()
       for (level in it){
         list.add(Category(level.category, "https://wallpapercave.com/wp/wp2724675.jpg"))
-        list.add(Category(level.category, "https://media.istockphoto.com/vectors/smart-home-appliances-cartoon-icons-in-set-collection-for-design-vector-id958410866"))
-
       }
       categoryListAdapter.swapData(list.distinct())
     })
@@ -68,7 +67,7 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction{
 
   }
   override fun clickCategory(cat: Category) {
-    Toast.makeText(context, "${cat.title}", Toast.LENGTH_LONG).show()
+    Toast.makeText(context, cat.title, Toast.LENGTH_LONG).show()
     val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.title)
     findNavController().navigate(action)
   }

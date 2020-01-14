@@ -14,7 +14,17 @@
         android:id="@+id/gameplayFragment"
         android:name="get.some.money.starter.Fragments.GameplayFragment"
         android:label="fragment_gameplay"
-        tools:layout="@layout/fragment_gameplay" />
+        tools:layout="@layout/fragment_gameplay" >
+        <argument
+            android:name="imageURL"
+            app:argType="string[]" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="question"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="get.some.money.starter.Fragments.HomeFragment"

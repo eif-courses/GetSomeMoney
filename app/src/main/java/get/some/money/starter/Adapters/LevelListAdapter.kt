@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.Level
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.level_item.view.*
+import kotlin.random.Random
 
 class LevelListAdapter(private val interaction: Interaction? = null) :
   ListAdapter<Level, LevelListAdapter.LevelViewHolder>(LevelDC()) {
@@ -46,7 +47,7 @@ class LevelListAdapter(private val interaction: Interaction? = null) :
 
     fun bind(item: Level) = with(itemView) {
       // TODO: Bind the data with View
-      Picasso.get().load(item.assets.get(0)).into(level_imageViewChoose)
+      Picasso.get().load(item.assets.get(Random.nextInt(item.assets.size))).into(level_imageViewChoose)
       //val text = itemView.findViewById<TextView>(R.id.level_title_chooseFragment)
       level_title_chooseFragment.text = item.name
     }
