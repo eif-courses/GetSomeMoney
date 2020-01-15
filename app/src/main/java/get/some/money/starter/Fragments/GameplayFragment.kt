@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import get.some.money.starter.Dialogs.RewardDialog
 import get.some.money.starter.Models.Level
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
@@ -108,6 +109,12 @@ class GameplayFragment : Fragment() {
             levelModel.save(Level(1, "Gamta", staticImages, "Auto","Kas per masina?", Timestamp(Date())))
 
           }else{
+
+            val fragmentManager = getFragmentManager()
+            val reward = RewardDialog()
+            reward.showsDialog = true
+            //args.name
+
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
             levelModel.getLevels().observe(this, androidx.lifecycle.Observer {
 
@@ -124,6 +131,7 @@ class GameplayFragment : Fragment() {
     }
 
   }
+
 
 
   fun moveObject(v: View, x: Float, y: Float = -600f, duration: Long = 1000) {

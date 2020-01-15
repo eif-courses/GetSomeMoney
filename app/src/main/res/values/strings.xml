@@ -13,7 +13,8 @@
     <string name="completion">completion</string>
     <string name="categoryImageDescription">categoryName</string>
     <string name="category_title" translatable="false">Nature</string>
-    <string name="gold">Gold:</string>
+    <string name="gold">Money:</string>
     <string name="score">Score:</string>
     <string name="solved">Tasks solved:</string>
+    <string name="reward_dialog">Reward dialog</string>
 </resources>
