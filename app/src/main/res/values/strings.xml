@@ -17,4 +17,7 @@
     <string name="score">Score:</string>
     <string name="solved">Tasks solved:</string>
     <string name="reward_dialog">Reward dialog</string>
+    <string name="repeat_level">Repeat Level</string>
+    <string name="next_level">Next level</string>
+    <string name="level_complete">LEVEL COMPLETE</string>
 </resources>

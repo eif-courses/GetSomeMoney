@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -39,6 +40,13 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     AuthUI.IdpConfig.EmailBuilder().build(),
     AuthUI.IdpConfig.GoogleBuilder().build()
   )
+  fun openChest(v: View) {
+    v.background
+    v.setBackgroundResource(R.drawable.chestopen)
+    v.isClickable = false
+  }
+  fun repeatLevel(v: View){
+  }
 
   override fun onStart() {
     super.onStart()

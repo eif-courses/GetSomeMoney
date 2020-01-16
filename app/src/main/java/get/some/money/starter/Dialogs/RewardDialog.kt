@@ -23,9 +23,9 @@ class RewardDialog : DialogFragment() {
     val dialog = super.onCreateDialog(savedInstanceState)
     dialog.setCancelable(false)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
     return dialog
   }
-
 
 
 }

@@ -11,4 +11,7 @@
     <string name="score">Taškai:</string>
     <string name="reward_dialog">Apdovanojimas</string>
     <string name="solved">Išspręsta užduočių:</string>
+    <string name="repeat_level">KARTOTI LYGĮ</string>
+    <string name="next_level">SEKANTIS LYGIS</string>
+    <string name="level_complete">LYGIS ĮVEIKTAS</string>
 </resources>

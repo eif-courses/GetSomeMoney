@@ -112,7 +112,11 @@ class GameplayFragment : Fragment() {
 
             val fragmentManager = getFragmentManager()
             val reward = RewardDialog()
-            reward.showsDialog = true
+            reward.isCancelable = false
+            if (fragmentManager != null) {
+              reward.show(fragmentManager, "REWARD_DIALOG")
+
+            }
             //args.name
 
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()

@@ -1,15 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="wrap_content"
+    android:background="@color/common_google_signin_btn_text_dark_disabled"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/level_name_rewardFragment"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LEVEL COMPLETE"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="212dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:fontFamily="@font/cherry_cream_soda"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:text="@string/level_complete"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/level_complete_img"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/chestclosed"
+        android:onClick="openChest"
+        android:scaleX=".6" />
+
+    <TextView
+        android:id="@+id/level_complete_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/levelborders"
+        android:fontFamily="@font/cherry_cream_soda"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Score: 900\nTime spend: 5 seconds"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/repeat_level_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/cherry_cream_soda"
+        android:text="@string/repeat_level"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider" />
+
+    <Button
+        android:id="@+id/next_level_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/cherry_cream_soda"
+        android:text="@string/next_level"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
