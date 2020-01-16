@@ -1,15 +1,15 @@
 package get.some.money.starter.Dialogs
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.fragment.app.DialogFragment
 import get.some.money.starter.R
+import kotlinx.android.synthetic.main.reward_dialog.*
 
-class RewardDialog : DialogFragment() {
+
+class RewardDialog : DialogFragment(){
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -19,12 +19,19 @@ class RewardDialog : DialogFragment() {
     // Inflate the layout to use as dialog or embedded fragment
     return inflater.inflate(R.layout.reward_dialog, container, false)
   }
-  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val dialog = super.onCreateDialog(savedInstanceState)
-    dialog.setCancelable(false)
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-    return dialog
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    next_level_btn.setOnClickListener {
+      activity?.onBackPressed()
+      this.dismiss()
+    }
+
+    level_complete_img.setOnClickListener {
+      it.background
+      it.setBackgroundResource(R.drawable.chestopen)
+      it.isClickable = false
+    }
   }
 
 
