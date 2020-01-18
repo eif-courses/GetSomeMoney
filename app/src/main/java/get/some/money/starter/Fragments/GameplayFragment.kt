@@ -16,7 +16,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import get.some.money.starter.Dialogs.LooseDialog
 import get.some.money.starter.Dialogs.RewardDialog
+import get.some.money.starter.Functions.Language
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
@@ -31,7 +33,8 @@ import kotlin.random.Random
 class GameplayFragment : Fragment() {
 
   val args: GameplayFragmentArgs by navArgs()
-
+  var isCompleted = false
+  var isLoose = false
   lateinit var mediaPlayer: MediaPlayer
   lateinit var clickSound: MediaPlayer
   lateinit var levelModel: LevelViewModel
@@ -51,7 +54,14 @@ class GameplayFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    levelQuestion.text = args.question
+    val currentLanguage = Language.getCurrentLanguage()
+
+    if(currentLanguage.equals("lt")){
+      levelQuestion.text = args.questionlt
+    }else{
+      levelQuestion.text = args.question
+    }
+
     time = gameTimer().start()
 
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
@@ -59,7 +69,10 @@ class GameplayFragment : Fragment() {
     mediaPlayer = MediaPlayer.create(view.context, R.raw.win)
     clickSound = MediaPlayer.create(view.context, R.raw.click)
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
-    gameBoard.setBackgroundResource(R.drawable.forest)
+
+    Picasso.get().load(args.background).into(level_background)
+
+    //gameBoard.setBackgroundResource(R.drawable.forest)
 
     val staticImages = args.imageURL.asList()
 
@@ -112,11 +125,31 @@ class GameplayFragment : Fragment() {
                 ft.setReorderingAllowed(false)
               }
               ft.detach(this).attach(this).commit()
+              isCompleted = true
             }
 
+
           }else{
-            time.cancel()
+
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
+            isLoose = true
+
+            val fragmentManager = getFragmentManager()
+            val reward = LooseDialog()
+            reward.isCancelable = false
+            if (fragmentManager != null) {
+              reward.show(fragmentManager, "LOOSE_DIALOG")
+              mediaPlayer.start()
+
+              val ft: FragmentTransaction = fragmentManager.beginTransaction()
+              if (Build.VERSION.SDK_INT >= 26) {
+                ft.setReorderingAllowed(false)
+              }
+              ft.detach(this).attach(this).commit()
+              isLoose = false
+              time.start()
+              }
+
           }
         }
 
@@ -124,7 +157,7 @@ class GameplayFragment : Fragment() {
     }
   }
 
-  fun moveObject(v: View, x: Float, y: Float = -600f, duration: Long = 1000) {
+  fun moveObject(v: View, x: Float, y: Float = -500f, duration: Long = 1000) {
     v.animate()
       .translationY(y)
       .translationX(x)
@@ -166,6 +199,10 @@ class GameplayFragment : Fragment() {
       override fun onTick(millisUntilFinished: Long) {
         time_remaining.text = (millisUntilFinished/1000).toString()
         your_score.text = (millisUntilFinished / 125).toString()
+        if(isCompleted || isLoose){
+          this.cancel()
+        }
+
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
       }
     }

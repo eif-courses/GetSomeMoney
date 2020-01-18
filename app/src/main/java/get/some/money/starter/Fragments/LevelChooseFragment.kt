@@ -64,7 +64,7 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
   override fun click(level: Level) {
     val temp: Array<String>
     temp = level.assets.toTypedArray()
-    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question)
+    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header)
     findNavController().navigate(action)
   }
 

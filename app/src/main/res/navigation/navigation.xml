@@ -20,10 +20,24 @@
             app:argType="string[]" />
         <argument
             android:name="name"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue='""' />
         <argument
             android:name="question"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="namelt"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="questionlt"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="background"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
