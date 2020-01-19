@@ -24,8 +24,8 @@ class UserViewModel : ViewModel(){
   }
   fun updateScore(score: Int, uuid: String) = repository.updateScore(score, uuid)
 
-  fun completedLevels(uuid: String, id: Long) {
-    repository.completedLevels(uuid).update("levels", FieldValue.arrayUnion(id))
+  fun levelComplete(uuid: String, id: Long) {
+    repository.levelComplete(uuid).update("levels", FieldValue.arrayUnion(id))
   }
 
 

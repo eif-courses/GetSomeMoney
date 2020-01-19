@@ -1,6 +1,5 @@
 package get.some.money.starter.Adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -62,7 +61,8 @@ class LevelListAdapter(private val interaction: Interaction? = null) :
 
       for(level in marker){
         if (item.id.equals(level)){
-          itemView.setBackgroundColor(Color.GREEN)
+         // itemView.setBackgroundColor(Color.parseColor("#cccccc"))
+          itemView.checkBox.isChecked = true
         }
       }
 

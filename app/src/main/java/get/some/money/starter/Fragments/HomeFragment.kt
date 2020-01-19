@@ -12,11 +12,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Adapters.CategoryListAdapter
 import get.some.money.starter.Functions.Language
 import get.some.money.starter.Models.Category
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
+import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -27,6 +29,9 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
 
   lateinit var categoryRecyclerView: RecyclerView
   lateinit var categoryListAdapter: CategoryListAdapter
+  lateinit var model: LevelViewModel
+  lateinit var user: UserViewModel
+  private val uuid = FirebaseAuth.getInstance().currentUser?.uid
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -44,31 +49,39 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
     categoryRecyclerView.layoutManager = GridLayoutManager(context, 2)
     categoryListAdapter = CategoryListAdapter(this)
 
-    val model = ViewModelProviders.of(this)[LevelViewModel::class.java]
+    user = ViewModelProviders.of(this)[UserViewModel::class.java]
+    model = ViewModelProviders.of(this)[LevelViewModel::class.java]
     //categoryListAdapter.submitList(model.getLevels().value)
     categoryRecyclerView.adapter = categoryListAdapter
 
 
     val currentLanguage = Language.getCurrentLanguage()
+
+
+    var levelSize = 0
     model.getLevels().observe(this, Observer {
 
+      levelSize = it.size
       val list = mutableListOf<Category>()
-      list.clear()
-
 
         for (level in it) {
+
           if (currentLanguage.equals("lt")) {
             list.add(Category(level.categorylt, level.header, level.category))
           }else{
             list.add(Category(level.category, level.header, level.category))
-
           }
         }
-
-
       categoryListAdapter.swapData(list.distinct())
     })
 
+    if (uuid != null) {
+      user.getUser(uuid).observe(this, Observer {
+        val percentage = (it.levels.size.toDouble() / levelSize.toDouble()) * 100
+        categoryListAdapter.sendPercentageCompleted(percentage.toInt())
+      })
+
+    }
 
   }
 

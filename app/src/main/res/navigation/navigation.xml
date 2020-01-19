@@ -38,6 +38,9 @@
             android:name="background"
             app:argType="string"
             android:defaultValue='""' />
+        <argument
+            android:name="levelid"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

@@ -128,6 +128,7 @@ class GameplayFragment : Fragment() {
               isCompleted = true
             }
 
+            userModel.levelComplete(uuid.toString(), args.levelid)
 
           }else{
 
@@ -157,7 +158,7 @@ class GameplayFragment : Fragment() {
     }
   }
 
-  fun moveObject(v: View, x: Float, y: Float = -500f, duration: Long = 1000) {
+  fun moveObject(v: View, x: Float, y: Float = -420f, duration: Long = 1000) {
     v.animate()
       .translationY(y)
       .translationX(x)

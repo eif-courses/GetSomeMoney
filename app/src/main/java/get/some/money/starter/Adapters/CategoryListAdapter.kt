@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.Category
 import get.some.money.starter.R
+import kotlinx.android.synthetic.main.category_item.view.*
 
 class CategoryListAdapter(private val interaction: Interaction? = null) :
   ListAdapter<Category, CategoryListAdapter.CategoryViewHolder>(CategoryDC()) {
 
+  var percent = 0
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryViewHolder(
     LayoutInflater.from(parent.context)
       .inflate(R.layout.category_item, parent, false), interaction
@@ -26,6 +28,11 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
 
   fun swapData(data: List<Category>) {
     submitList(data.toMutableList())
+  }
+
+
+  fun sendPercentageCompleted(a: Int) {
+    percent = a
   }
 
   inner class CategoryViewHolder(
@@ -51,6 +58,8 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
       val title:TextView = itemView.findViewById(R.id.category_title)
       val image: ImageView = itemView.findViewById(R.id.category_imageview)
       title.text = item.title
+      itemView.categoryProgress.progress = percent
+      itemView.currentProgressPercentage.text = "$percent %"
       Picasso.get().load(item.imageUrl).into(image)
     }
   }

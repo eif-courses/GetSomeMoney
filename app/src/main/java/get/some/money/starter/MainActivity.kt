@@ -23,11 +23,9 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.User
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.header_layout.*
 
 class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener{
 
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   override fun onStart() {
     super.onStart()
     // Create and launch sign-in intent
-   // if (uuid == null) {
+    if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()
           .createSignInIntentBuilder()
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           .build(),
         RC_SIGN_IN
       )
-    //}
+    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,28 +129,31 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
     if (requestCode == RC_SIGN_IN) {
       val response = IdpResponse.fromResultIntent(data)
+      val us = FirebaseAuth.getInstance().currentUser
 
       if (resultCode == Activity.RESULT_OK) {
         // Successfully signed in
 
-        val us = FirebaseAuth.getInstance().currentUser
+       // userModel.saveUser(User(response?.email.toString(), 0, us?.uid.toString(), 0, 0, 0))
+
         userModel.getUser(us?.uid.toString()).observe(this, Observer {
           //userModel.saveUser(User("Marius", 0, us?.uid.toString(), 500, 555, 30))
+
 
 
           if (us?.uid.equals(it.uuid)){
             Toast.makeText(this, "SVEIKI SUGRIZE $it", Toast.LENGTH_LONG).show()
             //userModel.completedLevels(it.uuid, 9845454324L)
           }else{
-            userModel.saveUser(User("Marius", 0, us?.uid.toString(), 500, 555, 30))
+            userModel.saveUser(User("Puzzle solver", 0, us?.uid.toString(), 0, 0, 0))
           }
 
 
           println("=====================================$it")
         }
         )
-        Picasso.get().load(us?.photoUrl).into(profileImage)
-        profileName.text = us?.displayName
+        //Picasso.get().load(us?.photoUrl).into(profileImage)
+       // profileName.text = us?.displayName
 
 
         // ...
