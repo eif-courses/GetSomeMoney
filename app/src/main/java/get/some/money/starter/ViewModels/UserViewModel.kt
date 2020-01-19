@@ -3,12 +3,9 @@ package get.some.money.starter.ViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.FieldValue
 import get.some.money.starter.Models.User
 import get.some.money.starter.Repositories.UserRepository
-import java.util.*
 
 class UserViewModel : ViewModel(){
   private val repository = UserRepository.instance
@@ -27,6 +24,9 @@ class UserViewModel : ViewModel(){
   }
   fun updateScore(score: Int, uuid: String) = repository.updateScore(score, uuid)
 
+  fun completedLevels(uuid: String, id: Long) {
+    repository.completedLevels(uuid).update("levels", FieldValue.arrayUnion(id))
+  }
 
 
 }

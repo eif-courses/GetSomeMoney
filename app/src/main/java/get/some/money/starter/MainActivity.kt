@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   override fun onStart() {
     super.onStart()
     // Create and launch sign-in intent
-    if (uuid == null) {
+   // if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()
           .createSignInIntentBuilder()
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           .build(),
         RC_SIGN_IN
       )
-    }
+    //}
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,13 +134,15 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
       if (resultCode == Activity.RESULT_OK) {
         // Successfully signed in
+
         val us = FirebaseAuth.getInstance().currentUser
         userModel.getUser(us?.uid.toString()).observe(this, Observer {
+          //userModel.saveUser(User("Marius", 0, us?.uid.toString(), 500, 555, 30))
 
-          profileEmail.text = "Your total score: ${it.score.toString()}"
-          //  your_score.text = it.score.toString()
+
           if (us?.uid.equals(it.uuid)){
             Toast.makeText(this, "SVEIKI SUGRIZE $it", Toast.LENGTH_LONG).show()
+            //userModel.completedLevels(it.uuid, 9845454324L)
           }else{
             userModel.saveUser(User("Marius", 0, us?.uid.toString(), 500, 555, 30))
           }

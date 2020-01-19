@@ -1,5 +1,6 @@
 package get.some.money.starter.Adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -30,6 +31,12 @@ class LevelListAdapter(private val interaction: Interaction? = null) :
     submitList(data.toMutableList())
   }
 
+   lateinit var marker: List<Long>
+
+  fun markCompletedLevels(levels: List<Long>) {
+    marker = levels
+  }
+
   inner class LevelViewHolder(
     itemView: View,
     private val interaction: Interaction?
@@ -51,6 +58,13 @@ class LevelListAdapter(private val interaction: Interaction? = null) :
       // TODO: Bind the data with View
       Picasso.get().load(item.assets.get(Random.nextInt(item.assets.size))).into(level_imageViewChoose)
       val currentLocale = Language.getCurrentLanguage()
+
+
+      for(level in marker){
+        if (item.id.equals(level)){
+          itemView.setBackgroundColor(Color.GREEN)
+        }
+      }
 
       if(currentLocale.equals("lt")){
         level_title_chooseFragment.text = item.namelt

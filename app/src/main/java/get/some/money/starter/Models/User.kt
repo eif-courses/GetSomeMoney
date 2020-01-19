@@ -8,5 +8,5 @@ data class User(
   val coins: Int = 10,
   val experience: Int = 0,
   val completion: Int = 5,
-  val levels: Array<Long> = emptyArray()
+  val levels: List<Long> = emptyList()
 )

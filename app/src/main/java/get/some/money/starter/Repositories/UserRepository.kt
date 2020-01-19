@@ -1,7 +1,5 @@
 package get.some.money.starter.Repositories
 
-import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import get.some.money.starter.Models.User
 
@@ -14,5 +12,6 @@ class UserRepository private constructor(){
   fun saveUser(user: User) = db.collection("users").document(user.uuid).set(user)
   fun getUser(uuid: String) = db.collection("users").document(uuid)
   fun updateScore(score: Int, uuid: String) = db.collection("users").document(uuid).update("score", score)
+  fun completedLevels(uuid: String) = db.collection("users").document(uuid)
 
 }

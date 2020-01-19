@@ -12,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Adapters.LevelListAdapter
 import get.some.money.starter.Models.Level
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
+import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_level_choose.*
 
 /**
@@ -27,7 +29,8 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
   lateinit var levelRecycleView: RecyclerView
   lateinit var levelListAdapter: LevelListAdapter
   lateinit var levelViewModel: LevelViewModel
-
+  lateinit var userViewModel: UserViewModel
+  val user = FirebaseAuth.getInstance().currentUser
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,7 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
     super.onViewCreated(view, savedInstanceState)
    // level_textView.text = args.categoryname
     levelViewModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
+    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     levelRecycleView = level_recycleview
     levelRecycleView.layoutManager = LinearLayoutManager(context)
     //levelRecycleView.layoutManager = GridLayoutManager(context,2)
@@ -54,7 +58,13 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
         list.add(item)
       }
       levelListAdapter.swapData(list)
+
     })
+    if(user != null) {
+      userViewModel.getUser(user.uid).observe(this, Observer {
+        levelListAdapter.markCompletedLevels(it.levels)
+      })
+    }
 
     //levelListAdapter.submitList(model.getLevels().value)
     levelRecycleView.adapter = levelListAdapter
