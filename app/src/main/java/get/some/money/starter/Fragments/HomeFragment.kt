@@ -92,4 +92,5 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
   }
 
 
+
 }

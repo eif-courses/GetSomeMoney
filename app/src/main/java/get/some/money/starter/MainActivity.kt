@@ -24,14 +24,17 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.User
+import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_hud.*
 
 class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener{
 
   private lateinit var appBarConfiguration: AppBarConfiguration;
   private val RC_SIGN_IN = 123
   lateinit var userModel: UserViewModel
+  lateinit var levelModel: LevelViewModel
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
     AuthUI.IdpConfig.EmailBuilder().build(),
@@ -44,7 +47,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   override fun onStart() {
     super.onStart()
     // Create and launch sign-in intent
-    if (uuid == null) {
+    //if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()
           .createSignInIntentBuilder()
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           .build(),
         RC_SIGN_IN
       )
-    }
+   // }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     setContentView(R.layout.activity_main)
 
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
 
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
     setSupportActionBar(toolbar) //set the toolbar
@@ -134,22 +138,22 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
       if (resultCode == Activity.RESULT_OK) {
         // Successfully signed in
 
-       // userModel.saveUser(User(response?.email.toString(), 0, us?.uid.toString(), 0, 0, 0))
+
+
+        levelModel.getLevels().observe(this, Observer {
+          textView3.text = it.size.toString()
+        })
+
 
         userModel.getUser(us?.uid.toString()).observe(this, Observer {
-          //userModel.saveUser(User("Marius", 0, us?.uid.toString(), 500, 555, 30))
-
-
-
           if (us?.uid.equals(it.uuid)){
             Toast.makeText(this, "SVEIKI SUGRIZE $it", Toast.LENGTH_LONG).show()
-            //userModel.completedLevels(it.uuid, 9845454324L)
+            textView7.text = it.coins.toString()
+            textView9.text = it.score.toString()
+            textView11.text = it.levels.size.toString()
           }else{
             userModel.saveUser(User("Puzzle solver", 0, us?.uid.toString(), 0, 0, 0))
           }
-
-
-          println("=====================================$it")
         }
         )
         //Picasso.get().load(us?.photoUrl).into(profileImage)
@@ -171,7 +175,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
       drawer_layout.closeDrawer(GravityCompat.START)
     } else {
-      super.onBackPressed()
+       super.onBackPressed()
     }
   }
 }
