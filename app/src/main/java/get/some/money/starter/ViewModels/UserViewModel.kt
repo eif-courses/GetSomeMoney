@@ -11,6 +11,10 @@ class UserViewModel : ViewModel(){
   private val repository = UserRepository.instance
   var user : MutableLiveData<User> = MutableLiveData()
 
+  var users: MutableLiveData<List<User>> = MutableLiveData()
+
+
+
   fun saveUser(user: User) = repository.saveUser(user)
 
   fun getUser(uuid: String): LiveData<User> {
@@ -22,6 +26,20 @@ class UserViewModel : ViewModel(){
     }
     return user
   }
+  fun getUsers():LiveData<List<User>>{
+      repository.getUsers().get().addOnCompleteListener {
+        val list = ArrayList<User>()
+        for (document in it.result!!) {
+          val temp = document.toObject(User::class.java)
+          list.add(temp)
+        }
+        users.value = list
+      }
+      return users
+
+  }
+
+
   fun updateScore(score: Int, uuid: String) = repository.updateScore(score, uuid)
 
   fun levelComplete(uuid: String, id: Long) {

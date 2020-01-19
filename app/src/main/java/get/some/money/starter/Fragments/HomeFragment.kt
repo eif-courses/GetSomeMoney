@@ -55,11 +55,14 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
     categoryRecyclerView.adapter = categoryListAdapter
 
 
+
     val currentLanguage = Language.getCurrentLanguage()
 
 
     var levelSize = 0
     model.getLevels().observe(this, Observer {
+
+      //textView3.text = it.size.toString()
 
       levelSize = it.size
       val list = mutableListOf<Category>()
@@ -75,13 +78,17 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
       categoryListAdapter.swapData(list.distinct())
     })
 
-    if (uuid != null) {
-      user.getUser(uuid).observe(this, Observer {
-        val percentage = (it.levels.size.toDouble() / levelSize.toDouble()) * 100
-        categoryListAdapter.sendPercentageCompleted(percentage.toInt())
-      })
-
-    }
+//    if (uuid != null) {
+//      user.getUser(uuid).observe(this, Observer {
+//        val percentage = (it.levels.size.toDouble() / levelSize.toDouble()) * 100
+//        categoryListAdapter.sendPercentageCompleted(percentage.toInt())
+//         textView7.text = it.coins.toString()
+//        textView9.text = it.score.toString()
+//         textView11.text = it.levels.size.toString()
+//
+//      })
+//
+//    }
 
   }
 

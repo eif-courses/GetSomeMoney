@@ -27,7 +27,7 @@ import get.some.money.starter.Models.User
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_hud.*
+
 
 class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener{
 
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   private val RC_SIGN_IN = 123
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel
-  private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
     AuthUI.IdpConfig.EmailBuilder().build(),
     AuthUI.IdpConfig.GoogleBuilder().build()
@@ -133,29 +132,37 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
     if (requestCode == RC_SIGN_IN) {
       val response = IdpResponse.fromResultIntent(data)
-      val us = FirebaseAuth.getInstance().currentUser
-
       if (resultCode == Activity.RESULT_OK) {
         // Successfully signed in
 
 
+        userModel.getUsers()
+          .observe(this, Observer<List<User>> { profiles ->
+            for (i in profiles.indices) {
+              if (profiles[i].uuid.equals(FirebaseAuth.getInstance().currentUser!!.uid)) {
+                Toast.makeText(this, "USERIS EGZISTUOJA JUNGIAMES", Toast.LENGTH_LONG).show()
+              } else {
+                userModel.saveUser(User("Puzzle solver", 0, FirebaseAuth.getInstance().currentUser!!.uid, 0, 0, 0))
+              //  profileViewModel.saveProfile(Profile(0, user.getEmail(), "gchfgc"))
+                //Picasso.get().load(user.getPhotoUrl()).into(avatar)
+              //  points.setText("" + 999999)
+              }
+            }
+          })
 
-        levelModel.getLevels().observe(this, Observer {
-          textView3.text = it.size.toString()
-        })
 
-
-        userModel.getUser(us?.uid.toString()).observe(this, Observer {
-          if (us?.uid.equals(it.uuid)){
-            Toast.makeText(this, "SVEIKI SUGRIZE $it", Toast.LENGTH_LONG).show()
-            textView7.text = it.coins.toString()
-            textView9.text = it.score.toString()
-            textView11.text = it.levels.size.toString()
-          }else{
-            userModel.saveUser(User("Puzzle solver", 0, us?.uid.toString(), 0, 0, 0))
-          }
-        }
-        )
+        //userModel.saveUser(User("Puzzle solver", 0, uuid.toString(), 0, 0, 0))
+//        if (uuid != null) {
+//          userModel.getUser(uuid).observe(this, Observer {
+//            if (uuid.equals(it.uuid)){
+//              Toast.makeText(this, "SVEIKI SUGRIZE $it", Toast.LENGTH_LONG).show()
+//
+//            }else{
+//              userModel.saveUser(User("Puzzle solver", 0, uuid.toString(), 0, 0, 0))
+//            }
+//          }
+//          )
+//        }
         //Picasso.get().load(us?.photoUrl).into(profileImage)
        // profileName.text = us?.displayName
 
