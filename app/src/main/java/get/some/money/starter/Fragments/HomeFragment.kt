@@ -70,6 +70,16 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
 
     model.getLevels().observe(this, Observer {
 
+
+      val categoriesMap = mutableMapOf<String, Int>()
+
+      it.groupingBy {it.category}.eachCount().map {
+        println(it.key + it.value)
+        categoriesMap.put(it.key, it.value)
+      }
+
+
+
       //levelSize = it.size
       val list = mutableListOf<Category>()
 
@@ -83,8 +93,8 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
         }
       categoryListAdapter.swapData(list.distinct())
 
-      val percentage = (levelSize.toDouble()/ it.size.toDouble()) * 100
-      categoryListAdapter.sendPercentageCompleted(percentage.toInt())
+
+      categoryListAdapter.sendPercentageCompleted(categoriesMap, levelSize)
 
     })
 

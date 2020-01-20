@@ -6,11 +6,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.reward_dialog.*
+import kotlin.random.Random
 
 
 class RewardDialog : DialogFragment(){
@@ -50,12 +53,14 @@ class RewardDialog : DialogFragment(){
       val toastView = getLayoutInflater().inflate(R.layout.toast_message, null);
       val toast = Toast(it.context)
       // Set custom view in toast.
-      toast.setView(toastView);
-      toast.setDuration(Toast.LENGTH_SHORT);
+      val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
+      val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+        rewardText.text = Random.nextInt(500).toString()
+        //rewardMesageImage =
+      toast.view = toastView
+      toast.duration = Toast.LENGTH_LONG;
       toast.setGravity(Gravity.CENTER, 0,0);
       toast.show()
-
-
 
     }
 

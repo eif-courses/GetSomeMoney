@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.category_item.view.*
 class CategoryListAdapter(private val interaction: Interaction? = null) :
   ListAdapter<Category, CategoryListAdapter.CategoryViewHolder>(CategoryDC()) {
 
-  var percent = 0
+  var categories = mutableMapOf<String, Int>()
+  var completeLevels = 0
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryViewHolder(
     LayoutInflater.from(parent.context)
       .inflate(R.layout.category_item, parent, false), interaction
@@ -31,8 +32,12 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
   }
 
 
-  fun sendPercentageCompleted(a: Int) {
-    percent = a
+  fun sendPercentageCompleted(
+    a: MutableMap<String, Int>,
+    levelSize: Int
+  ) {
+    categories = a
+    completeLevels = levelSize
   }
 
   inner class CategoryViewHolder(
@@ -58,8 +63,16 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
       val title:TextView = itemView.findViewById(R.id.category_title)
       val image: ImageView = itemView.findViewById(R.id.category_imageview)
       title.text = item.title
-      itemView.categoryProgress.progress = percent
-      itemView.currentProgressPercentage.text = "$percent %"
+
+
+      for(cat in categories) {
+        if (item.title.equals(cat.key)) {
+          itemView.categoryProgress.progress = ((completeLevels.toDouble()) * 100 / cat.value.toDouble()).toInt()
+          itemView.currentProgressPercentage.text = "${(( completeLevels.toDouble() / cat.value.toDouble()) * 100).toInt()} %"
+        }
+      }
+
+      //itemView.currentProgressPercentage.text = "$percent %"
       Picasso.get().load(item.imageUrl).into(image)
     }
   }
