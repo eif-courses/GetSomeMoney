@@ -21,8 +21,6 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
   var completeLevels = 0
   var separateCategories = mutableMapOf<String, Long>()
 
-
-
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryViewHolder(
     LayoutInflater.from(parent.context)
       .inflate(R.layout.category_item, parent, false), interaction
