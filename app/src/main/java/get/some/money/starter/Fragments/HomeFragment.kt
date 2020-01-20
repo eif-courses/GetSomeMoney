@@ -24,6 +24,10 @@ import kotlinx.android.synthetic.main.fragment_home.*
 /**
  * A simple [Fragment] subclass.
  */
+
+
+class CompletedLevelByCategory(val name: String, val id: Long)
+
 class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
 
 
@@ -61,24 +65,52 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
 
     var levelSize = 0
 
+    var completedByCategory = mutableListOf<Long>()
+
+    var completedSeparateByCategory = mutableMapOf<String, Long>()
+
+
+
+
     if (uuid != null) {
       user.getUser(uuid).observe(this, Observer {
         levelSize = it.levels.size
+        completedByCategory = it.levels as MutableList<Long>
       })
     }
 
 
-    model.getLevels().observe(this, Observer {
 
+
+    model.getLevels().observe(this, Observer {
 
       val categoriesMap = mutableMapOf<String, Int>()
 
-      it.groupingBy {it.category}.eachCount().map {
-        println(it.key + it.value)
-        categoriesMap.put(it.key, it.value)
+      val finalMapOfCompletedLevels = mutableListOf<CompletedLevelByCategory>()
+      for(down in it){
+        for(temp in completedByCategory){
+          if(temp.equals(down.id)){
+            finalMapOfCompletedLevels.add(CompletedLevelByCategory(down.category, temp))
+          }
+        }
+      }
+
+      finalMapOfCompletedLevels.groupingBy {it.name}.eachCount().map {
+        println("RIKIUOJAM CUSTOM GAL: "+it.key +"    "+ it.value)
+        completedSeparateByCategory.put(it.key, it.value.toLong())
+
       }
 
 
+
+
+
+
+      categoriesMap.clear()
+      it.groupingBy {it.category}.eachCount().map {
+      //  println(it.key + it.value)
+        categoriesMap.put(it.key, it.value)
+      }
 
       //levelSize = it.size
       val list = mutableListOf<Category>()
@@ -94,7 +126,7 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
       categoryListAdapter.swapData(list.distinct())
 
 
-      categoryListAdapter.sendPercentageCompleted(categoriesMap, levelSize)
+      categoryListAdapter.sendPercentageCompleted(categoriesMap, levelSize, completedSeparateByCategory)
 
     })
 

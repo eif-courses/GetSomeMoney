@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_hud.*
 class HudFragment : Fragment() {
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel
-  val uuid = FirebaseAuth.getInstance().currentUser?.uid
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -51,11 +50,6 @@ class HudFragment : Fragment() {
         }
       })
 
-//    userModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
-//      textView7.text = it.coins.toString()
-//      textView9.text = it.score.toString()
-//      textView11.text = it.levels.size.toString()
-//    })
   }
 
 

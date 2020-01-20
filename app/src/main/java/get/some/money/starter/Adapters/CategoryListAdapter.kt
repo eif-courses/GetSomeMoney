@@ -19,6 +19,10 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
 
   var categories = mutableMapOf<String, Int>()
   var completeLevels = 0
+  var separateCategories = mutableMapOf<String, Long>()
+
+
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryViewHolder(
     LayoutInflater.from(parent.context)
       .inflate(R.layout.category_item, parent, false), interaction
@@ -34,10 +38,12 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
 
   fun sendPercentageCompleted(
     a: MutableMap<String, Int>,
-    levelSize: Int
+    levelSize: Int,
+    completedSeparateByCategory: MutableMap<String, Long>
   ) {
     categories = a
     completeLevels = levelSize
+    separateCategories = completedSeparateByCategory
   }
 
   inner class CategoryViewHolder(
@@ -64,15 +70,18 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
       val image: ImageView = itemView.findViewById(R.id.category_imageview)
       title.text = item.title
 
-
-      for(cat in categories) {
-        if (item.title.equals(cat.key)) {
-          itemView.categoryProgress.progress = ((completeLevels.toDouble()) * 100 / cat.value.toDouble()).toInt()
-          itemView.currentProgressPercentage.text = "${(( completeLevels.toDouble() / cat.value.toDouble()) * 100).toInt()} %"
+      for (separate in separateCategories){
+        if(item.title.equals(separate.key)){
+          for(j in categories) {
+            if(j.key.equals(separate.key)){
+            val formula = (separate.value.toDouble() / j.value.toDouble()) * 100
+            //println(completeLevels.toString() + " "+ cat.value + " " + cat.key)
+            itemView.categoryProgress.progress = formula.toInt()
+            itemView.currentProgressPercentage.text = String.format("%.1f%s", formula, "%")
+          }
+          }
         }
       }
-
-      //itemView.currentProgressPercentage.text = "$percent %"
       Picasso.get().load(item.imageUrl).into(image)
     }
   }
