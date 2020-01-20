@@ -32,16 +32,18 @@ import kotlin.random.Random
  */
 class GameplayFragment : Fragment() {
 
-  val args: GameplayFragmentArgs by navArgs()
-  var isCompleted = false
-  var isLoose = false
+  private val args: GameplayFragmentArgs by navArgs()
+  private var isCompleted = false
+  private var isLoose = false
   lateinit var mediaPlayer: MediaPlayer
   lateinit var clickSound: MediaPlayer
+  lateinit var looseSound: MediaPlayer
   lateinit var levelModel: LevelViewModel
   lateinit var userModel: UserViewModel
   lateinit var time: CountDownTimer
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
-  var images = listOf<ImageView>()
+  private var images = listOf<ImageView>()
+
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -67,12 +69,19 @@ class GameplayFragment : Fragment() {
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     mediaPlayer = MediaPlayer.create(view.context, R.raw.win)
+    looseSound = MediaPlayer.create(view.context, R.raw.failed)
     clickSound = MediaPlayer.create(view.context, R.raw.click)
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
 
-    Picasso.get().load(args.background).into(level_background)
+    init(args.userscore)
+  }
 
-    //gameBoard.setBackgroundResource(R.drawable.forest)
+
+
+  fun init(score:Int){
+
+
+    Picasso.get().load(args.background).into(level_background)
 
     val staticImages = args.imageURL.asList()
 
@@ -127,8 +136,22 @@ class GameplayFragment : Fragment() {
               ft.detach(this).attach(this).commit()
               isCompleted = true
             }
-
             userModel.levelComplete(uuid.toString(), args.levelid)
+
+
+
+            val result = your_score.text.toString().toInt() + score
+            //textView9.text = score.toString()
+            userModel.updateScore(result, uuid!!)
+
+
+
+
+
+
+
+
+
 
           } else {
 
@@ -140,7 +163,7 @@ class GameplayFragment : Fragment() {
             reward.isCancelable = false
             if (fragmentManager != null) {
               reward.show(fragmentManager, "LOOSE_DIALOG")
-              mediaPlayer.start()
+              looseSound.start()
 
               val ft: FragmentTransaction = fragmentManager.beginTransaction()
               if (Build.VERSION.SDK_INT >= 26) {
@@ -157,6 +180,8 @@ class GameplayFragment : Fragment() {
       }
     }
   }
+
+
 
   fun moveObject(v: View, x: Float, y: Float = -420f, duration: Long = 1000) {
     v.animate()
@@ -193,8 +218,8 @@ class GameplayFragment : Fragment() {
       override fun onFinish() {
         //v?.visibility = View.GONE
         //val uuid = FirebaseAuth.getInstance().currentUser?.uid
-        userModel.updateScore(your_score.text.toString().toInt() + 500, uuid!!)
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
       }
 
       override fun onTick(millisUntilFinished: Long) {
@@ -203,7 +228,6 @@ class GameplayFragment : Fragment() {
         if (isCompleted || isLoose) {
           this.cancel()
         }
-
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
       }
     }

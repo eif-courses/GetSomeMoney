@@ -41,6 +41,9 @@
         <argument
             android:name="levelid"
             app:argType="long" />
+        <argument
+            android:name="userscore"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

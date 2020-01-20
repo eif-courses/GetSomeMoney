@@ -31,7 +31,7 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
   lateinit var levelViewModel: LevelViewModel
   lateinit var userViewModel: UserViewModel
   val user = FirebaseAuth.getInstance().currentUser
-
+  var score = 0
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -50,6 +50,12 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
     //levelRecycleView.layoutManager = GridLayoutManager(context,2)
     levelListAdapter = LevelListAdapter(this)
 
+    if(user != null) {
+      userViewModel.getUser(user.uid).observe(this, Observer {
+        levelListAdapter.markCompletedLevels(it.levels)
+        score = it.score
+      })
+    }
 
     levelViewModel.getLevels(args.categoryname).observe(this, Observer {
 
@@ -60,11 +66,7 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
       levelListAdapter.swapData(list)
 
     })
-    if(user != null) {
-      userViewModel.getUser(user.uid).observe(this, Observer {
-        levelListAdapter.markCompletedLevels(it.levels)
-      })
-    }
+
 
     //levelListAdapter.submitList(model.getLevels().value)
     levelRecycleView.adapter = levelListAdapter
@@ -74,7 +76,7 @@ class LevelChooseFragment : Fragment(), LevelListAdapter.Interaction{
   override fun click(level: Level) {
     val temp: Array<String>
     temp = level.assets.toTypedArray()
-    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header, level.id)
+    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header, level.id, score)
     findNavController().navigate(action)
   }
 

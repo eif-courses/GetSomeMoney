@@ -1,5 +1,6 @@
 package get.some.money.starter.ViewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,36 +8,43 @@ import com.google.firebase.firestore.FieldValue
 import get.some.money.starter.Models.User
 import get.some.money.starter.Repositories.UserRepository
 
-class UserViewModel : ViewModel(){
+class UserViewModel : ViewModel() {
   private val repository = UserRepository.instance
-  var user : MutableLiveData<User> = MutableLiveData()
-
-  var users: MutableLiveData<List<User>> = MutableLiveData()
-
+  var user: MutableLiveData<User> = MutableLiveData()
+  val TAG = "GET_USERS"
+  var currentUsers: MutableLiveData<List<User>> = MutableLiveData()
 
 
   fun saveUser(user: User) = repository.saveUser(user)
 
   fun getUser(uuid: String): LiveData<User> {
 
-    repository.getUser(uuid).addSnapshotListener { documentSnapshot, e -> run{
-      val u = documentSnapshot?.toObject(User::class.java)
-      user.value = u
-    }
+    repository.getUser(uuid).addSnapshotListener { value, e ->
+      if (e != null) {
+        Log.w(TAG, "Listen failed.", e)
+        return@addSnapshotListener
+      }
+      user.value = value?.toObject(User::class.java)
+      Log.d(TAG, "Current users list: $user")
     }
     return user
   }
-  fun getUsers():LiveData<List<User>>{
-      repository.getUsers().get().addOnCompleteListener {
-        val list = ArrayList<User>()
-        for (document in it.result!!) {
-          val temp = document.toObject(User::class.java)
-          list.add(temp)
-        }
-        users.value = list
-      }
-      return users
 
+  fun getUsers(): LiveData<List<User>> {
+
+    repository.getUsers().addSnapshotListener { value, e ->
+      if (e != null) {
+        Log.w(TAG, "Listen failed.", e)
+        return@addSnapshotListener
+      }
+      val users = ArrayList<User>()
+      for (doc in value!!) {
+        users.add(doc.toObject(User::class.java))
+      }
+      currentUsers.value = users
+      Log.d(TAG, "Current users list: $users")
+    }
+    return currentUsers
   }
 
 
