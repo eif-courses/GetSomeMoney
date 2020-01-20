@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
+import get.some.money.starter.Models.User
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_hud.*
 class HudFragment : Fragment() {
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel
+  val uuid = FirebaseAuth.getInstance().currentUser?.uid
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -30,28 +32,32 @@ class HudFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
+
 
     levelModel.getLevels().observe(this, Observer {
       textView3.text = it.size.toString()
     })
 
+    userModel.getUsers()
+      .observe(this, Observer<List<User>> { profiles ->
+        for (i in profiles.indices) {
+          if (profiles[i].uuid.equals(FirebaseAuth.getInstance().currentUser?.uid)) {
+            textView7.text = profiles[i].coins.toString()
+            textView9.text = profiles[i].score.toString()
+            textView11.text = profiles[i].levels.size.toString()
+          }
+        }
+      })
 
-    userModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
-      textView7.text = it.coins.toString()
-      textView9.text = it.score.toString()
-      textView11.text = it.levels.size.toString()
-    })
-
-
-
-
-
-
-
+//    userModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
+//      textView7.text = it.coins.toString()
+//      textView9.text = it.score.toString()
+//      textView11.text = it.levels.size.toString()
+//    })
   }
+
 
 
 }

@@ -29,24 +29,23 @@ import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener{
+class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener {
 
   private lateinit var appBarConfiguration: AppBarConfiguration;
   private val RC_SIGN_IN = 123
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel
+  var uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
     AuthUI.IdpConfig.EmailBuilder().build(),
     AuthUI.IdpConfig.GoogleBuilder().build()
   )
 
 
-
-
   override fun onStart() {
     super.onStart()
     // Create and launch sign-in intent
-    //if (uuid == null) {
+    if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()
           .createSignInIntentBuilder()
@@ -54,15 +53,17 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           .build(),
         RC_SIGN_IN
       )
-   // }
+    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
+    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+
 
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
     setSupportActionBar(toolbar) //set the toolbar
@@ -135,40 +136,37 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
       if (resultCode == Activity.RESULT_OK) {
         // Successfully signed in
 
-
         userModel.getUsers()
           .observe(this, Observer<List<User>> { profiles ->
+
+            var exists = false
+
             for (i in profiles.indices) {
               if (profiles[i].uuid.equals(FirebaseAuth.getInstance().currentUser!!.uid)) {
                 Toast.makeText(this, "USERIS EGZISTUOJA JUNGIAMES", Toast.LENGTH_LONG).show()
+                exists = true
+
               } else {
-                userModel.saveUser(User("Puzzle solver", 0, FirebaseAuth.getInstance().currentUser!!.uid, 0, 0, 0))
-              //  profileViewModel.saveProfile(Profile(0, user.getEmail(), "gchfgc"))
-                //Picasso.get().load(user.getPhotoUrl()).into(avatar)
-              //  points.setText("" + 999999)
+                println("Not exists!")
               }
             }
+            if (!exists) {
+              userModel.saveUser(
+                User(
+                  "Puzzle solver",
+                  0,
+                  FirebaseAuth.getInstance().currentUser!!.uid,
+                  0,
+                  0,
+                  0
+                )
+              )
+            }
+
           })
 
-
-        //userModel.saveUser(User("Puzzle solver", 0, uuid.toString(), 0, 0, 0))
-//        if (uuid != null) {
-//          userModel.getUser(uuid).observe(this, Observer {
-//            if (uuid.equals(it.uuid)){
-//              Toast.makeText(this, "SVEIKI SUGRIZE $it", Toast.LENGTH_LONG).show()
-//
-//            }else{
-//              userModel.saveUser(User("Puzzle solver", 0, uuid.toString(), 0, 0, 0))
-//            }
-//          }
-//          )
-//        }
-        //Picasso.get().load(us?.photoUrl).into(profileImage)
-       // profileName.text = us?.displayName
-
-
-        // ...
       } else {
+        println(response?.error)
         // Sign in failed. If response is null the user canceled the
         // sign-in flow using the back button. Otherwise check
         // response.getError().getErrorCode() and handle the error.
@@ -182,7 +180,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
       drawer_layout.closeDrawer(GravityCompat.START)
     } else {
-       super.onBackPressed()
+      super.onBackPressed()
     }
   }
 }

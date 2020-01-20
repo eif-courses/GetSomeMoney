@@ -56,9 +56,9 @@ class GameplayFragment : Fragment() {
 
     val currentLanguage = Language.getCurrentLanguage()
 
-    if(currentLanguage.equals("lt")){
+    if (currentLanguage.equals("lt")) {
       levelQuestion.text = args.questionlt
-    }else{
+    } else {
       levelQuestion.text = args.question
     }
 
@@ -93,25 +93,25 @@ class GameplayFragment : Fragment() {
         it.getLocationOnScreen(location)
         moveObject(it, -location[0].toFloat() + 50 + (count * 190))
         count++
-       // mediaPlayer.start()
+        // mediaPlayer.start()
 
-        if(!clickSound.isPlaying)
+        if (!clickSound.isPlaying)
           clickSound.start()
 
         house.isClickable = false
 
         sequence.add(house.tag.toString())
 
-        if(count > 4){
+        if (count > 4) {
 
           var complete = 0
-            //  1 4 5 3 2
-          for (index in 0..4){
-            if(sequence[index] == staticImages[index]){
+          //  1 4 5 3 2
+          for (index in 0..4) {
+            if (sequence[index] == staticImages[index]) {
               complete++
             }
           }
-          if(complete == 5){
+          if (complete == 5) {
             Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
             val fragmentManager = getFragmentManager()
             val reward = RewardDialog()
@@ -130,7 +130,7 @@ class GameplayFragment : Fragment() {
 
             userModel.levelComplete(uuid.toString(), args.levelid)
 
-          }else{
+          } else {
 
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
             isLoose = true
@@ -149,7 +149,7 @@ class GameplayFragment : Fragment() {
               ft.detach(this).attach(this).commit()
               isLoose = false
               time.start()
-              }
+            }
 
           }
         }
@@ -164,6 +164,7 @@ class GameplayFragment : Fragment() {
       .translationX(x)
       .duration = duration
   }
+
   override fun onPause() {
     super.onPause()
 
@@ -187,7 +188,6 @@ class GameplayFragment : Fragment() {
   }
 
 
-
   fun gameTimer(): CountDownTimer {
     val timer = object : CountDownTimer(Random.nextLong(30000) + 20000, 1000) {
       override fun onFinish() {
@@ -198,9 +198,9 @@ class GameplayFragment : Fragment() {
       }
 
       override fun onTick(millisUntilFinished: Long) {
-        time_remaining.text = (millisUntilFinished/1000).toString()
+        time_remaining.text = (millisUntilFinished / 1000).toString()
         your_score.text = (millisUntilFinished / 125).toString()
-        if(isCompleted || isLoose){
+        if (isCompleted || isLoose) {
           this.cancel()
         }
 
