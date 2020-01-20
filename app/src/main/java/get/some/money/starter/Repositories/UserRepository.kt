@@ -13,6 +13,7 @@ class UserRepository private constructor(){
   fun getUser(uuid: String) = db.collection("users").document(uuid)
   fun getUsers() = db.collection("users")
   fun updateScore(score: Int, uuid: String) = db.collection("users").document(uuid).update("score", score)
+  fun updateGold(gold: Int, uuid: String) = db.collection("users").document(uuid).update("gold", gold)
   fun levelComplete(uuid: String) = db.collection("users").document(uuid)
 
 }

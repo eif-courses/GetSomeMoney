@@ -64,28 +64,21 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
-
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+
     setSupportActionBar(toolbar) //set the toolbar
+
+
+
+
+
     val host: NavHostFragment = supportFragmentManager
       .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
     val navController = host.navController
     appBarConfiguration = AppBarConfiguration(navController.graph) //configure nav controller
     setupNavigation(navController) //setup navigation
     setupActionBar(navController, appBarConfiguration) // setup action bar
-    //hear for event changes
-//    navController.addOnDestinationChangedListener { _, destination, _ ->
-//      val dest: String = try {
-//        resources.getResourceName(destination.id)
-//      } catch (e: Resources.NotFoundException) {
-//        Integer.toString(destination.id)
-//      }
-//      Toast.makeText(
-//        this@MainActivity, "Navigated to $dest",
-//        Toast.LENGTH_SHORT
-//      ).show()
-//      Log.d("NavigationActivity", "Navigated to $dest")
-//    }
   }
 
   private fun setupActionBar(
@@ -102,7 +95,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
     //fragments load from here but how ?
     appBarConfiguration = AppBarConfiguration(
-      setOf(R.id.homeFragment, R.id.shopFragment),
+      setOf(R.id.homeFragment, R.id.shopFragment, R.id.highScoresFragment, R.id.privacyPolicyFragment),
       drawerLayout
     )
   }

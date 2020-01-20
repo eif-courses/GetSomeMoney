@@ -70,4 +70,14 @@
             android:id="@+id/action_levelChooseFragment_to_gameplayFragment"
             app:destination="@id/gameplayFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="get.some.money.starter.Fragments.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" />
+    <fragment
+        android:id="@+id/highScoresFragment"
+        android:name="get.some.money.starter.Fragments.HighScoresFragment"
+        android:label="fragment_high_scores"
+        tools:layout="@layout/fragment_high_scores" />
 </navigation>
