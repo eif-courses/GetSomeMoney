@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListener {
 
-  private lateinit var appBarConfiguration: AppBarConfiguration;
+  private lateinit var appBarConfiguration: AppBarConfiguration
   private val RC_SIGN_IN = 123
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel

@@ -10,12 +10,12 @@
     <string name="play">Play</string>
     <string name="high_scores">High Scores</string>
     <string name="shop">Shop</string>
-    <string name="completion">completion</string>
+    <string name="completion" translatable="false">0%</string>
     <string name="categoryImageDescription">categoryName</string>
     <string name="category_title" translatable="false">Nature</string>
     <string name="gold">Money:</string>
     <string name="score">Score:</string>
-    <string name="solved">Tasks solved:</string>
+    <string name="solved">Completed:</string>
     <string name="reward_dialog">Reward dialog</string>
     <string name="repeat_level">Repeat Level</string>
     <string name="next_level">Next level</string>
@@ -24,4 +24,7 @@
     <string name="loose_dialog_title">Try again :(</string>
     <string name="home">Home</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="ad_mob_rewarded_video_ad_test" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="id">ID:</string>
+    <string name="name">Name:</string>
 </resources>

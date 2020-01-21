@@ -5,15 +5,22 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdCallback
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import get.some.money.starter.Dialogs.LooseDialog
@@ -35,6 +42,8 @@ class GameplayFragment : Fragment() {
   private val args: GameplayFragmentArgs by navArgs()
   private var isCompleted = false
   private var isLoose = false
+  private lateinit var rewardedAd: RewardedAd
+
   lateinit var mediaPlayer: MediaPlayer
   lateinit var clickSound: MediaPlayer
   lateinit var looseSound: MediaPlayer
@@ -53,8 +62,12 @@ class GameplayFragment : Fragment() {
     return inflater.inflate(R.layout.fragment_gameplay, container, false)
   }
 
+
+
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
 
     val currentLanguage = Language.getCurrentLanguage()
 
@@ -72,6 +85,18 @@ class GameplayFragment : Fragment() {
     looseSound = MediaPlayer.create(view.context, R.raw.failed)
     clickSound = MediaPlayer.create(view.context, R.raw.click)
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
+
+    val adLoadCallback = object: RewardedAdLoadCallback() {
+      override fun onRewardedAdLoaded() {
+        // Ad successfully loaded.
+      }
+      override fun onRewardedAdFailedToLoad(errorCode: Int) {
+        // Ad failed to load.
+      }
+    }
+    rewardedAd.loadAd(AdRequest.Builder().build(), adLoadCallback)
+
+
 
     init(args.userscore)
   }
@@ -145,14 +170,6 @@ class GameplayFragment : Fragment() {
             userModel.updateScore(result, uuid!!)
 
 
-
-
-
-
-
-
-
-
           } else {
 
             Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
@@ -171,7 +188,32 @@ class GameplayFragment : Fragment() {
               }
               ft.detach(this).attach(this).commit()
               isLoose = false
-              time.start()
+              time.cancel()
+
+
+              if (rewardedAd.isLoaded) {
+                //val activityContext: Activity = ...
+                val adCallback = object: RewardedAdCallback() {
+                  override fun onRewardedAdOpened() {
+                    // Ad opened.
+                  }
+                  override fun onRewardedAdClosed() {
+                    time.start()
+                  }
+                  override fun onUserEarnedReward(@NonNull reward: RewardItem) {
+                    // User earned reward.
+                  }
+                  override fun onRewardedAdFailedToShow(errorCode: Int) {
+                    // Ad failed to display.
+                  }
+                }
+                rewardedAd.show(activity, adCallback)
+              }
+              else {
+                Log.d("TAG", "The rewarded ad wasn't loaded yet.")
+              }
+
+
             }
 
           }

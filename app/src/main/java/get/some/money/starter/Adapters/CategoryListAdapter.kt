@@ -75,7 +75,7 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
             val formula = (separate.value.toDouble() / j.value.toDouble()) * 100
             //println(completeLevels.toString() + " "+ cat.value + " " + cat.key)
             itemView.categoryProgress.progress = formula.toInt()
-            itemView.currentProgressPercentage.text = String.format("%.1f%s", formula, "%")
+            itemView.currentProgressPercentage.text = String.format("%d%s", formula.toInt(), "%")
           }
           }
         }

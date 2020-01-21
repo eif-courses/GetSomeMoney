@@ -67,7 +67,7 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
 
     var completedByCategory = mutableListOf<Long>()
 
-    var completedSeparateByCategory = mutableMapOf<String, Long>()
+    val completedSeparateByCategory = mutableMapOf<String, Long>()
 
 
 
