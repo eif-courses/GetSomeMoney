@@ -25,7 +25,7 @@ class HighScoresListAdapter(private val interaction: Interaction? = null) :
     holder.bind(getItem(position))
 
   fun swapData(data: List<User>) {
-    submitList(data.toMutableList())
+    submitList(data.toMutableList().sortedByDescending { it.score })
   }
 
   var recordSize = 0

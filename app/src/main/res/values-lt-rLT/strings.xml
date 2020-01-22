@@ -7,16 +7,18 @@
     <string name="categoryImageDescription">kategorijosPavadinimas</string>
     <string name="hello_blank_fragment">eeee</string>
     <string name="gold">Pinigai:</string>
-    <string name="score">Taškai:</string>
+    <string name="score">Taškai</string>
     <string name="reward_dialog">Apdovanojimas</string>
-    <string name="solved">Išspręsta:</string>
+    <string name="solved">Išspręsta</string>
     <string name="repeat_level">KARTOTI LYGĮ</string>
     <string name="next_level">SEKANTIS LYGIS</string>
     <string name="level_complete">LYGIS ĮVEIKTAS</string>
-    <string name="time_left">Laikas:</string>
+    <string name="time_left">Laikas</string>
     <string name="loose_dialog_title">Bandyk dar kartą :(</string>
     <string name="privacy_policy">Privatumo politika</string>
     <string name="home">Pagrindinis</string>
     <string name="name">Vardas</string>
-    <string name="id">Nr:</string>
+    <string name="id">Nr.</string>
+    <string name="fragment_level_choose">Pasirinkti lygį</string>
+    <string name="fragment_privacy_policy">Privatumo politika</string>
 </resources>

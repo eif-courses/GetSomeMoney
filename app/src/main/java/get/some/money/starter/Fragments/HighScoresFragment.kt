@@ -42,6 +42,9 @@ class HighScoresFragment : Fragment() {
     recycleView.adapter = highScoresListAdapter
 
     userViewModel.getUsers().observe(this, Observer {
+
+
+
       highScoresListAdapter.swapData(it)
       highScoresListAdapter.listSize(it.size)
     })

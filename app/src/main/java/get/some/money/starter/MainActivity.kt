@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
   override fun onStart() {
     super.onStart()
+    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
+    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     // Create and launch sign-in intent
     if (uuid == null) {
       startActivityForResult(
@@ -54,20 +56,21 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
         RC_SIGN_IN
       )
     }
+//    }else{
+//      userModel.getUser(uuid!!).observe(this, Observer {
+//        Nickname.text = it.name
+//      })
+//
+//    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-
-    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
-    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
-
-
     setSupportActionBar(toolbar) //set the toolbar
+
 
 
 

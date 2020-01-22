@@ -59,7 +59,6 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
     categoryRecyclerView.adapter = categoryListAdapter
 
 
-
     val currentLanguage = Language.getCurrentLanguage()
 
 
@@ -87,16 +86,28 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
       val categoriesMap = mutableMapOf<String, Int>()
 
       val finalMapOfCompletedLevels = mutableListOf<CompletedLevelByCategory>()
-      for(down in it){
-        for(temp in completedByCategory){
-          if(temp.equals(down.id)){
-            finalMapOfCompletedLevels.add(CompletedLevelByCategory(down.category, temp))
+
+
+      if (currentLanguage.equals("lt")) {
+        for (down in it) {
+          for (temp in completedByCategory) {
+            if (temp.equals(down.id)) {
+              finalMapOfCompletedLevels.add(CompletedLevelByCategory(down.categorylt, temp))
+            }
+          }
+        }
+      }else{
+        for (down in it) {
+          for (temp in completedByCategory) {
+            if (temp.equals(down.id)) {
+              finalMapOfCompletedLevels.add(CompletedLevelByCategory(down.category, temp))
+            }
           }
         }
       }
 
-      finalMapOfCompletedLevels.groupingBy {it.name}.eachCount().map {
-        println("RIKIUOJAM CUSTOM GAL: "+it.key +"    "+ it.value)
+      finalMapOfCompletedLevels.groupingBy { it.name }.eachCount().map {
+        println("RIKIUOJAM CUSTOM GAL: " + it.key + "    " + it.value)
         completedSeparateByCategory.put(it.key, it.value.toLong())
 
       }
@@ -106,27 +117,41 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
 
 
 
+
       categoriesMap.clear()
-      it.groupingBy {it.category}.eachCount().map {
-      //  println(it.key + it.value)
-        categoriesMap.put(it.key, it.value)
+
+      if (currentLanguage.equals("lt")) {
+        it.groupingBy { it.categorylt }.eachCount().map {
+          //  println(it.key + it.value)
+          categoriesMap.put(it.key, it.value)
+        }
+
+      } else {
+        it.groupingBy { it.category }.eachCount().map {
+          //  println(it.key + it.value)
+          categoriesMap.put(it.key, it.value)
+        }
       }
 
       //levelSize = it.size
       val list = mutableListOf<Category>()
 
-        for (level in it) {
+      for (level in it) {
 
-          if (currentLanguage.equals("lt")) {
-            list.add(Category(level.categorylt, level.header, level.category))
-          }else{
-            list.add(Category(level.category, level.header, level.category))
-          }
+        if (currentLanguage.equals("lt")) {
+          list.add(Category(level.categorylt, level.header, level.category))
+        } else {
+          list.add(Category(level.category, level.header, level.category))
         }
+      }
       categoryListAdapter.swapData(list.distinct())
 
 
-      categoryListAdapter.sendPercentageCompleted(categoriesMap, levelSize, completedSeparateByCategory)
+      categoryListAdapter.sendPercentageCompleted(
+        categoriesMap,
+        levelSize,
+        completedSeparateByCategory
+      )
 
     })
 
@@ -145,7 +170,6 @@ class HomeFragment : Fragment(), CategoryListAdapter.Interaction {
     val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
     findNavController().navigate(action)
   }
-
 
 
 }

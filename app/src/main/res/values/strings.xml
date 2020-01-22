@@ -14,17 +14,19 @@
     <string name="categoryImageDescription">categoryName</string>
     <string name="category_title" translatable="false">Nature</string>
     <string name="gold">Money:</string>
-    <string name="score">Score:</string>
-    <string name="solved">Completed:</string>
+    <string name="score">Score</string>
+    <string name="solved">Completed</string>
     <string name="reward_dialog">Reward dialog</string>
     <string name="repeat_level">Repeat Level</string>
     <string name="next_level">Next level</string>
     <string name="level_complete">LEVEL COMPLETE</string>
-    <string name="time_left">Time:</string>
+    <string name="time_left">Time</string>
     <string name="loose_dialog_title">Try again :(</string>
     <string name="home">Home</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="ad_mob_rewarded_video_ad_test" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="id">ID:</string>
+    <string name="id">ID</string>
     <string name="name">Name:</string>
+    <string name="fragment_level_choose">Choose level</string>
+    <string name="fragment_privacy_policy">Privacy Policy</string>
 </resources>
