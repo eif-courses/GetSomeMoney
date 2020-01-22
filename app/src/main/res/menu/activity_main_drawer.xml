@@ -22,7 +22,7 @@
             android:title="@string/privacy_policy"/>
         <item
             android:id="@+id/details"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/home"
             android:title="details"/>
 
     </group>
