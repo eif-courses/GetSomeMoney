@@ -74,15 +74,8 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
     looseSound = MediaPlayer.create(view.context, R.raw.failed)
     clickSound = MediaPlayer.create(view.context, R.raw.click)
     images = listOf(view.house, view.house2, view.house3, view.house4, view.house5)
-
-
-
-
-
     init(args.userscore)
   }
-
-
 
   fun init(score:Int){
 
@@ -143,8 +136,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
               isCompleted = true
             }
             userModel.levelComplete(uuid.toString(), args.levelid)
-
-
 
             val result = your_score.text.toString().toInt() + score
             //textView9.text = score.toString()

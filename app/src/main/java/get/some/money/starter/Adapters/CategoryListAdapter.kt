@@ -25,15 +25,12 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
     LayoutInflater.from(parent.context)
       .inflate(R.layout.category_item, parent, false), interaction
   )
-
   override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) =
     holder.bind(getItem(position))
 
   fun swapData(data: List<Category>) {
     submitList(data.toMutableList())
   }
-
-
   fun sendPercentageCompleted(
     a: MutableMap<String, Int>,
     levelSize: Int,
@@ -86,9 +83,7 @@ class CategoryListAdapter(private val interaction: Interaction? = null) :
 
   interface Interaction {
     fun clickCategory(cat: Category)
-
   }
-
   private class CategoryDC : DiffUtil.ItemCallback<Category>() {
     override fun areItemsTheSame(
       oldItem: Category,

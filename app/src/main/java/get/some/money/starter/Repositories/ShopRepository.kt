@@ -11,39 +11,37 @@ class ShopRepository private constructor(){
     fun loadItems(): MutableLiveData<List<Item>> {
         val temp = listOf(
             Item(
-                "G3 Gaming",
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/page/campaign/26214/26214-notebook-g-15-3579-169x149.png?fmt=jpg&amp;wid=124",
-                1000
+                "Coins mutiplier x2",
+                "https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shop%2Fdaugiklis2.png?alt=media&token=9bab5789-d4f4-419b-ab6d-8ed47834dcb8",
+                100000
             ),
             Item(
-                "G5 Gaming",
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/page/campaign/26214/26214-notebook-g-15-5590-169x149.png?fmt=jpg&amp;wid=124",
-                1500
+                "Coins multiplier x3",
+                "https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shop%2Fdaugiklis3.png?alt=media&token=4db277e7-8ca6-4c8f-aec5-92680806c91b",
+                500000
             ),
             Item(
                 "Free gift",
-                "https://i1.wp.com/www.wtrf.com/wp-content/uploads/sites/25/2018/11/money-hundred-dollar-bills-cash_1519336993846_345031_ver1.0_35024789_ver1.0.jpg?resize=2560%2C1440&ssl=1",
+                "https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shop%2Fgift.png?alt=media&token=5ceb7f83-b1ac-41d2-810d-5f1b55ca70b3",
                 0
             ),
             Item(
-                "Alienware m15",
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/page/campaign/26214/26214-notebook-alienware-m15-169x149.png?fmt=jpg&amp;wid=124",
-                1900
+                "Unlock Special levels",
+                "https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shop%2Ffeature.png?alt=media&token=383c52da-e4e8-4446-a12f-262312edc274",
+                100000
             ),
             Item(
-                "G7 Gaming",
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/page/campaign/26214/26214-notebook-g-15-7590-169x149.png?fmt=jpg&amp;wid=124",
-                2000
+                "Fully unlock game content",
+                "https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shop%2Fkeys.png?alt=media&token=3ba6b370-bc1c-4964-aad8-412f29e4896d",
+                500000
             ),
             Item(
-                "Alienware m15",
-                "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/page/campaign/26214/26214-notebook-alienware-m15-169x149.png?fmt=jpg&amp;wid=124",
+                "Game ticket",
+                "https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shop%2Ftickets.png?alt=media&token=2c995efe-a4e1-4ef0-9810-2880a97c80e2",
                 1500
             )
         )
         items.value = temp
         return items
     }
-
-
 }

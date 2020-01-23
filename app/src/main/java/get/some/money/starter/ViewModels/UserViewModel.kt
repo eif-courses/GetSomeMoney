@@ -49,7 +49,9 @@ class UserViewModel : ViewModel() {
 
 
   fun updateScore(score: Int, uuid: String) = repository.updateScore(score, uuid)
-  fun updateGold(gold: Int, uuid: String) = repository.updateGold(gold, uuid)
+  fun updateCoins(coins: Int, uuid: String) = repository.updateCoins(coins, uuid)
+  fun updateName(name: String, uuid: String) = repository.updateName(name, uuid)
+
 
   fun levelComplete(uuid: String, id: Long) {
     repository.levelComplete(uuid).update("levels", FieldValue.arrayUnion(id))

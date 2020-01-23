@@ -1,6 +1,7 @@
 package get.some.money.starter.Fragments
 
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -18,33 +19,28 @@ import kotlinx.android.synthetic.main.fragment_shop.*
  */
 class ShopFragment : Fragment(R.layout.fragment_shop) {
 
-    lateinit var recycleView: RecyclerView
-    lateinit var shopListAdapter: ShopListAdapter
+  lateinit var recycleView: RecyclerView
+  lateinit var shopListAdapter: ShopListAdapter
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_shop, container, false)
-//    }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    recycleView = fragment_shop_recycleview
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recycleView = fragment_shop_recycleview
-        //recycleView.layoutManager = LinearLayoutManager(context)
-        recycleView.layoutManager = GridLayoutManager(context, 2) as RecyclerView.LayoutManager?
-        shopListAdapter = ShopListAdapter()
+    val orientation = resources.configuration.orientation
+    if (orientation == Configuration.ORIENTATION_LANDSCAPE) { // In landscape
+      recycleView.layoutManager = GridLayoutManager(context, 3) as RecyclerView.LayoutManager?
 
-        val model = ViewModelProviders.of(this)[ShopViewModel::class.java]
-        shopListAdapter.submitList(model.getItems().value)
-        recycleView.adapter = shopListAdapter
-
-        model.getItems().observe(this, Observer {
-          shopListAdapter.notifyDataSetChanged()
-        })
-
+    } else {
+      recycleView.layoutManager = GridLayoutManager(context, 2) as RecyclerView.LayoutManager?
     }
+    shopListAdapter = ShopListAdapter()
 
+    val model = ViewModelProviders.of(this)[ShopViewModel::class.java]
+    shopListAdapter.submitList(model.getItems().value)
+    recycleView.adapter = shopListAdapter
 
+    model.getItems().observe(this, Observer {
+      shopListAdapter.notifyDataSetChanged()
+    })
+  }
 }

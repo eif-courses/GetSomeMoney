@@ -30,6 +30,7 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
   lateinit var userViewModel: UserViewModel
   val user = FirebaseAuth.getInstance().currentUser
   var score = 0
+  var coins = 0
 //  override fun onCreateView(
 //    inflater: LayoutInflater, container: ViewGroup?,
 //    savedInstanceState: Bundle?
@@ -52,6 +53,7 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
       userViewModel.getUser(user.uid).observe(this, Observer {
         levelListAdapter.markCompletedLevels(it.levels)
         score = it.score
+        coins = it.coins
       })
     }
 
@@ -74,7 +76,7 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
   override fun click(level: Level) {
     val temp: Array<String>
     temp = level.assets.toTypedArray()
-    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header, level.id, score)
+    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header, level.id, score, coins)
     findNavController().navigate(action)
   }
 

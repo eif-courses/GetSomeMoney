@@ -31,9 +31,9 @@ class RewardDialog : DialogFragment(){
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    val totalEarned = Random.nextInt(50,100)
 
     mediaPlayer = MediaPlayer.create(view.context, R.raw.openchest)
-
 
     next_level_btn.isVisible = false
 
@@ -55,7 +55,7 @@ class RewardDialog : DialogFragment(){
       // Set custom view in toast.
       val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
       val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
-        rewardText.text = Random.nextInt(500).toString()
+        rewardText.text = totalEarned.toString()
         //rewardMesageImage =
       toast.view = toastView
       toast.duration = Toast.LENGTH_LONG;

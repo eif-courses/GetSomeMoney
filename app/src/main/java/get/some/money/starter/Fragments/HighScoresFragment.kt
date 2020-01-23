@@ -20,13 +20,6 @@ class HighScoresFragment : Fragment(R.layout.fragment_high_scores) {
   lateinit var recycleView: RecyclerView
   lateinit var highScoresListAdapter: HighScoresListAdapter
   lateinit var userViewModel: UserViewModel
-//  override fun onCreateView(
-//    inflater: LayoutInflater, container: ViewGroup?,
-//    savedInstanceState: Bundle?
-//  ): View? {
-//    // Inflate the layout for this fragment
-//    return inflater.inflate(R.layout.fragment_high_scores, container, false)
-//  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -40,8 +33,6 @@ class HighScoresFragment : Fragment(R.layout.fragment_high_scores) {
     recycleView.adapter = highScoresListAdapter
 
     userViewModel.getUsers().observe(this, Observer {
-
-
 
       highScoresListAdapter.swapData(it)
       highScoresListAdapter.listSize(it.size)

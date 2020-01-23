@@ -31,4 +31,5 @@
     <string name="fragment_privacy_policy">Privacy Policy</string>
     <string name="loose_dialog_ad_text">Click on chest watch video ad and get reward!</string>
     <string name="prize">Your prize is here!</string>
+    <string name="profile">Profile</string>
 </resources>

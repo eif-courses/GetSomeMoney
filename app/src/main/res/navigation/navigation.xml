@@ -44,6 +44,9 @@
         <argument
             android:name="userscore"
             app:argType="integer" />
+        <argument
+            android:name="coins"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -80,4 +83,9 @@
         android:name="get.some.money.starter.Fragments.HighScoresFragment"
         android:label="@string/high_scores"
         tools:layout="@layout/fragment_high_scores" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="get.some.money.starter.Fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
