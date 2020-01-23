@@ -71,11 +71,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
     setSupportActionBar(toolbar) //set the toolbar
 
-
-
-
-
-
     val host: NavHostFragment = supportFragmentManager
       .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
     val navController = host.navController

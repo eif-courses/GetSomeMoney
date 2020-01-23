@@ -2,9 +2,7 @@ package get.some.money.starter.Fragments
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,16 +16,16 @@ import kotlinx.android.synthetic.main.fragment_hud.*
 /**
  * A simple [Fragment] subclass.
  */
-class HudFragment : Fragment() {
+class HudFragment : Fragment(R.layout.fragment_hud) {
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_hud, container, false)
-  }
+//  override fun onCreateView(
+//    inflater: LayoutInflater, container: ViewGroup?,
+//    savedInstanceState: Bundle?
+//  ): View? {
+//    // Inflate the layout for this fragment
+//    return inflater.inflate(R.layout.fragment_hud, container, false)
+//  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

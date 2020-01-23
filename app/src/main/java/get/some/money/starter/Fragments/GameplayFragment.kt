@@ -6,11 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -37,7 +34,7 @@ import kotlin.random.Random
 /**
  * A simple [Fragment] subclass.
  */
-class GameplayFragment : Fragment() {
+class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
 
   private val args: GameplayFragmentArgs by navArgs()
   private var isCompleted = false
@@ -53,14 +50,14 @@ class GameplayFragment : Fragment() {
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   private var images = listOf<ImageView>()
 
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_gameplay, container, false)
-  }
+//
+//  override fun onCreateView(
+//    inflater: LayoutInflater, container: ViewGroup?,
+//    savedInstanceState: Bundle?
+//  ): View? {
+//    // Inflate the layout for this fragment
+//    return inflater.inflate(R.layout.fragment_gameplay, container, false)
+//  }
 
 
 
@@ -146,7 +143,7 @@ class GameplayFragment : Fragment() {
             }
           }
           if (complete == 5) {
-            Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
+           // Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
             val fragmentManager = getFragmentManager()
             val reward = RewardDialog()
             reward.isCancelable = false
@@ -172,7 +169,7 @@ class GameplayFragment : Fragment() {
 
           } else {
 
-            Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
             isLoose = true
 
             val fragmentManager = getFragmentManager()
