@@ -22,4 +22,5 @@
     <string name="fragment_level_choose">Pasirinkti lygį</string>
     <string name="fragment_privacy_policy">Privatumo politika</string>
     <string name="loose_dialog_ad_text">Spausk ant dėžės, peržiūrėk vaizdo reklamą ir gauk prizą!</string>
+    <string name="prize">Štai jūsų prizas!</string>
 </resources>

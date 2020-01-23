@@ -18,6 +18,13 @@
         android:textColor="@color/white"
         android:textSize="14sp" />
 
+    <ProgressBar
+        android:id="@+id/progressBarLooseReward"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
@@ -29,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/chestclosed"
-        android:scaleX="0.6" />
+        android:scaleX="0.6"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textView"
@@ -52,4 +60,5 @@
         android:text="@string/repeat_level"
         android:textColor="@color/white"
         android:textSize="24sp" />
+
 </LinearLayout>
