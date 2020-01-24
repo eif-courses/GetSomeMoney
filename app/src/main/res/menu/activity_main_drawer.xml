@@ -17,13 +17,22 @@
             android:icon="@drawable/shop"
             android:title="@string/shop"/>
         <item
+            android:id="@+id/profileFragment"
+            android:icon="@drawable/profile"
+            android:title="@string/profile"/>
+        <item
+            android:id="@+id/gameGuideFragment"
+            android:icon="@drawable/manual"
+            android:title="@string/game_guide"/>
+        <item
             android:id="@+id/privacyPolicyFragment"
             android:icon="@drawable/policy"
             android:title="@string/privacy_policy"/>
         <item
-            android:id="@+id/profileFragment"
-            android:icon="@drawable/profile"
-            android:title="@string/profile"/>
+            android:id="@+id/termsAndConditionsFragment"
+            android:icon="@drawable/accept"
+            android:title="@string/terms_and_conditions"/>
+
 
     </group>
 

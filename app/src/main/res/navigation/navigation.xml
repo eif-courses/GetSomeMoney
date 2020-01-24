@@ -88,4 +88,14 @@
         android:name="get.some.money.starter.Fragments.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/gameGuideFragment"
+        android:name="get.some.money.starter.Fragments.GameGuideFragment"
+        android:label="@string/game_guide"
+        tools:layout="@layout/fragment_game_guide" />
+    <fragment
+        android:id="@+id/termsAndConditionsFragment"
+        android:name="get.some.money.starter.Fragments.TermsAndConditionsFragment"
+        android:label="@string/terms_and_conditions"
+        tools:layout="@layout/fragment_terms_and_conditions" />
 </navigation>
