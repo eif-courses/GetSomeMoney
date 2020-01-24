@@ -4,35 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/borders">
+    android:background="@drawable/borders"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Kepurė"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/inventory_item_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/coins"
         android:scaleX="0.5"
         android:scaleY="0.5"
         app:layout_constraintStart_toEndOf="@+id/inventory_item_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <ImageView
         android:id="@+id/inventory_item_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/taure"
         android:padding="5dp"
         android:scaleX="0.5"
@@ -44,8 +57,7 @@
         android:id="@+id/knowloge_points_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="28dp"
         android:padding="1dp"
         android:text="+1"
         android:textColor="#2196F3"
@@ -56,8 +68,7 @@
         android:id="@+id/extra_coins_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:padding="1dp"
         android:text="+3"
         android:textColor="#2196F3"

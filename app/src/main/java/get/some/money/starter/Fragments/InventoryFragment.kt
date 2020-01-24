@@ -46,7 +46,8 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
   }
 
   override fun click_item(inventory: Inventory) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }
 

@@ -40,4 +40,5 @@
     <string name="random_item">Random item</string>
     <string name="extra_coins">Extra coins</string>
     <string name="knowledge">Knowledge</string>
+    <string name="name_updated">Your name is successfull updated!</string>
 </resources>

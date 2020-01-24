@@ -14,59 +14,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
+        android:maxLength="30"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toStartOf="@+id/saveUserProfileDetails"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/coins_multiplier"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:padding="5dp"
-        android:text="Coins multiplier: "
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/saveUserProfileDetails"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameProfileDetails" />
-
-    <TextView
-        android:id="@+id/feature_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Feature content unlocked: "
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coins_multiplier" />
-
-    <TextView
-        android:id="@+id/game_tickets"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Game tickets: "
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feature_content" />
-
-    <TextView
-        android:id="@+id/special_levels"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Special levels unlocked: "
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_tickets" />
 
     <Button
         android:id="@+id/saveUserProfileDetails"
