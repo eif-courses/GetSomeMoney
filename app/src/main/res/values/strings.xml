@@ -32,4 +32,12 @@
     <string name="loose_dialog_ad_text">Click on chest watch video ad and get reward!</string>
     <string name="prize">Your prize is here!</string>
     <string name="profile">Profile</string>
+    <string name="multiplier2x">Double coins</string>
+    <string name="multiplier3x">Triple coins</string>
+    <string name="free_gift">Free Gift</string>
+    <string name="special_levels">Unlock special levels</string>
+    <string name="game_ticket">Game ticket</string>
+    <string name="random_item">Random item</string>
+    <string name="extra_coins">Extra coins</string>
+    <string name="knowledge">Knowledge</string>
 </resources>

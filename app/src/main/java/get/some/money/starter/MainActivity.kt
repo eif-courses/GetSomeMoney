@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   private val RC_SIGN_IN = 123
   lateinit var userModel: UserViewModel
   lateinit var levelModel: LevelViewModel
+
   var uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
     AuthUI.IdpConfig.EmailBuilder().build(),
@@ -55,13 +57,17 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           .build(),
         RC_SIGN_IN
       )
+
+    }else{
+      userModel.getUser(uuid!!).observe(this, Observer {
+
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val header = navigationView.getHeaderView(0)
+        val profileName = header.findViewById<TextView>(R.id.Nickname)
+        profileName.text = it.name
+      })
+
     }
-//    }else{
-//      userModel.getUser(uuid!!).observe(this, Observer {
-//        Nickname.text = it.name
-//      })
-//
-//    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +83,12 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     appBarConfiguration = AppBarConfiguration(navController.graph) //configure nav controller
     setupNavigation(navController) //setup navigation
     setupActionBar(navController, appBarConfiguration) // setup action bar
+
+
+
+
+
+
   }
 
   private fun setupActionBar(

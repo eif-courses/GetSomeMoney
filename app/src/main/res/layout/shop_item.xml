@@ -7,26 +7,44 @@
     android:background="@drawable/borders">
 
 
-    <TextView
-        android:id="@+id/shop_item_price"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/price_shop_item"
-        android:textSize="12sp"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:background="#4DA1D0FF"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_item_image">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/shop_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="4dp"
+            android:text="600"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/shop_item_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#36D0DACD"
         android:gravity="center"
-        android:padding="10dp"
+        android:padding="5dp"
         android:text="@string/title_shop_item"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/shop_item_image"
@@ -39,8 +57,10 @@
     <ImageView
         android:id="@+id/shop_item_image"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/shop_item_price"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FieldValue
+import get.some.money.starter.Models.Inventory
 import get.some.money.starter.Models.User
 import get.some.money.starter.Repositories.UserRepository
 
@@ -56,7 +57,9 @@ class UserViewModel : ViewModel() {
   fun levelComplete(uuid: String, id: Long) {
     repository.levelComplete(uuid).update("levels", FieldValue.arrayUnion(id))
   }
-
+  fun addItemToInventory(uuid: String, inventory: Inventory) {
+    repository.addItemToInventory(uuid).update("items", FieldValue.arrayUnion(inventory))
+  }
 
 }
 

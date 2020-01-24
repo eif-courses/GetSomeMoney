@@ -24,4 +24,12 @@
     <string name="loose_dialog_ad_text">Spausk ant dėžės, peržiūrėk vaizdo reklamą ir gauk prizą!</string>
     <string name="prize">Štai jūsų prizas!</string>
     <string name="profile">Profilis</string>
+    <string name="free_gift">Nemokama dovana</string>
+    <string name="game_ticket">Bilietas</string>
+    <string name="multiplier2x">Dvigubai daugiau monetų</string>
+    <string name="multiplier3x">Trigubai daugiau monetų</string>
+    <string name="random_item">Atsitiktinis daiktas</string>
+    <string name="special_levels">Slapti žaidimo lygiai</string>
+    <string name="extra_coins">Papildomos monetos</string>
+    <string name="knowledge">Išmintis</string>
 </resources>

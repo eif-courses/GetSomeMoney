@@ -12,6 +12,7 @@ data class User(
   val multiplier: Int = 1,
   val specialLevels: Int = 0,
   val permanentDLC: Int = 0,
-  val gameTickets: Int = 0
+  val gameTickets: Int = 0,
+  val items: List<Inventory> = emptyList()
 
 )
