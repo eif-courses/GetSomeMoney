@@ -29,6 +29,7 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
 
     recycleView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+
     inventoryListAdapter = InventoryListAdapter(this)
 
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]

@@ -15,6 +15,8 @@ class UserRepository private constructor(){
   fun updateScore(score: Int, uuid: String) = db.collection("users").document(uuid).update("score", score)
   fun updateCoins(coins: Int, uuid: String) = db.collection("users").document(uuid).update("coins", coins)
   fun updateName(name: String, uuid: String) = db.collection("users").document(uuid).update("name", name)
+  fun updateSpecialLevels(pass: Int, uuid: String) = db.collection("users").document(uuid).update("specialLevels", pass)
+  fun updateMultiplier(multiplier: Int, uuid: String) = db.collection("users").document(uuid).update("multiplier", multiplier)
   fun levelComplete(uuid: String) = db.collection("users").document(uuid)
   fun addItemToInventory(uuid: String) = db.collection("users").document(uuid)
   fun equipItems(uuid: String) = db.collection("users").document(uuid)

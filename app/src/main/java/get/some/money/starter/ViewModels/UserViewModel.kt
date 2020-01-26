@@ -54,8 +54,8 @@ class UserViewModel : ViewModel() {
   fun updateScore(score: Int, uuid: String) = repository.updateScore(score, uuid)
   fun updateCoins(coins: Int, uuid: String) = repository.updateCoins(coins, uuid)
   fun updateName(name: String, uuid: String) = repository.updateName(name, uuid)
-
-
+  fun updateMultiplier(multiplier: Int, uuid: String) = repository.updateMultiplier(multiplier, uuid)
+  fun updateSpecialLevels(pass: Int, uuid: String) = repository.updateSpecialLevels(pass, uuid)
   fun levelComplete(uuid: String, id: Long) {
     repository.levelComplete(uuid).update("levels", FieldValue.arrayUnion(id))
   }
@@ -66,7 +66,7 @@ class UserViewModel : ViewModel() {
 
   fun equipItems(uuid: String, inventory: Inventory) {
     when (inventory.type) {
-      "CAP", "SHIRT", "BOOTS" -> repository.equipItems(uuid).update(
+      "CAP", "SHIRT", "JEANS" -> repository.equipItems(uuid).update(
         "equipped.${inventory.type}",
         inventory
       )

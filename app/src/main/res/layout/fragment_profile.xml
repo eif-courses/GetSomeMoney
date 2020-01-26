@@ -27,10 +27,11 @@
 
         <ImageView
             android:id="@+id/head_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="128dp"
+            android:layout_height="87dp"
 
-            android:src="@drawable/kepure"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/kepure8"
             app:layout_constraintBottom_toTopOf="@+id/shirt_imageview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.63"
@@ -39,20 +40,19 @@
 
         <ImageView
             android:id="@+id/shirt_imageview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="128dp"
+            android:layout_height="52dp"
             android:src="@drawable/maike"
-            app:layout_constraintBottom_toTopOf="@+id/boots_imageView"
+            app:layout_constraintBottom_toTopOf="@+id/jeans_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/head_image_view" />
 
         <ImageView
-            android:id="@+id/boots_imageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/jeans_imageView"
+            android:layout_width="128dp"
+            android:layout_height="94dp"
             android:layout_marginBottom="16dp"
-            android:paddingTop="20dp"
             android:src="@drawable/kelnes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

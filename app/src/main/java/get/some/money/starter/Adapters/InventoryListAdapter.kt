@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import get.some.money.starter.Functions.Language
 import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.inventory_item.view.*
@@ -46,9 +46,23 @@ class InventoryListAdapter(private val interaction: Interaction? = null) :
     fun bind(item: Inventory) = with(itemView) {
       // TODO: Bind the data with View
       //inventory_item_image.setImageResource(R.id.)
-      Picasso.get().load(item.imageURL).into(itemView.inventory_item_image)
-      extra_coins_txt.text = item.extraCoins.toString()
-      knowloge_points_txt.text = item.knowledge.toString()
+
+      val language = Language.getCurrentLanguage()
+      if(language.equals("lt")) {
+        when(item.type){
+          "CAP" -> {inventory_item_type.text = String.format("%s", "Kepurė")}
+          "SHIRT" -> {inventory_item_type.text = String.format("%s", "Maikė")}
+          "JEANS" -> {inventory_item_type.text = String.format("%s", "Džinsai")}
+        }
+      }
+      else{
+        inventory_item_type.text = item.type
+      }
+
+
+      inventory_item_image.setImageResource(item.imageID)
+      extra_coins_txt.text = String.format("%s%d", "+", item.extraCoins)
+      knowloge_points_txt.text = String.format("%s%d", "+", item.knowledge)
 
 
     }

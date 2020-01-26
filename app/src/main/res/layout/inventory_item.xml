@@ -8,7 +8,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/inventory_item_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -30,7 +30,7 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         app:layout_constraintStart_toEndOf="@+id/inventory_item_image"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/inventory_item_type" />
 
     <ImageView
         android:id="@+id/inventory_item_image"
@@ -39,7 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/inventory_item_type" />
 
     <TextView
         android:id="@+id/textView8"

@@ -1,4 +1,42 @@
 <resources>
+    <string-array name="shirts">
+        <item>maike</item>
+        <item>maike2</item>
+        <item>maike3</item>
+        <item>maike4</item>
+        <item>maike5</item>
+        <item>maike6</item>
+        <item>maike7</item>
+        <item>maike8</item>
+    </string-array>
+
+    <string-array name="caps">
+        <item>kepure</item>
+        <item>kepure2</item>
+        <item>kepure3</item>
+        <item>kepure4</item>
+        <item>kepure5</item>
+        <item>kepure6</item>
+        <item>kepure7</item>
+        <item>kepure8</item>
+        <item>kepure9</item>
+        <item>kepure10</item>
+    </string-array>
+
+    <string-array name="jeans">
+        <item>kelnes</item>
+        <item>kelnes2</item>
+        <item>kelnes3</item>
+        <item>kelnes4</item>
+        <item>kelnes5</item>
+        <item>kelnes6</item>
+        <item>kelnes7</item>
+        <item>kelnes8</item>
+        <item>kelnes9</item>
+        <item>kelnes10</item>
+    </string-array>
+
+
     <string name="app_name">GetSomeMoney</string>
 
     <!-- TODO: Remove or change this placeholder text -->

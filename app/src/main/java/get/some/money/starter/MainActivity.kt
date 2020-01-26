@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -68,10 +67,10 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
         RC_SIGN_IN
       )
 
-    }else{
+    } else {
       userModel.getUser(uuid!!).observe(this, Observer {
 
-        if(it != null) {
+        if (it != null) {
           val navigationView = findViewById<NavigationView>(R.id.nav_view)
           val header = navigationView.getHeaderView(0)
           val profileName = header.findViewById<TextView>(R.id.Nickname)
@@ -97,10 +96,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     setupActionBar(navController, appBarConfiguration) // setup action bar
 
 
-
-
-
-
   }
 
   private fun setupActionBar(
@@ -117,7 +112,12 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
     //fragments load from here but how ?
     appBarConfiguration = AppBarConfiguration(
-      setOf(R.id.homeFragment, R.id.shopFragment, R.id.highScoresFragment, R.id.privacyPolicyFragment),
+      setOf(
+        R.id.homeFragment,
+        R.id.shopFragment,
+        R.id.highScoresFragment,
+        R.id.privacyPolicyFragment
+      ),
       drawerLayout
     )
   }
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
             for (i in profiles.indices) {
               if (profiles[i].uuid.equals(FirebaseAuth.getInstance().currentUser!!.uid)) {
-                Toast.makeText(this, "USERIS EGZISTUOJA JUNGIAMES", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "USERIS EGZISTUOJA JUNGIAMES", Toast.LENGTH_LONG).show()
                 exists = true
 
               } else {
@@ -171,8 +171,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
                   "Puzzle solver",
                   0,
                   FirebaseAuth.getInstance().currentUser!!.uid,
-                  0,
-                  0,
                   0
                 )
               )

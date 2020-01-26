@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import get.some.money.starter.Models.Item
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.shop_item.view.*
@@ -48,7 +47,10 @@ class ShopListAdapter(private val interaction: Interaction? = null) :
             shop_item_title.text = item.name
             shop_item_price.text = "${item.price}"
             val image:ImageView = this.findViewById(R.id.shop_item_image)
-            Picasso.get().load(item.imageURL).into(image)
+
+            image.setImageResource(item.imageID)
+
+            //Picasso.get().load(item.imageURL).into(image)
             // TODO: Bind the data with View
         }
     }

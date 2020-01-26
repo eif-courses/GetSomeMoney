@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -22,23 +21,29 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     super.onViewCreated(view, savedInstanceState)
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+
+
+//    shirt_imageview.setImageResource(R.drawable.maike)
+//
+//    jeans_imageView.setImageResource(R.drawable.kelnes3)
+//
+//    head_image_view.setImageResource(R.drawable.kepure)
+
+
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
 
-      it.equipped.forEach{item ->
+      it.equipped.forEach { item ->
 
         val obj = item.value
-        when(item.key){
+        when (item.key) {
           "CAP" -> {
-            Picasso.get().load(obj.imageURL).into(head_image_view)
-            println(obj.imageURL)
+            head_image_view.setImageResource(obj.imageID)
           }
           "SHIRT" -> {
-            Picasso.get().load(obj.imageURL).into(shirt_imageview)
-            println(obj.imageURL)
+            shirt_imageview.setImageResource(obj.imageID)
           }
-          "BOOTS" -> {
-            Picasso.get().load(obj.imageURL).into(boots_imageView)
-            println(obj.imageURL)
+          "JEANS" -> {
+            jeans_imageView.setImageResource(obj.imageID)
           }
         }
       }
@@ -47,8 +52,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //      special_levels.append(it.specialLevels.toString())
 //      game_tickets.append(it.gameTickets.toString())
 //      feature_content.append(it.permanentDLC.toString())
-     // userNameProfileDetails.setText(it.name)
-      }
+      // userNameProfileDetails.setText(it.name)
+    }
     )
 //    saveUserProfileDetails.setOnClickListener {
 //      userViewModel.updateName(userNameProfileDetails.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
@@ -59,6 +64,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //      it.visibility = View.GONE
 //      userNameProfileDetails.visibility = View.GONE
 
-    }
   }
+}
 

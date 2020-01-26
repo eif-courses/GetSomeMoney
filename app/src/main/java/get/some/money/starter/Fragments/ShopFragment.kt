@@ -50,11 +50,12 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
 
     rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
 
-    val adLoadCallback = object: RewardedAdLoadCallback() {
+    val adLoadCallback = object : RewardedAdLoadCallback() {
       override fun onRewardedAdLoaded() {
         // Ad successfully loaded.
 
       }
+
       override fun onRewardedAdFailedToLoad(errorCode: Int) {
         // Ad failed to load.
       }
@@ -88,52 +89,95 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
   }
 
   override fun item_clicked(clicked: Item) {
+    shopping(clicked)
+  }
 
-
-    when(clicked.price){
+  fun shopping(item: Item) {
+    when (item.price) {
       0 -> {
         getReward()
       }
       1000 -> {
-
+        randomItem(Random.nextInt(3))
       }
       10000 -> {
-        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/boots%2Fkepure.png?alt=media&token=d9ffe3dc-7bcf-429c-a311-ff62d365f26a", Random.nextInt(1, 50), Random.nextInt(1, 50), "CAP"))
-        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/boots%2Fmaike.png?alt=media&token=d502375e-01de-4494-98da-98cf02469ec3", Random.nextInt(1, 50), Random.nextInt(1, 50), "SHIRT"))
-        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/boots%2Fkelnes3.png?alt=media&token=82fa81e4-5891-40f3-bef9-e90354bd82b7", Random.nextInt(1, 50), Random.nextInt(1, 50), "BOOTS"))
-        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/boots%2Fkelnes2.png?alt=media&token=b71905f7-4d38-4073-88cc-c0e7d6b70a0d", Random.nextInt(1, 50), Random.nextInt(1, 50), "BOOTS"))
+        userViewModel.updateMultiplier(2, FirebaseAuth.getInstance().currentUser!!.uid)
       }
-      100000 -> {
-
+      20000 -> {
+        userViewModel.updateMultiplier(3, FirebaseAuth.getInstance().currentUser!!.uid)
       }
-      200000 -> {
-
+      30000 -> {
+        userViewModel.updateSpecialLevels(1, FirebaseAuth.getInstance().currentUser!!.uid)
       }
-      300000 -> {
-
-      }
-
     }
 
     //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
-  fun getReward(){
+
+  fun randomItem(random: Int = 0) {
+
+    when (random) {
+      0 -> {
+
+        val caps = resources.getStringArray(R.array.caps)
+        val cap = resources.getIdentifier(
+          caps.toList().shuffled()[0],
+          "drawable",
+          context!!.getPackageName()
+        )
+        userViewModel.addItemToInventory(
+          FirebaseAuth.getInstance().currentUser!!.uid,
+          Inventory(cap, Random.nextInt(1, 50), Random.nextInt(1, 50), "CAP")
+        )
+
+      }
+      1 -> {
+        val shirts = resources.getStringArray(R.array.shirts)
+        val shirt = resources.getIdentifier(
+          shirts.toList().shuffled()[0],
+          "drawable",
+          context!!.getPackageName()
+        )
+        userViewModel.addItemToInventory(
+          FirebaseAuth.getInstance().currentUser!!.uid,
+          Inventory(shirt, Random.nextInt(1, 50), Random.nextInt(1, 50), "SHIRT")
+        )
+      }
+      2 -> {
+        val jeans = resources.getStringArray(R.array.jeans)
+        val jean = resources.getIdentifier(
+          jeans.toList().shuffled()[0],
+          "drawable",
+          context!!.getPackageName()
+        )
+        userViewModel.addItemToInventory(
+          FirebaseAuth.getInstance().currentUser!!.uid,
+          Inventory(jean, Random.nextInt(1, 50), Random.nextInt(1, 50), "JEANS")
+        )
+      }
+    }
+  }
+
+
+  fun getReward() {
     if (rewardedAd.isLoaded) {
       //val activityContext: Activity = ...
-      val adCallback = object: RewardedAdCallback() {
+      val adCallback = object : RewardedAdCallback() {
         override fun onRewardedAdOpened() {
           // Ad opened.
         }
+
         override fun onRewardedAdClosed() {
           //it.setBackgroundResource(R.drawable.chestopen)
 
         }
+
         override fun onUserEarnedReward(@NonNull reward: RewardItem) {
           val toastView = getLayoutInflater().inflate(R.layout.toast_message, null);
           val toast = Toast(context)
 
-          val totalEarned = reward.amount + Random.nextInt(10,50)
+          val totalEarned = reward.amount + Random.nextInt(10, 50)
 
           // Set custom view in toast.
           val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
@@ -142,19 +186,22 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
           //rewardMesageImage =
           toast.view = toastView
           toast.duration = Toast.LENGTH_LONG;
-          toast.setGravity(Gravity.CENTER, 0,0);
+          toast.setGravity(Gravity.CENTER, 0, 0);
           toast.show()
           mediaPlayer.start()
-          userViewModel.updateCoins(gold + totalEarned, FirebaseAuth.getInstance().currentUser!!.uid)
+          userViewModel.updateCoins(
+            gold + totalEarned,
+            FirebaseAuth.getInstance().currentUser!!.uid
+          )
 
         }
+
         override fun onRewardedAdFailedToShow(errorCode: Int) {
           // Ad failed to display.
         }
       }
       rewardedAd.show(activity, adCallback)
-    }
-    else {
+    } else {
       Log.d("TAG", "The rewarded ad wasn't loaded yet.")
     }
 
