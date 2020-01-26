@@ -99,8 +99,8 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
       }
       10000 -> {
         userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/caps%2Fcap_09.png?alt=media&token=14e08f2c-ab57-4501-b9de-27acabc528ca", Random.nextInt(1, 50), Random.nextInt(1, 50), "CAP"))
-        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/caps%2Fcap_09.png?alt=media&token=14e08f2c-ab57-4501-b9de-27acabc528ca", Random.nextInt(1, 50), Random.nextInt(1, 50), "SHIRT"))
-        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/caps%2Fcap_09.png?alt=media&token=14e08f2c-ab57-4501-b9de-27acabc528ca", Random.nextInt(1, 50), Random.nextInt(1, 50), "BOOTS"))
+        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/shirts%2Fshirt_03.png?alt=media&token=bdeaae11-4f2d-4071-b9c8-f7c326fea1d5", Random.nextInt(1, 50), Random.nextInt(1, 50), "SHIRT"))
+        userViewModel.addItemToInventory(FirebaseAuth.getInstance().currentUser!!.uid, Inventory("https://firebasestorage.googleapis.com/v0/b/getsomemoney-f79c8.appspot.com/o/boots%2Fbata3_01.png?alt=media&token=113c73c6-bc9c-4ce0-9886-d51acb9cf840", Random.nextInt(1, 50), Random.nextInt(1, 50), "BOOTS"))
 
       }
       100000 -> {

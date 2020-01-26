@@ -14,5 +14,5 @@ data class User(
   val permanentDLC: Int = 0,
   val gameTickets: Int = 0,
   val items: List<Inventory> = emptyList(),
-  val equipped: Map<String, Any> = emptyMap()
+  val equipped: Map<String, Inventory> = emptyMap()
 )

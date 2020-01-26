@@ -18,6 +18,6 @@ class UserRepository private constructor(){
   fun levelComplete(uuid: String) = db.collection("users").document(uuid)
   fun addItemToInventory(uuid: String) = db.collection("users").document(uuid)
   fun equipItems(uuid: String) = db.collection("users").document(uuid)
-  fun getEquippedItems(uuid: String) = db.collection("users")
+
 
 }

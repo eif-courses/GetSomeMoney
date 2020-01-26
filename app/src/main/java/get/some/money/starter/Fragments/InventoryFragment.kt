@@ -38,30 +38,10 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
       inventoryListAdapter.swapData(it.items)
     })
-
-
-//    model.getItems().observe(this, Observer {
-//      inventoryListAdapter.notifyDataSetChanged()
-//    })
   }
 
   override fun click_item(inventory: Inventory) {
-
-
     userViewModel.equipItems(FirebaseAuth.getInstance().currentUser!!.uid, inventory)
-
-
-    userViewModel.getEquippedItems(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
-      print(it)
-    })
-
-//    userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
-//
-//    })
-
-    // head_image_view.setImageResource(R.drawable.chestclosed)
-
-    // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }
 

@@ -3,11 +3,11 @@ package get.some.money.starter.Fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -22,45 +22,43 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     super.onViewCreated(view, savedInstanceState)
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
-
-    head_image_view.setImageResource(R.drawable.chestclosed)
-    shirt_imageview.setImageResource(R.drawable.chestclosed)
-    boots_imageView.setImageResource(R.drawable.chestclosed)
-
-
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
+
+      it.equipped.forEach{item ->
+
+        val obj = item.value
+        when(item.key){
+          "CAP" -> {
+            Picasso.get().load(obj.imageURL).into(head_image_view)
+            println(obj.imageURL)
+          }
+          "SHIRT" -> {
+            Picasso.get().load(obj.imageURL).into(shirt_imageview)
+            println(obj.imageURL)
+          }
+          "BOOTS" -> {
+            Picasso.get().load(obj.imageURL).into(boots_imageView)
+            println(obj.imageURL)
+          }
+        }
+      }
 
 //      coins_multiplier.append(it.multiplier.toString())
 //      special_levels.append(it.specialLevels.toString())
 //      game_tickets.append(it.gameTickets.toString())
 //      feature_content.append(it.permanentDLC.toString())
-      userNameProfileDetails.setText(it.name)
+     // userNameProfileDetails.setText(it.name)
       }
     )
-    saveUserProfileDetails.setOnClickListener {
-      userViewModel.updateName(userNameProfileDetails.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
-
-      Toast.makeText(context, getString(R.string.name_updated), Toast.LENGTH_LONG).show()
-
-      it.isClickable = false
-      it.visibility = View.GONE
-      userNameProfileDetails.visibility = View.GONE
-
-//      val timer = object : CountDownTimer(30000, 10000) {
-//      override fun onFinish() {
-//        it.visibility = View.VISIBLE
-//        it.isClickable = true
-////        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//      }
+//    saveUserProfileDetails.setOnClickListener {
+//      userViewModel.updateName(userNameProfileDetails.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
 //
-//      override fun onTick(millisUntilFinished: Long) {
-//  //      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//      }
+//      Toast.makeText(context, getString(R.string.name_updated), Toast.LENGTH_LONG).show()
 //
-//    }
-//
-//      timer.start()
+//      it.isClickable = false
+//      it.visibility = View.GONE
+//      userNameProfileDetails.visibility = View.GONE
+
     }
   }
 
-}
