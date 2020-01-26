@@ -50,13 +50,13 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     // Create and launch sign-in intent
 
-
-    startActivityForResult(
-      AuthUI.getInstance()
-        .createSignInIntentBuilder()
-        .setAvailableProviders(providers)
-        .build(),
-      RC_SIGN_IN)
+//
+//    startActivityForResult(
+//      AuthUI.getInstance()
+//        .createSignInIntentBuilder()
+//        .setAvailableProviders(providers)
+//        .build(),
+//      RC_SIGN_IN)
 
 
     if (uuid == null) {
