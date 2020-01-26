@@ -12,6 +12,8 @@ import get.some.money.starter.Repositories.UserRepository
 class UserViewModel : ViewModel() {
   private val repository = UserRepository.instance
   var user: MutableLiveData<User> = MutableLiveData()
+  var equippedItems: MutableLiveData<Map<String, Inventory>> = MutableLiveData()
+
   val TAG = "GET_USERS"
   var currentUsers: MutableLiveData<List<User>> = MutableLiveData()
 
@@ -57,9 +59,46 @@ class UserViewModel : ViewModel() {
   fun levelComplete(uuid: String, id: Long) {
     repository.levelComplete(uuid).update("levels", FieldValue.arrayUnion(id))
   }
+
   fun addItemToInventory(uuid: String, inventory: Inventory) {
     repository.addItemToInventory(uuid).update("items", FieldValue.arrayUnion(inventory))
   }
+
+  fun equipItems(uuid: String, inventory: Inventory) {
+    when (inventory.type) {
+      "CAP", "SHIRT", "BOOTS" -> repository.equipItems(uuid).update(
+        "equipped.${inventory.type}",
+        inventory
+      )
+    }
+  }
+
+  fun getEquippedItems(uuid: String): LiveData<Map<String, Inventory>> {
+
+    repository.getEquippedItems(uuid).addSnapshotListener { value, e ->
+      if (e != null) {
+        Log.w(TAG, "Listen failed.", e)
+        return@addSnapshotListener
+      }
+
+      val cities = ArrayList<String>()
+      val map = HashMap<String, Inventory>()
+
+
+      for (doc in value!!) {
+
+
+        val item = doc.get("equipped.CAP", Inventory::class.java)
+        println("QQQQQQQQQQQQQ"+item)
+
+      }
+      Log.d(TAG, "Current cites in CA: $cities")
+    }
+
+
+    return equippedItems
+  }
+
 
 }
 

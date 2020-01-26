@@ -22,17 +22,17 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
 
   lateinit var recycleView: RecyclerView
   lateinit var inventoryListAdapter: InventoryListAdapter
-   lateinit var userViewModel: UserViewModel
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+  lateinit var userViewModel: UserViewModel
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     recycleView = inventory_recycleView
 
-      recycleView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    recycleView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     inventoryListAdapter = InventoryListAdapter(this)
 
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-   // inventoryListAdapter.submitList(model.getItems().value)
+    // inventoryListAdapter.submitList(model.getItems().value)
     recycleView.adapter = inventoryListAdapter
 
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
@@ -46,6 +46,20 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
   }
 
   override fun click_item(inventory: Inventory) {
+
+
+    userViewModel.equipItems(FirebaseAuth.getInstance().currentUser!!.uid, inventory)
+
+
+    userViewModel.getEquippedItems(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
+      print(it)
+    })
+
+//    userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
+//
+//    })
+
+    // head_image_view.setImageResource(R.drawable.chestclosed)
 
     // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }

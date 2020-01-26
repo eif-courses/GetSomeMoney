@@ -70,8 +70,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
 
     if (uuid != null) {
       user.getUser(uuid).observe(this, Observer {
-        levelSize = it.levels.size
-        completedByCategory = it.levels as MutableList<Long>
+        if(it != null) {
+          levelSize = it.levels.size
+          completedByCategory = it.levels as MutableList<Long>
+        }
       })
     }
 

@@ -13,6 +13,6 @@ data class User(
   val specialLevels: Int = 0,
   val permanentDLC: Int = 0,
   val gameTickets: Int = 0,
-  val items: List<Inventory> = emptyList()
-
+  val items: List<Inventory> = emptyList(),
+  val equipped: Map<String, Any> = emptyMap()
 )

@@ -49,6 +49,16 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
     userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     // Create and launch sign-in intent
+
+
+    startActivityForResult(
+      AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(providers)
+        .build(),
+      RC_SIGN_IN)
+
+
     if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()
@@ -61,10 +71,12 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     }else{
       userModel.getUser(uuid!!).observe(this, Observer {
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        val header = navigationView.getHeaderView(0)
-        val profileName = header.findViewById<TextView>(R.id.Nickname)
-        profileName.text = it.name
+        if(it != null) {
+          val navigationView = findViewById<NavigationView>(R.id.nav_view)
+          val header = navigationView.getHeaderView(0)
+          val profileName = header.findViewById<TextView>(R.id.Nickname)
+          profileName.text = it.name
+        }
       })
 
     }

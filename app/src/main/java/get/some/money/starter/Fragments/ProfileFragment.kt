@@ -22,6 +22,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     super.onViewCreated(view, savedInstanceState)
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+
+    head_image_view.setImageResource(R.drawable.chestclosed)
+    shirt_imageview.setImageResource(R.drawable.chestclosed)
+    boots_imageView.setImageResource(R.drawable.chestclosed)
+
+
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
 
 //      coins_multiplier.append(it.multiplier.toString())
