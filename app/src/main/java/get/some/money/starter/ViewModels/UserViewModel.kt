@@ -66,12 +66,32 @@ class UserViewModel : ViewModel() {
 
   fun equipItems(uuid: String, inventory: Inventory) {
     when (inventory.type) {
-      "CAP", "SHIRT", "JEANS" -> repository.equipItems(uuid).update(
-        "equipped.${inventory.type}",
+      "CAP", "SHIRT", "JEANS" -> repository.equipItems(uuid).document(inventory.type).set(
         inventory
       )
     }
   }
+
+  fun getEquipedItems(uuid: String): LiveData<List<Inventory>> {
+
+    repository.getEquipedItems(uuid).addSnapshotListener { value, e ->
+      if (e != null) {
+        Log.w(TAG, "Listen failed.", e)
+        return@addSnapshotListener
+      }
+      val itemsEQuipped = ArrayList<Inventory>()
+      for (doc in value!!) {
+        itemsEQuipped.add(doc.toObject(Inventory::class.java))
+      }
+      equippedItems.value = itemsEQuipped
+      Log.d(TAG, "Current items EQUIPPED list: $itemsEQuipped")
+    }
+    return equippedItems
+  }
+
+
+
+
 
 }
 

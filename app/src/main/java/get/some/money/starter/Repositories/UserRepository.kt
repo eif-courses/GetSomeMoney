@@ -19,7 +19,8 @@ class UserRepository private constructor(){
   fun updateMultiplier(multiplier: Int, uuid: String) = db.collection("users").document(uuid).update("multiplier", multiplier)
   fun levelComplete(uuid: String) = db.collection("users").document(uuid)
   fun addItemToInventory(uuid: String) = db.collection("users").document(uuid)
-  fun equipItems(uuid: String) = db.collection("users").document(uuid)
+  fun equipItems(uuid: String) = db.collection("users").document(uuid).collection("equipped_items")
+  fun getEquipedItems(uuid: String) = db.collection("users").document(uuid).collection("equipped_items")
 
 
 }

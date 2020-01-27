@@ -21,40 +21,30 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     super.onViewCreated(view, savedInstanceState)
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+    userViewModel.getEquipedItems(FirebaseAuth.getInstance().currentUser!!.uid)
+      .observe(this, Observer {
 
-
-//    shirt_imageview.setImageResource(R.drawable.maike)
-//
-//    jeans_imageView.setImageResource(R.drawable.kelnes3)
-//
-//    head_image_view.setImageResource(R.drawable.kepure)
-
-
-    userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
-
-      it.equipped.forEach { item ->
-
-        val obj = item.value
-        when (item.key) {
-          "CAP" -> {
-            head_image_view.setImageResource(obj.imageID)
-          }
-          "SHIRT" -> {
-            shirt_imageview.setImageResource(obj.imageID)
-          }
-          "JEANS" -> {
-            jeans_imageView.setImageResource(obj.imageID)
+        it.forEach { item ->
+          when (item.type) {
+            "CAP" -> {
+              head_image_view.setImageResource(item.imageID)
+            }
+            "SHIRT" -> {
+              shirt_imageview.setImageResource(item.imageID)
+            }
+            "JEANS" -> {
+              jeans_imageView.setImageResource(item.imageID)
+            }
           }
         }
-      }
 
 //      coins_multiplier.append(it.multiplier.toString())
 //      special_levels.append(it.specialLevels.toString())
 //      game_tickets.append(it.gameTickets.toString())
 //      feature_content.append(it.permanentDLC.toString())
-      // userNameProfileDetails.setText(it.name)
-    }
-    )
+        // userNameProfileDetails.setText(it.name)
+      }
+      )
 //    saveUserProfileDetails.setOnClickListener {
 //      userViewModel.updateName(userNameProfileDetails.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
 //

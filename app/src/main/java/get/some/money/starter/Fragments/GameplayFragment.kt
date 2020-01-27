@@ -43,18 +43,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   private var images = listOf<ImageView>()
 
-//
-//  override fun onCreateView(
-//    inflater: LayoutInflater, container: ViewGroup?,
-//    savedInstanceState: Bundle?
-//  ): View? {
-//    // Inflate the layout for this fragment
-//    return inflater.inflate(R.layout.fragment_gameplay, container, false)
-//  }
-
-
-
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 

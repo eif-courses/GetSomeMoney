@@ -25,18 +25,15 @@ class HighScoresFragment : Fragment(R.layout.fragment_high_scores) {
     super.onViewCreated(view, savedInstanceState)
     recycleView = high_scores_recycleView
     recycleView.layoutManager = LinearLayoutManager(context)
-    // recycleView.layoutManager = GridLayoutManager(context, 2) as RecyclerView.LayoutManager?
     highScoresListAdapter = HighScoresListAdapter()
-
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-    // shopListAdapter.submitList(model.getItems().value)
-    recycleView.adapter = highScoresListAdapter
 
     userViewModel.getUsers().observe(this, Observer {
-
       highScoresListAdapter.swapData(it)
       highScoresListAdapter.listSize(it.size)
     })
+    recycleView.adapter = highScoresListAdapter
+
 
   }
 
