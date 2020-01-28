@@ -24,6 +24,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.User
+import get.some.money.starter.Util.SharedPreference
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,13 +51,23 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     // Create and launch sign-in intent
 
 
-    startActivityForResult(
-      AuthUI.getInstance()
-        .createSignInIntentBuilder()
-        .setAvailableProviders(providers)
-        .build(),
-      RC_SIGN_IN)
+    val pref = SharedPreference(this)
 
+    pref.save("FIRST_RUN", true)
+
+    val isFirstRun = pref.getValueBoolien("FIRST_RUN", true)
+
+    if(isFirstRun) {
+      startActivityForResult(
+        AuthUI.getInstance()
+          .createSignInIntentBuilder()
+          .setAvailableProviders(providers)
+          .build(),
+        RC_SIGN_IN
+      )
+      pref.save("FIRST_RUN", false)
+      //pref.clearSharedPreference()
+    }
 
     if (uuid == null) {
       startActivityForResult(

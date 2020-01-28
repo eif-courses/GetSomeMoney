@@ -70,6 +70,7 @@ class InventoryListAdapter(private val interaction: Interaction? = null) :
           "CAP" -> {inventory_item_type.text = String.format("%s", "Kepurė")}
           "SHIRT" -> {inventory_item_type.text = String.format("%s", "Maikė")}
           "JEANS" -> {inventory_item_type.text = String.format("%s", "Džinsai")}
+          "GLASSES" -> {inventory_item_type.text = String.format("%s", "Akiniai")}
         }
       }
       else{

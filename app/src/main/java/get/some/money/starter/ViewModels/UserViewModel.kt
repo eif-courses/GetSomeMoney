@@ -28,7 +28,7 @@ class UserViewModel : ViewModel() {
         return@addSnapshotListener
       }
       user.value = value?.toObject(User::class.java)
-      Log.d(TAG, "Current users list: $user")
+      //Log.d(TAG, "Current users list: $user")
     }
     return user
   }

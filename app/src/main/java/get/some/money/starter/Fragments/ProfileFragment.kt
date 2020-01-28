@@ -11,9 +11,6 @@ import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
   lateinit var userViewModel: UserViewModel
 
@@ -22,13 +19,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
 
-
-    var knowledge = 0
-    var coins = 0
+    var knowledge: Int
+    var coins: Int
     userViewModel.getEquipedItems(FirebaseAuth.getInstance().currentUser!!.uid)
       .observe(this, Observer {
 
-       coins = 0
+        coins = 0
         knowledge = 0
         it.forEach { item ->
           when (item.type) {
@@ -48,27 +44,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
           coins += item.extraCoins
           knowledge += item.knowledge
         }
-
-        coins_profile.text = coins.toString()
-        score_profile.text = knowledge.toString()
-
-
-//      coins_multiplier.append(it.multiplier.toString())
-//      special_levels.append(it.specialLevels.toString())
-//      game_tickets.append(it.gameTickets.toString())
-//      feature_content.append(it.permanentDLC.toString())
-        // userNameProfileDetails.setText(it.name)
+        coins_profile.text = String.format("%s%d", "+", coins)
+        score_profile.text = String.format("%s%d", "+", knowledge)
       }
       )
-//    saveUserProfileDetails.setOnClickListener {
-//      userViewModel.updateName(userNameProfileDetails.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
-//
-//      Toast.makeText(context, getString(R.string.name_updated), Toast.LENGTH_LONG).show()
-//
-//      it.isClickable = false
-//      it.visibility = View.GONE
-//      userNameProfileDetails.visibility = View.GONE
-
   }
 }
 

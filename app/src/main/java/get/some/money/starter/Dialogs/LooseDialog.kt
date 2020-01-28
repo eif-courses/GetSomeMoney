@@ -1,5 +1,6 @@
 package get.some.money.starter.Dialogs
 
+import android.app.Dialog
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.rewarded.RewardItem
@@ -20,17 +20,22 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import get.some.money.starter.Models.User
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.loose_dialog.*
 import kotlin.random.Random
 
 class LooseDialog : DialogFragment(){
-
+  companion object {
+    fun newInstance() = LooseDialog()
+  }
   //var startTimer = false
   private lateinit var rewardedAd: RewardedAd
   lateinit var mediaPlayer: MediaPlayer
   lateinit var userViewModel: UserViewModel
+  lateinit var db: FirebaseFirestore
 
   var gold = 0
 
@@ -40,18 +45,51 @@ class LooseDialog : DialogFragment(){
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
+
+
+    // Inflate the layout to use as dialog or embedded fragment
+    return inflater.inflate(R.layout.loose_dialog, container, false)
+  }
+
+
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    return super.onCreateDialog(savedInstanceState)
+
+  }
+
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
     mediaPlayer = MediaPlayer.create(context, R.raw.openchest)
     rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
     userViewModel = ViewModelProviders.of(requireActivity())[UserViewModel::class.java]
 
-    userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(viewLifecycleOwner, Observer {
-      gold = it.coins
-    })
+
+
+    //val coins = view.findViewById<TextView>(R.id.coins_profile)
+
+
+
+    //userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
+     // gold = coins.toString().toInt()
+    ///})
+
+
+
 
     val adLoadCallback = object: RewardedAdLoadCallback() {
       override fun onRewardedAdLoaded() {
         // Ad successfully loaded.
+        db = FirebaseFirestore.getInstance()
+        val ref = db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
 
+        // val ref = db.collection("cities").document("BJ")
+        ref.get().addOnSuccessListener { documentSnapshot ->
+          val user = documentSnapshot.toObject(User::class.java)
+          println("USERISSSSSSSSSSSSSSSSSSSSS: $user")
+          gold = user!!.coins
+        }
         progressBarLooseReward.visibility = View.GONE
         restart_level_image.visibility = View.VISIBLE
 
@@ -63,12 +101,7 @@ class LooseDialog : DialogFragment(){
     }
     rewardedAd.loadAd(AdRequest.Builder().build(), adLoadCallback)
 
-    // Inflate the layout to use as dialog or embedded fragment
-    return inflater.inflate(R.layout.loose_dialog, container, false)
-  }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
 
     restart_level_image.setOnClickListener {
       //this.dismiss()
