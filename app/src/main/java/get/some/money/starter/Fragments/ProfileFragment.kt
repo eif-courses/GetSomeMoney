@@ -21,9 +21,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     super.onViewCreated(view, savedInstanceState)
     userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+
+
+    var knowledge = 0
+    var coins = 0
     userViewModel.getEquipedItems(FirebaseAuth.getInstance().currentUser!!.uid)
       .observe(this, Observer {
 
+       coins = 0
+        knowledge = 0
         it.forEach { item ->
           when (item.type) {
             "CAP" -> {
@@ -35,8 +41,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             "JEANS" -> {
               jeans_imageView.setImageResource(item.imageID)
             }
+            "GLASSES" -> {
+              glasses_imageView.setImageResource(item.imageID)
+            }
           }
+          coins += item.extraCoins
+          knowledge += item.knowledge
         }
+
+        coins_profile.text = coins.toString()
+        score_profile.text = knowledge.toString()
+
 
 //      coins_multiplier.append(it.multiplier.toString())
 //      special_levels.append(it.specialLevels.toString())

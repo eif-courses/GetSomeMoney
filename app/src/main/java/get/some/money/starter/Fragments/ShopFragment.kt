@@ -84,8 +84,6 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
       gold = it.coins
     })
-
-
   }
 
   override fun item_clicked(clicked: Item) {
@@ -98,7 +96,7 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
         getReward()
       }
       1000 -> {
-        randomItem(Random.nextInt(3))
+        randomItem(Random.nextInt(4))
       }
       10000 -> {
         userViewModel.updateMultiplier(2, FirebaseAuth.getInstance().currentUser!!.uid)
@@ -119,7 +117,6 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
 
     when (random) {
       0 -> {
-
         val caps = resources.getStringArray(R.array.caps)
         val cap = resources.getIdentifier(
           caps.toList().shuffled()[0],
@@ -130,7 +127,6 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
           FirebaseAuth.getInstance().currentUser!!.uid,
           Inventory(cap, Random.nextInt(1, 50), Random.nextInt(1, 50), "CAP")
         )
-
       }
       1 -> {
         val shirts = resources.getStringArray(R.array.shirts)
@@ -154,6 +150,18 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
         userViewModel.addItemToInventory(
           FirebaseAuth.getInstance().currentUser!!.uid,
           Inventory(jean, Random.nextInt(1, 50), Random.nextInt(1, 50), "JEANS")
+        )
+      }
+      3 -> {
+        val glasses = resources.getStringArray(R.array.glasses)
+        val glass = resources.getIdentifier(
+          glasses.toList().shuffled()[0],
+          "drawable",
+          context!!.getPackageName()
+        )
+        userViewModel.addItemToInventory(
+          FirebaseAuth.getInstance().currentUser!!.uid,
+          Inventory(glass, Random.nextInt(1, 50), Random.nextInt(1, 50), "GLASSES")
         )
       }
     }

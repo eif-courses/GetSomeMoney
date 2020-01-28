@@ -66,7 +66,7 @@ class UserViewModel : ViewModel() {
 
   fun equipItems(uuid: String, inventory: Inventory) {
     when (inventory.type) {
-      "CAP", "SHIRT", "JEANS" -> repository.equipItems(uuid).document(inventory.type).set(
+      "CAP", "SHIRT", "JEANS", "GLASSES" -> repository.equipItems(uuid).document(inventory.type).set(
         inventory
       )
     }
@@ -84,7 +84,7 @@ class UserViewModel : ViewModel() {
         itemsEQuipped.add(doc.toObject(Inventory::class.java))
       }
       equippedItems.value = itemsEQuipped
-      Log.d(TAG, "Current items EQUIPPED list: $itemsEQuipped")
+     // Log.d(TAG, "Current items EQUIPPED list: $itemsEQuipped")
     }
     return equippedItems
   }

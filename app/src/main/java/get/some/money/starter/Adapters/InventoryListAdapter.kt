@@ -12,17 +12,28 @@ import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.inventory_item.view.*
 
+
 class InventoryListAdapter(private val interaction: Interaction? = null) :
   ListAdapter<Inventory, InventoryListAdapter.InventoryViewHolder>(InventoryDC()) {
+
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = InventoryViewHolder(
     LayoutInflater.from(parent.context)
       .inflate(R.layout.inventory_item, parent, false), interaction
   )
 
-  override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) =
+  var selectedPosition = 0 // You have to set this globally in the Adapter class
+
+
+  override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
     holder.bind(getItem(position))
 
+    holder.itemView.setSelected(selectedPosition == position);
+
+    //holder.itemView.setBackgroundColor(if(selectedPosition == position) Color.parseColor("#7FD1FF") else Color.TRANSPARENT)
+
+
+  }
   fun swapData(data: List<Inventory>) {
     submitList(data.toMutableList())
   }
@@ -40,6 +51,12 @@ class InventoryListAdapter(private val interaction: Interaction? = null) :
 
       if (adapterPosition == RecyclerView.NO_POSITION) return
       val clicked = getItem(adapterPosition)
+
+      // Updating old as well as new positions
+      notifyItemChanged(selectedPosition);
+      selectedPosition = adapterPosition;
+      notifyItemChanged(selectedPosition);
+
       interaction?.click_item(clicked)
     }
 

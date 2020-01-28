@@ -37,6 +37,23 @@
     </string-array>
 
 
+    <string-array name="glasses">
+        <item>akiniai</item>
+        <item>akiniai2</item>
+        <item>akiniai3</item>
+        <item>akiniai4</item>
+        <item>akiniai5</item>
+        <item>akiniai6</item>
+        <item>akiniais7</item>
+        <item>akiniai8</item>
+        <item>akiniai9</item>
+        <item>akiniai10</item>
+        <item>akiniai11</item>
+    </string-array>
+
+
+
+
     <string name="app_name">GetSomeMoney</string>
 
     <!-- TODO: Remove or change this placeholder text -->

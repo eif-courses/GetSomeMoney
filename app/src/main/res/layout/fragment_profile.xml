@@ -30,13 +30,11 @@
         <ImageView
             android:id="@+id/head_image_view"
             android:layout_width="128dp"
-            android:layout_height="87dp"
+            android:layout_height="46dp"
 
-            android:layout_marginTop="16dp"
-            android:src="@drawable/kepure8"
-            app:layout_constraintBottom_toTopOf="@+id/shirt_imageview"
+            android:src="@drawable/kepure2"
+            app:layout_constraintBottom_toTopOf="@+id/glasses_imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.63"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,18 +46,27 @@
             app:layout_constraintBottom_toTopOf="@+id/jeans_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/head_image_view" />
+            app:layout_constraintTop_toBottomOf="@+id/glasses_imageView" />
 
         <ImageView
             android:id="@+id/jeans_imageView"
             android:layout_width="128dp"
             android:layout_height="94dp"
-            android:layout_marginBottom="16dp"
             android:src="@drawable/kelnes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shirt_imageview" />
+
+        <ImageView
+            android:id="@+id/glasses_imageView"
+            android:layout_width="128dp"
+            android:layout_height="40dp"
+            android:src="@drawable/akiniai"
+            app:layout_constraintBottom_toTopOf="@+id/shirt_imageview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/head_image_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -110,7 +117,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/coins_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
@@ -131,7 +138,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/score_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
