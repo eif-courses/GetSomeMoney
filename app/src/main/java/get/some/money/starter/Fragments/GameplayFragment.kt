@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -37,8 +37,8 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
   lateinit var mediaPlayer: MediaPlayer
   lateinit var clickSound: MediaPlayer
   lateinit var looseSound: MediaPlayer
-  lateinit var levelModel: LevelViewModel
-  lateinit var userModel: UserViewModel
+  val levelModel: LevelViewModel by viewModels()
+  val userModel: UserViewModel by viewModels()
   lateinit var time: CountDownTimer
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   private var images = listOf<ImageView>()
@@ -56,8 +56,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
 
     time = gameTimer().start()
 
-    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
-    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
     mediaPlayer = MediaPlayer.create(view.context, R.raw.win)
     looseSound = MediaPlayer.create(view.context, R.raw.failed)
     clickSound = MediaPlayer.create(view.context, R.raw.click)
@@ -109,7 +107,7 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
           }
           if (complete == 5) {
            // Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
-            val fragmentManager = getFragmentManager()
+            val fragmentManager = fragmentManager
             val reward = RewardDialog()
             reward.isCancelable = false
             if (fragmentManager != null) {
@@ -135,7 +133,7 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
             //Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
             isLoose = true
 
-            val fragmentManager = getFragmentManager()
+            val fragmentManager = fragmentManager
             val reward = LooseDialog()
             reward.isCancelable = false
             if (fragmentManager != null) {

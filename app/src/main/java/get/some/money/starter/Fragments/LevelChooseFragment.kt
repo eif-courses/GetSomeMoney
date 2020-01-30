@@ -4,8 +4,8 @@ package get.some.money.starter.Fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,8 +26,8 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
   val args: LevelChooseFragmentArgs by navArgs()
   lateinit var levelRecycleView: RecyclerView
   lateinit var levelListAdapter: LevelListAdapter
-  lateinit var levelViewModel: LevelViewModel
-  lateinit var userViewModel: UserViewModel
+  val levelViewModel: LevelViewModel by viewModels()
+  val userViewModel: UserViewModel by viewModels()
   val user = FirebaseAuth.getInstance().currentUser
   var score = 0
   var coins = 0
@@ -42,8 +42,7 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
    // level_textView.text = args.categoryname
-    levelViewModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
-    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+
     levelRecycleView = level_recycleview
     levelRecycleView.layoutManager = LinearLayoutManager(context)
     //levelRecycleView.layoutManager = GridLayoutManager(context,2)

@@ -11,8 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
@@ -23,7 +23,7 @@ import kotlin.random.Random
 class RewardDialog : DialogFragment(){
 
   lateinit var mediaPlayer: MediaPlayer
-  lateinit var userViewModel: UserViewModel
+  val userViewModel: UserViewModel by viewModels()
   private var gold = 0
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -38,7 +38,6 @@ class RewardDialog : DialogFragment(){
     super.onViewCreated(view, savedInstanceState)
 
     mediaPlayer = MediaPlayer.create(view.context, R.raw.openchest)
-    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
       gold = it.coins

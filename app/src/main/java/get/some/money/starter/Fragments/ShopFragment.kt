@@ -12,8 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
@@ -38,8 +38,8 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
 
   lateinit var recycleView: RecyclerView
   lateinit var shopListAdapter: ShopListAdapter
-  lateinit var userViewModel: UserViewModel
-  lateinit var shopViewModel: ShopViewModel
+  val userViewModel: UserViewModel by viewModels()
+  val shopViewModel: ShopViewModel by viewModels()
   private lateinit var rewardedAd: RewardedAd
   private lateinit var mediaPlayer: MediaPlayer
   private var gold = 0
@@ -72,8 +72,8 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
     }
     shopListAdapter = ShopListAdapter(this)
 
-    shopViewModel = ViewModelProviders.of(this)[ShopViewModel::class.java]
-    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+//    shopViewModel = ViewModelProviders.of(this)[ShopViewModel::class.java]
+//    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
     shopViewModel.getItems().observe(this, Observer {
       shopListAdapter.swapData(it)

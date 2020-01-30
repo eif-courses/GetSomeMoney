@@ -4,8 +4,8 @@ package get.some.money.starter.Fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.User
 import get.some.money.starter.R
@@ -17,14 +17,11 @@ import kotlinx.android.synthetic.main.fragment_hud.*
  * A simple [Fragment] subclass.
  */
 class HudFragment : Fragment(R.layout.fragment_hud) {
-  lateinit var userModel: UserViewModel
-  lateinit var levelModel: LevelViewModel
+  val userModel: UserViewModel by viewModels()
+ val levelModel: LevelViewModel by viewModels()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
-
 
     levelModel.getLevels().observe(this, Observer {
       textView3.text = it.size.toString()

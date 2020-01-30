@@ -20,7 +20,7 @@ class LevelViewModel : ViewModel() {
 
     repository.getLevels().get().addOnCompleteListener {
       val list = ArrayList<Level>()
-      for (document in it.result!!) {
+          for (document in it.result!!) {
         val level = document.toObject(Level::class.java)
         list.add(level)
       }

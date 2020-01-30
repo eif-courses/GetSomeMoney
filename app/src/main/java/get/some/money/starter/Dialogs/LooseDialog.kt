@@ -13,7 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
@@ -34,7 +34,7 @@ class LooseDialog : DialogFragment(){
   //var startTimer = false
   private lateinit var rewardedAd: RewardedAd
   lateinit var mediaPlayer: MediaPlayer
-  lateinit var userViewModel: UserViewModel
+  val userViewModel: UserViewModel by viewModels()
   lateinit var db: FirebaseFirestore
 
   var gold = 0
@@ -63,8 +63,6 @@ class LooseDialog : DialogFragment(){
 
     mediaPlayer = MediaPlayer.create(context, R.raw.openchest)
     rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
-    userViewModel = ViewModelProviders.of(requireActivity())[UserViewModel::class.java]
-
 
 
     //val coins = view.findViewById<TextView>(R.id.coins_profile)

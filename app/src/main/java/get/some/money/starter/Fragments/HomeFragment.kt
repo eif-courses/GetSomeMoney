@@ -5,8 +5,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,8 +32,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
 
   lateinit var categoryRecyclerView: RecyclerView
   lateinit var categoryListAdapter: CategoryListAdapter
-  lateinit var model: LevelViewModel
-  lateinit var user: UserViewModel
+  val model: LevelViewModel by viewModels()
+ val user: UserViewModel by viewModels()
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
 
     categoryListAdapter = CategoryListAdapter(this)
 
-    user = ViewModelProviders.of(this)[UserViewModel::class.java]
-    model = ViewModelProviders.of(this)[LevelViewModel::class.java]
+
     //categoryListAdapter.submitList(model.getLevels().value)
     categoryRecyclerView.adapter = categoryListAdapter
 

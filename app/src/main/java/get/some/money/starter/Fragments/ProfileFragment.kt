@@ -4,20 +4,18 @@ package get.some.money.starter.Fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
-  lateinit var userViewModel: UserViewModel
+ val userViewModel: UserViewModel by viewModels()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
-
 
     var knowledge: Int
     var coins: Int
