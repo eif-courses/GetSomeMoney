@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -13,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
+import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.reward_dialog.*
@@ -73,7 +75,86 @@ class RewardDialog : DialogFragment(){
       val toast = Toast(it.context)
       // Set custom view in toast.
       val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
-     // val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+      val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+      val item_toast_coins = toastView.findViewById<TextView>(R.id.item_coins_toast)
+      val item_toast_score = toastView.findViewById<TextView>(R.id.item_score_toast)
+
+      when (Random.nextInt(4)) {
+        0 -> {
+          val caps = resources.getStringArray(R.array.caps)
+          val cap = resources.getIdentifier(
+            caps.toList().shuffled()[0],
+            "drawable",
+            context!!.getPackageName()
+          )
+
+          rewardMesageImage.setImageResource(cap)
+          val rcoins = Random.nextInt(1, 50)
+          val rscore = Random.nextInt(1, 50)
+          item_toast_coins.text = rcoins.toString()
+          item_toast_score.text = rscore.toString()
+
+          userViewModel.addItemToInventory(
+            FirebaseAuth.getInstance().currentUser!!.uid,
+            Inventory(cap, rcoins, rscore, "CAP")
+          )
+        }
+        1 -> {
+          val shirts = resources.getStringArray(R.array.shirts)
+          val shirt = resources.getIdentifier(
+            shirts.toList().shuffled()[0],
+            "drawable",
+            context!!.getPackageName()
+          )
+          rewardMesageImage.setImageResource(shirt)
+          val rcoins = Random.nextInt(1, 50)
+          val rscore = Random.nextInt(1, 50)
+          item_toast_coins.text = rcoins.toString()
+          item_toast_score.text = rscore.toString()
+
+          userViewModel.addItemToInventory(
+            FirebaseAuth.getInstance().currentUser!!.uid,
+            Inventory(shirt, rcoins, rscore, "SHIRT")
+          )
+        }
+        2 -> {
+          val jeans = resources.getStringArray(R.array.jeans)
+          val jean = resources.getIdentifier(
+            jeans.toList().shuffled()[0],
+            "drawable",
+            context!!.getPackageName()
+          )
+          rewardMesageImage.setImageResource(jean)
+          val rcoins = Random.nextInt(1, 50)
+          val rscore = Random.nextInt(1, 50)
+          item_toast_coins.text = rcoins.toString()
+          item_toast_score.text = rscore.toString()
+
+          userViewModel.addItemToInventory(
+            FirebaseAuth.getInstance().currentUser!!.uid,
+            Inventory(jean, rcoins, rscore, "JEANS")
+          )
+        }
+        3 -> {
+          val glasses = resources.getStringArray(R.array.glasses)
+          val glass = resources.getIdentifier(
+            glasses.toList().shuffled()[0],
+            "drawable",
+            context!!.getPackageName()
+          )
+          rewardMesageImage.setImageResource(glass)
+          val rcoins = Random.nextInt(1, 50)
+          val rscore = Random.nextInt(1, 50)
+          item_toast_coins.text = rcoins.toString()
+          item_toast_score.text = rscore.toString()
+
+          userViewModel.addItemToInventory(
+            FirebaseAuth.getInstance().currentUser!!.uid,
+            Inventory(glass, rcoins, rscore, "GLASSES")
+          )
+        }
+      }
+
         rewardText.text = String.format("%d%s%d%s%d", totalEarned, "+", knowledge, "=", totalEarned+knowledge)
         //rewardMesageImage =
       toast.view = toastView
@@ -86,6 +167,11 @@ class RewardDialog : DialogFragment(){
     }
 
 
+
+
+  }
+
+  fun randomItem(random: Int = 0){
 
 
   }

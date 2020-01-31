@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/item_score_toast" />
 
     <View
         android:id="@+id/divider9"
@@ -78,7 +78,7 @@
         app:srcCompat="@drawable/coins" />
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/customToastImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -87,38 +87,40 @@
         app:srcCompat="@drawable/akiniai" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/item_coins_toast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="9dp"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageView16"
         app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/item_score_toast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/item_coins_toast" />
 
     <ImageView
         android:id="@+id/imageView16"
-        android:layout_width="24dp"
-        android:layout_height="15dp"
+        android:layout_width="37dp"
+        android:layout_height="23dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView15"
+        app:layout_constraintStart_toEndOf="@+id/customToastImage"
         app:layout_constraintTop_toBottomOf="@+id/divider7"
         app:srcCompat="@drawable/coins" />
 
     <ImageView
         android:id="@+id/imageView17"
-        android:layout_width="25dp"
-        android:layout_height="15dp"
+        android:layout_width="37dp"
+        android:layout_height="23dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView15"
+        app:layout_constraintStart_toEndOf="@+id/customToastImage"
         app:layout_constraintTop_toBottomOf="@+id/imageView16"
         app:srcCompat="@drawable/taure" />
 
