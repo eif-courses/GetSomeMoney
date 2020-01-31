@@ -17,6 +17,16 @@ class ShopRepository private constructor(){
 
         val temp = listOf(
             Item(
+                R.string.free_gift.toLocalizedString(),
+                R.drawable.gift,
+                0
+            ),
+            Item(
+                R.string.random_item.toLocalizedString(),
+                R.drawable.random,
+                1000
+            ),
+            Item(
                 R.string.multiplier2x.toLocalizedString(),
                 R.drawable.daugiklis2,
                 10000
@@ -26,20 +36,11 @@ class ShopRepository private constructor(){
                 R.drawable.daugiklis3,
                 20000
             ),
-            Item(
-               R.string.free_gift.toLocalizedString(),
-                R.drawable.gift,
-                0
-            ),
+
             Item(
                 R.string.special_levels.toLocalizedString(),
                 R.drawable.feature,
                 30000
-            ),
-            Item(
-                R.string.random_item.toLocalizedString(),
-                R.drawable.random,
-                1000
             )
         )
         items.value = temp

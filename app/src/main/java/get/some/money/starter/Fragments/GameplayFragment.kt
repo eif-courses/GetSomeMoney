@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import get.some.money.starter.Dialogs.LooseDialog
 import get.some.money.starter.Dialogs.RewardDialog
-import get.some.money.starter.Functions.Language
+import get.some.money.starter.Util.Language
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel

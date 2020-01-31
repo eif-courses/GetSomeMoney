@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Adapters.CategoryListAdapter
-import get.some.money.starter.Functions.Language
+import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Category
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.LevelViewModel

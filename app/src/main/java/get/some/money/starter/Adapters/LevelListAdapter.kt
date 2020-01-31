@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import get.some.money.starter.Functions.Language
+import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Level
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.level_item.view.*

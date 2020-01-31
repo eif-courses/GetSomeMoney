@@ -155,7 +155,7 @@ class RewardDialog : DialogFragment(){
         }
       }
 
-        rewardText.text = String.format("%d%s%d%s%d", totalEarned, "+", knowledge, "=", totalEarned+knowledge)
+        rewardText.text = String.format("%d", totalEarned+knowledge)
         //rewardMesageImage =
       toast.view = toastView
       toast.duration = Toast.LENGTH_LONG;
@@ -166,15 +166,8 @@ class RewardDialog : DialogFragment(){
       userViewModel.updateCoins(gold + totalEarned+knowledge, FirebaseAuth.getInstance().currentUser!!.uid)
     }
 
-
-
-
   }
 
-  fun randomItem(random: Int = 0){
-
-
-  }
 
 
 }

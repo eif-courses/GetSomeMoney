@@ -1,4 +1,4 @@
-package get.some.money.starter.Functions
+package get.some.money.starter.Util
 
 import android.os.Build
 import android.os.LocaleList

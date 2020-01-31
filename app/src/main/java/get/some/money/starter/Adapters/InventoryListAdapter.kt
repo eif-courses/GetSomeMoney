@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import get.some.money.starter.Functions.Language
+import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.inventory_item.view.*

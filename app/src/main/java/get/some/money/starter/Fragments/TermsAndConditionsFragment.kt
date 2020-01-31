@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import get.some.money.starter.Adapters.ParagraphListAdapter
-import get.some.money.starter.Functions.Language
+import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Paragraph
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.fragment_terms_and_conditions.*

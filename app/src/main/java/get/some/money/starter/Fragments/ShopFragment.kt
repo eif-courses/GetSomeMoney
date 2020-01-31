@@ -1,6 +1,7 @@
 package get.some.money.starter.Fragments
 
 
+import android.app.AlertDialog
 import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -26,6 +27,7 @@ import get.some.money.starter.Adapters.ShopListAdapter
 import get.some.money.starter.Models.Inventory
 import get.some.money.starter.Models.Item
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import get.some.money.starter.ViewModels.ShopViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_shop.*
@@ -42,11 +44,15 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
   val shopViewModel: ShopViewModel by viewModels()
   private lateinit var rewardedAd: RewardedAd
   private lateinit var mediaPlayer: MediaPlayer
+  lateinit var buyOperationSound: MediaPlayer
+
   private var gold = 0
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     mediaPlayer = MediaPlayer.create(context, R.raw.openchest)
+
+    buyOperationSound = MediaPlayer.create(context, R.raw.click)
 
     rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
 
@@ -91,21 +97,119 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
   }
 
   fun shopping(item: Item) {
+
+    var multiplier2="Buy Coins Mutiplier x2!"
+    var multiplier3="Buy Coins Mutiplier x3!"
+    var itemRandom="Buy Random Item!"
+    var special="Unlock Special Levels!"
+    var areyousure="Are you sure to spend"
+    var postfix="coins"
+    var success ="You successfully payed for service :)"
+
+    var yes = "Yes"
+    var no = "No"
+    var sad = "Not enough coins :("
+    var back = "Have a nice day :)"
+
+    if(Language.getCurrentLanguage().equals("lt")){
+      multiplier2="Padauginti gaunamų monetų skaičių 2x!"
+      multiplier3="Padauginti gaunamų monetų skaičių 3x!"
+      itemRandom="Įsigyti atsitiktinį daiktą!"
+      special="Atrakinti slaptus žaidimo lygius!"
+      areyousure="Ar jus esate tikras išleisti"
+      postfix ="monetų"
+      success = "Jūs sėkmingai apmokėjote už pirkinį :)"
+      yes = "Taip"
+      no = "Ne"
+      sad = "Dėja nepakanka lėšų :("
+      back = "Gražios dienos :)"
+    }
+
+
     when (item.price) {
       0 -> {
         getReward()
       }
       1000 -> {
-        randomItem(Random.nextInt(4))
+
+        val mAlertDialog = buyDialog(itemRandom, "$areyousure ${item.price} $postfix", R.drawable.coins)
+        mAlertDialog.setPositiveButton(yes) { dialog, id ->
+          //perform some tasks here
+          val temp = gold - item.price
+          if(temp >=0){
+            userViewModel.updateCoins(temp, FirebaseAuth.getInstance().currentUser!!.uid)
+
+            //Toast.makeText(context, success, Toast.LENGTH_LONG).show()
+            randomItem(Random.nextInt(4))
+            //userViewModel.updateMultiplier(2, FirebaseAuth.getInstance().currentUser!!.uid)
+            buyOperationSound.start()
+          }else{
+            Toast.makeText(context, sad, Toast.LENGTH_SHORT).show()
+          }
+        }
+        mAlertDialog.setNegativeButton(no) { dialog, id ->
+          Toast.makeText(context, back, Toast.LENGTH_SHORT).show()
+        }
+        mAlertDialog.show()
+
+
       }
       10000 -> {
-        userViewModel.updateMultiplier(2, FirebaseAuth.getInstance().currentUser!!.uid)
+        val mAlertDialog = buyDialog(multiplier2, "$areyousure ${item.price} $postfix", R.drawable.coins)
+        mAlertDialog.setPositiveButton(yes) { dialog, id ->
+          //perform some tasks here
+          val temp = gold - item.price
+          if(temp >=0){
+            userViewModel.updateCoins(temp, FirebaseAuth.getInstance().currentUser!!.uid)
+            Toast.makeText(context, success, Toast.LENGTH_LONG).show()
+            userViewModel.updateMultiplier(2, FirebaseAuth.getInstance().currentUser!!.uid)
+            buyOperationSound.start()
+          }else{
+            Toast.makeText(context, sad, Toast.LENGTH_SHORT).show()
+          }
+        }
+        mAlertDialog.setNegativeButton(no) { dialog, id ->
+          Toast.makeText(context, back, Toast.LENGTH_SHORT).show()
+        }
+        mAlertDialog.show()
       }
       20000 -> {
-        userViewModel.updateMultiplier(3, FirebaseAuth.getInstance().currentUser!!.uid)
+        val mAlertDialog = buyDialog(multiplier3, "$areyousure ${item.price} $postfix", R.drawable.coins)
+        mAlertDialog.setPositiveButton(yes) { dialog, id ->
+          //perform some tasks here
+          val temp = gold - item.price
+          if(temp >=0){
+            userViewModel.updateCoins(temp, FirebaseAuth.getInstance().currentUser!!.uid)
+            Toast.makeText(context, success, Toast.LENGTH_LONG).show()
+            userViewModel.updateMultiplier(3, FirebaseAuth.getInstance().currentUser!!.uid)
+            buyOperationSound.start()
+          }else{
+            Toast.makeText(context, sad, Toast.LENGTH_SHORT).show()
+          }
+        }
+        mAlertDialog.setNegativeButton(no) { dialog, id ->
+          Toast.makeText(context, back, Toast.LENGTH_SHORT).show()
+        }
+        mAlertDialog.show()
       }
       30000 -> {
-        userViewModel.updateSpecialLevels(1, FirebaseAuth.getInstance().currentUser!!.uid)
+        val mAlertDialog = buyDialog(special, "$areyousure ${item.price} $postfix", R.drawable.coins)
+        mAlertDialog.setPositiveButton(yes) { dialog, id ->
+          //perform some tasks here
+          val temp = gold - item.price
+          if(temp >=0){
+            userViewModel.updateCoins(temp, FirebaseAuth.getInstance().currentUser!!.uid)
+            Toast.makeText(context, success, Toast.LENGTH_LONG).show()
+            userViewModel.updateSpecialLevels(1, FirebaseAuth.getInstance().currentUser!!.uid)
+            buyOperationSound.start()
+          }else{
+            Toast.makeText(context, sad, Toast.LENGTH_SHORT).show()
+          }
+        }
+        mAlertDialog.setNegativeButton(no) { dialog, id ->
+          Toast.makeText(context, back, Toast.LENGTH_SHORT).show()
+        }
+        mAlertDialog.show()
       }
     }
 
@@ -113,7 +217,27 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
   }
 
 
+
+
+
+
+  fun buyDialog(title:String, message: String, icon: Int): AlertDialog.Builder{
+    val mAlertDialog = AlertDialog.Builder(context)
+    mAlertDialog.setIcon(icon) //set alertdialog icon
+    mAlertDialog.setTitle(title) //set alertdialog title
+    mAlertDialog.setMessage(message) //set alertdialog message
+    return mAlertDialog
+  }
+
+
   fun randomItem(random: Int = 0) {
+    val totalEarned = Random.nextInt(50,100)
+    // Get the custom TOAST layout view.
+
+    var you_get_message = "You got an item view your profile for more details!!!"
+    if(Language.getCurrentLanguage().equals("lt")){
+      you_get_message = "Jus gavote daiktą jį peržiūrėkite profilio aplinkoje!!!"
+    }
 
     when (random) {
       0 -> {
@@ -165,6 +289,7 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
         )
       }
     }
+    Toast.makeText(context, you_get_message, Toast.LENGTH_LONG).show()
   }
 
 

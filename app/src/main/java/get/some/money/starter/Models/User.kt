@@ -9,6 +9,5 @@ data class User(
   val levels: List<Long> = emptyList(),
   val multiplier: Int = 1,
   val specialLevels: Int = 0,
-  val items: List<Inventory> = emptyList(),
-  val equipped: Map<String, Inventory> = emptyMap()
+  val items: List<Inventory> = emptyList()
 )
