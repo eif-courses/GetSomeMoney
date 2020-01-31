@@ -34,11 +34,23 @@
         android:layout_height="3dp"
         android:background="?android:attr/listDivider" />
 
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/cherry_cream_soda"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/get_reward_text_message"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
     <Button
         android:id="@+id/next_level_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/holo_red_dark"
         android:fontFamily="@font/cherry_cream_soda"
         android:text="@string/next_level"
         android:textColor="@color/white"

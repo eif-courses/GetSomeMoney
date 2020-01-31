@@ -39,8 +39,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
               glasses_imageView.setImageResource(item.imageID)
             }
           }
-          coins += item.extraCoins
-          knowledge += item.knowledge
+          coins += item.knowledge
+          knowledge += item.extraCoins
         }
         coins_profile.text = String.format("%s%d", "+", coins)
         score_profile.text = String.format("%s%d", "+", knowledge)

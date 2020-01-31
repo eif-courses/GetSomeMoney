@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
@@ -189,7 +188,7 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
 
           // Set custom view in toast.
           val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
-          val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+         // val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
           rewardText.text = totalEarned.toString()
           //rewardMesageImage =
           toast.view = toastView

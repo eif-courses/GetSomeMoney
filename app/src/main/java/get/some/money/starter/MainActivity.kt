@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
   private lateinit var appBarConfiguration: AppBarConfiguration
   private val RC_SIGN_IN = 123
-  lateinit var userModel: UserViewModel
-  lateinit var levelModel: LevelViewModel
+  val userModel: UserViewModel by viewModels()
+  val levelModel: LevelViewModel by viewModels()
 
   var uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
@@ -46,8 +46,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
   override fun onStart() {
     super.onStart()
-    levelModel = ViewModelProviders.of(this)[LevelViewModel::class.java]
-    userModel = ViewModelProviders.of(this)[UserViewModel::class.java]
+
     // Create and launch sign-in intent
 
 
@@ -66,9 +65,9 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
         RC_SIGN_IN
       )
       pref.save("FIRST_RUN", false)
+
       //pref.clearSharedPreference()
     }
-
     if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()

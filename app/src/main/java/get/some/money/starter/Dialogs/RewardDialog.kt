@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -25,6 +24,8 @@ class RewardDialog : DialogFragment(){
   lateinit var mediaPlayer: MediaPlayer
   val userViewModel: UserViewModel by viewModels()
   private var gold = 0
+  var knowledge: Int = 0
+  var coins: Int = 0
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -49,6 +50,17 @@ class RewardDialog : DialogFragment(){
       this.dismiss()
     }
 
+    userViewModel.getEquipedItems(FirebaseAuth.getInstance().currentUser!!.uid)
+      .observe(this, Observer {
+
+        coins = 0
+        knowledge = 0
+        it.forEach { item ->
+          coins += item.knowledge
+          knowledge += item.extraCoins
+        }
+      })
+
     level_complete_img.setOnClickListener {
       it.background
       it.setBackgroundResource(R.drawable.chestopen)
@@ -61,8 +73,8 @@ class RewardDialog : DialogFragment(){
       val toast = Toast(it.context)
       // Set custom view in toast.
       val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
-      val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
-        rewardText.text = totalEarned.toString()
+     // val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+        rewardText.text = String.format("%d%s%d%s%d", totalEarned, "+", knowledge, "=", totalEarned+knowledge)
         //rewardMesageImage =
       toast.view = toastView
       toast.duration = Toast.LENGTH_LONG;
@@ -70,7 +82,7 @@ class RewardDialog : DialogFragment(){
       toast.show()
 
 
-      userViewModel.updateCoins(gold + totalEarned, FirebaseAuth.getInstance().currentUser!!.uid)
+      userViewModel.updateCoins(gold + totalEarned+knowledge, FirebaseAuth.getInstance().currentUser!!.uid)
     }
 
 

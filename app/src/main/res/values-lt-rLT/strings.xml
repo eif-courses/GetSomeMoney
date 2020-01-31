@@ -38,4 +38,5 @@
     <string name="extra_stats_profile_hint">Papildomi taškai gaunant prizus</string>
     <string name="press_on_item_profile">Spausk ant rūbo ir apsirenk!</string>
     <string name="hint_profile">Džinsai, maikė, kepurė tave paturbina!</string>
+    <string name="get_reward_text_message">Spausk ant dėžės ir gauk prizą!</string>
 </resources>

@@ -63,7 +63,7 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
     init(args.userscore)
   }
 
-  fun init(score:Int){
+  fun init(score: Int) {
 
 
     Picasso.get().load(args.background).into(level_background)
@@ -106,22 +106,23 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
             }
           }
           if (complete == 5) {
-           // Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
-            val fragmentManager = fragmentManager
+            // Toast.makeText(context, "VALIO Jus laimejote!", Toast.LENGTH_LONG).show()
+            val fragmentManager = parentFragmentManager
             val reward = RewardDialog()
             reward.isCancelable = false
-            if (fragmentManager != null) {
-              reward.show(fragmentManager, "REWARD_DIALOG")
-              mediaPlayer.start()
 
-              val ft: FragmentTransaction = fragmentManager.beginTransaction()
-              if (Build.VERSION.SDK_INT >= 26) {
-                ft.setReorderingAllowed(false)
-              }
-              ft.detach(this).attach(this).commit()
-              isCompleted = true
+            reward.show(fragmentManager, "REWARD_DIALOG")
+            mediaPlayer.start()
+
+            val ft: FragmentTransaction = fragmentManager.beginTransaction()
+            if (Build.VERSION.SDK_INT >= 26) {
+              ft.setReorderingAllowed(false)
             }
+            ft.detach(this).attach(this).commit()
+            isCompleted = true
+
             userModel.levelComplete(uuid.toString(), args.levelid)
+
 
             val result = your_score.text.toString().toInt() + score
             //textView9.text = score.toString()
@@ -133,26 +134,21 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
             //Toast.makeText(context, "Deja jus pralaimejote!", Toast.LENGTH_LONG).show()
             isLoose = true
 
-            val fragmentManager = fragmentManager
+            val fragmentManager = parentFragmentManager
             val reward = LooseDialog()
             reward.isCancelable = false
-            if (fragmentManager != null) {
-              reward.show(fragmentManager, "LOOSE_DIALOG")
-              looseSound.start()
 
-              val ft: FragmentTransaction = fragmentManager.beginTransaction()
-              if (Build.VERSION.SDK_INT >= 26) {
-                ft.setReorderingAllowed(false)
-              }
-              ft.detach(this).attach(this).commit()
-              isLoose = false
-              time.cancel()
+            reward.show(fragmentManager, "LOOSE_DIALOG")
+            looseSound.start()
 
-
-
-
-
+            val ft: FragmentTransaction = fragmentManager.beginTransaction()
+            if (Build.VERSION.SDK_INT >= 26) {
+              ft.setReorderingAllowed(false)
             }
+            ft.detach(this).attach(this).commit()
+            isLoose = false
+            time.cancel()
+
 
           }
         }
@@ -160,7 +156,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
       }
     }
   }
-
 
 
   fun moveObject(v: View, x: Float, y: Float = -420f, duration: Long = 1000) {
