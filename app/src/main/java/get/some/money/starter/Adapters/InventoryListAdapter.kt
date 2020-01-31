@@ -3,23 +3,24 @@ package get.some.money.starter.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import kotlinx.android.synthetic.main.inventory_item.view.*
 
 
-class InventoryListAdapter(private val interaction: Interaction? = null) :
+class InventoryListAdapter(private val interaction: Interaction? = null, private val longClickInteraction: LongClickInteraction? = null) :
   ListAdapter<Inventory, InventoryListAdapter.InventoryViewHolder>(InventoryDC()) {
 
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = InventoryViewHolder(
     LayoutInflater.from(parent.context)
-      .inflate(R.layout.inventory_item, parent, false), interaction
+      .inflate(R.layout.inventory_item, parent, false), interaction, longClickInteraction
   )
 
   var selectedPosition = 0 // You have to set this globally in the Adapter class
@@ -40,11 +41,24 @@ class InventoryListAdapter(private val interaction: Interaction? = null) :
 
   inner class InventoryViewHolder(
     itemView: View,
-    private val interaction: Interaction?
-  ) : RecyclerView.ViewHolder(itemView), OnClickListener {
+    private val interaction: Interaction?,
+    private val longClickInteraction: LongClickInteraction?
+  ) : RecyclerView.ViewHolder(itemView), OnClickListener, OnLongClickListener {
 
     init {
       itemView.setOnClickListener(this)
+      itemView.setOnLongClickListener(this)
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+      if (adapterPosition == RecyclerView.NO_POSITION) return false
+      val clicked = getItem(adapterPosition)
+      // Updating old as well as new positions
+      notifyItemChanged(selectedPosition);
+      selectedPosition = adapterPosition;
+      notifyItemChanged(selectedPosition);
+      longClickInteraction?.long_click(clicked)
+      return true
     }
 
     override fun onClick(v: View?) {
@@ -88,6 +102,9 @@ class InventoryListAdapter(private val interaction: Interaction? = null) :
 
   interface Interaction {
     fun click_item(inventory: Inventory)
+  }
+  interface LongClickInteraction{
+    fun long_click(inventory: Inventory)
   }
 
   private class InventoryDC : DiffUtil.ItemCallback<Inventory>() {

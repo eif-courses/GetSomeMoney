@@ -100,14 +100,16 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 
           var title = "Change your name or nickname!"
           var message="Enter your name shorter than 30 characters."
-          var yes ="yes"
+          var yes ="Apply"
+          var no = "Cancel"
           var success = "Your name was changed successfully!"
           var toolong="Your name is too long! Maximum 30 characters!"
           var hint = "Enter your name or nickname:"
           if(Language.getCurrentLanguage().equals("lt")){
           title = "Pakeisti slapyvardį arba vardą!"
           message = "Įveskite vardą neilgesnį nei 30 simbolių."
-            yes = "Taip"
+            yes = "Patvirtinti"
+            no = "Atšaukti"
             success = "Jūsų vardas sėkmingai pakeistas!"
             toolong ="Jūsų vardas per ilgas max 30 simbolių!"
             hint = "Įveskite savo vardą arba slapyvardį:"
@@ -132,7 +134,11 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
                 }
               }
               .setView(_categoryName)
-              .show()
+            _dialogBuilder.setCancelable(false)
+
+            _dialogBuilder.show()
+
+
           }
         }
       })
