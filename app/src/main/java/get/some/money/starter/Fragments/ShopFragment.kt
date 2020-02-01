@@ -4,6 +4,7 @@ package get.some.money.starter.Fragments
 import android.app.AlertDialog
 import android.content.res.Configuration
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -13,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,7 +26,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Adapters.ShopListAdapter
-import get.some.money.starter.Models.Inventory
+import get.some.money.starter.Dialogs.RewardDialog
 import get.some.money.starter.Models.Item
 import get.some.money.starter.R
 import get.some.money.starter.Util.Language
@@ -103,7 +105,7 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
     var itemRandom="Buy Random Item!"
     var special="Unlock Special Levels!"
     var areyousure="Are you sure to spend"
-    var postfix="coins"
+    var postfix="coins?"
     var success ="You successfully payed for service :)"
 
     var yes = "Yes"
@@ -116,8 +118,8 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
       multiplier3="Padauginti gaunamų monetų skaičių 3x!"
       itemRandom="Įsigyti atsitiktinį daiktą!"
       special="Atrakinti slaptus žaidimo lygius!"
-      areyousure="Ar jus esate tikras išleisti"
-      postfix ="monetų"
+      areyousure="Ar sutinkate išleisti"
+      postfix ="monetų?"
       success = "Jūs sėkmingai apmokėjote už pirkinį :)"
       yes = "Taip"
       no = "Ne"
@@ -239,56 +241,86 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
       you_get_message = "Jus gavote daiktą jį peržiūrėkite profilio aplinkoje!!!"
     }
 
-    when (random) {
-      0 -> {
-        val caps = resources.getStringArray(R.array.caps)
-        val cap = resources.getIdentifier(
-          caps.toList().shuffled()[0],
-          "drawable",
-          context!!.getPackageName()
-        )
-        userViewModel.addItemToInventory(
-          FirebaseAuth.getInstance().currentUser!!.uid,
-          Inventory(cap, Random.nextInt(1, 50), Random.nextInt(1, 50), "CAP")
-        )
-      }
-      1 -> {
-        val shirts = resources.getStringArray(R.array.shirts)
-        val shirt = resources.getIdentifier(
-          shirts.toList().shuffled()[0],
-          "drawable",
-          context!!.getPackageName()
-        )
-        userViewModel.addItemToInventory(
-          FirebaseAuth.getInstance().currentUser!!.uid,
-          Inventory(shirt, Random.nextInt(1, 50), Random.nextInt(1, 50), "SHIRT")
-        )
-      }
-      2 -> {
-        val jeans = resources.getStringArray(R.array.jeans)
-        val jean = resources.getIdentifier(
-          jeans.toList().shuffled()[0],
-          "drawable",
-          context!!.getPackageName()
-        )
-        userViewModel.addItemToInventory(
-          FirebaseAuth.getInstance().currentUser!!.uid,
-          Inventory(jean, Random.nextInt(1, 50), Random.nextInt(1, 50), "JEANS")
-        )
-      }
-      3 -> {
-        val glasses = resources.getStringArray(R.array.glasses)
-        val glass = resources.getIdentifier(
-          glasses.toList().shuffled()[0],
-          "drawable",
-          context!!.getPackageName()
-        )
-        userViewModel.addItemToInventory(
-          FirebaseAuth.getInstance().currentUser!!.uid,
-          Inventory(glass, Random.nextInt(1, 50), Random.nextInt(1, 50), "GLASSES")
-        )
-      }
+
+
+
+    val fragmentManager = parentFragmentManager
+    val reward = RewardDialog(true)
+    reward.isCancelable = false
+
+    reward.show(fragmentManager, "REWARD_DIALOG")
+    mediaPlayer.start()
+
+    val ft: FragmentTransaction = fragmentManager.beginTransaction()
+    if (Build.VERSION.SDK_INT >= 26) {
+      ft.setReorderingAllowed(false)
     }
+    ft.detach(this).attach(this).commit()
+
+
+
+
+
+
+    //userModel.levelComplete(uuid.toString(), args.levelid)
+
+
+    //val result = your_score.text.toString().toInt() + score
+    //textView9.text = score.toString()
+    //userModel.updateScore(result, uuid!!)
+
+
+
+//    when (random) {
+//      0 -> {
+//        val caps = resources.getStringArray(R.array.caps)
+//        val cap = resources.getIdentifier(
+//          caps.toList().shuffled()[0],
+//          "drawable",
+//          context!!.getPackageName()
+//        )
+//        userViewModel.addItemToInventory(
+//          FirebaseAuth.getInstance().currentUser!!.uid,
+//          Inventory(cap, Random.nextInt(1, 50), Random.nextInt(1, 50), "CAP")
+//        )
+//      }
+//      1 -> {
+//        val shirts = resources.getStringArray(R.array.shirts)
+//        val shirt = resources.getIdentifier(
+//          shirts.toList().shuffled()[0],
+//          "drawable",
+//          context!!.getPackageName()
+//        )
+//        userViewModel.addItemToInventory(
+//          FirebaseAuth.getInstance().currentUser!!.uid,
+//          Inventory(shirt, Random.nextInt(1, 50), Random.nextInt(1, 50), "SHIRT")
+//        )
+//      }
+//      2 -> {
+//        val jeans = resources.getStringArray(R.array.jeans)
+//        val jean = resources.getIdentifier(
+//          jeans.toList().shuffled()[0],
+//          "drawable",
+//          context!!.getPackageName()
+//        )
+//        userViewModel.addItemToInventory(
+//          FirebaseAuth.getInstance().currentUser!!.uid,
+//          Inventory(jean, Random.nextInt(1, 50), Random.nextInt(1, 50), "JEANS")
+//        )
+//      }
+//      3 -> {
+//        val glasses = resources.getStringArray(R.array.glasses)
+//        val glass = resources.getIdentifier(
+//          glasses.toList().shuffled()[0],
+//          "drawable",
+//          context!!.getPackageName()
+//        )
+//        userViewModel.addItemToInventory(
+//          FirebaseAuth.getInstance().currentUser!!.uid,
+//          Inventory(glass, Random.nextInt(1, 50), Random.nextInt(1, 50), "GLASSES")
+//        )
+//      }
+//    }
     Toast.makeText(context, you_get_message, Toast.LENGTH_LONG).show()
   }
 

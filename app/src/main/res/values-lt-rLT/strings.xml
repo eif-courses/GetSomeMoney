@@ -36,7 +36,9 @@
     <string name="terms_and_conditions">Sąlygos ir nuostatos</string>
     <string name="game_guide">Kaip žaisti?</string>
     <string name="extra_stats_profile_hint">Papildomi taškai gaunant prizus</string>
-    <string name="press_on_item_profile">Spausk ant rūbo ir apsirenk!</string>
+    <string name="press_on_item_profile">Spausk ant rūbo apačioje ir apsirenk! Palaikyk paspaudęs ilgiau, kad parduotum jį!</string>
     <string name="hint_profile">Džinsai, maikė, kepurė tave paturbina!</string>
     <string name="get_reward_text_message">Spausk ant dėžės ir gauk prizą!</string>
+    <string name="sell_item">Parduoti</string>
+    <string name="back">Grįžti į parduotuvę</string>
 </resources>

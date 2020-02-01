@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.reward_dialog.*
 import kotlin.random.Random
 
 
-class RewardDialog : DialogFragment(){
+class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(){
 
   lateinit var mediaPlayer: MediaPlayer
   val userViewModel: UserViewModel by viewModels()
@@ -47,10 +47,21 @@ class RewardDialog : DialogFragment(){
     })
     next_level_btn.isVisible = false
 
-    next_level_btn.setOnClickListener {
-      activity?.onBackPressed()
-      this.dismiss()
+    if(changeUIForOtherRewards){
+      level_name_rewardFragment.visibility = View.GONE
+      next_level_btn.text = resources.getString(R.string.back)
+      next_level_btn.setOnClickListener {
+        this.dismiss()
+      }
+    }else{
+      next_level_btn.setOnClickListener {
+        activity?.onBackPressed()
+        this.dismiss()
+      }
     }
+
+
+
 
     userViewModel.getEquipedItems(FirebaseAuth.getInstance().currentUser!!.uid)
       .observe(this, Observer {
@@ -76,6 +87,10 @@ class RewardDialog : DialogFragment(){
       // Set custom view in toast.
       val rewardText = toastView.findViewById<TextView>(R.id.customToastText)
       val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+      val goldImageIcon = toastView.findViewById<ImageView>(R.id.imageView13)
+
+
+
       val item_toast_coins = toastView.findViewById<TextView>(R.id.item_coins_toast)
       val item_toast_score = toastView.findViewById<TextView>(R.id.item_score_toast)
 
@@ -163,7 +178,13 @@ class RewardDialog : DialogFragment(){
       toast.show()
 
 
-      userViewModel.updateCoins(gold + totalEarned+knowledge, FirebaseAuth.getInstance().currentUser!!.uid)
+
+      if(changeUIForOtherRewards){
+        rewardText.visibility = View.GONE
+        goldImageIcon.visibility = View.GONE
+      }else{
+        userViewModel.updateCoins(gold + totalEarned+knowledge, FirebaseAuth.getInstance().currentUser!!.uid)
+      }
     }
 
   }

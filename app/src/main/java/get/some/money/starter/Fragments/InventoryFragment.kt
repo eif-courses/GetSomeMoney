@@ -95,8 +95,12 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
     sell?.text = generatedCoins.toString()
     sellItemsButton.text = positiveBtn
     sellItemsButton.setOnClickListener {
-      Toast.makeText(context, "Item was removed", Toast.LENGTH_LONG).show()
 
+      if(!Language.getCurrentLanguage().equals("lt")) {
+        Toast.makeText(context, "The item was solded for $generatedCoins coins!", Toast.LENGTH_LONG).show()
+      }else{
+        Toast.makeText(context, "Jūsų daiktas buvo parduotas už $generatedCoins monetas!", Toast.LENGTH_LONG).show()
+      }
 
     var index = 0
       for (i in levels){
