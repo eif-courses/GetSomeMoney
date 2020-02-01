@@ -253,6 +253,9 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     }
   }
 
+
+
+
   override fun onBackPressed() {
     //the code is beautiful enough without comments
     if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

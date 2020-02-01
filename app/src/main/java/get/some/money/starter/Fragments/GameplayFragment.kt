@@ -1,22 +1,25 @@
 package get.some.money.starter.Fragments
 
 
+import android.animation.ObjectAnimator
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.ViewCompat.animate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import get.some.money.starter.Dialogs.LooseDialog
 import get.some.money.starter.Dialogs.RewardDialog
-import get.some.money.starter.Util.Language
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_gameplay.*
@@ -43,8 +46,10 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
   private var images = listOf<ImageView>()
 
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
 
     val currentLanguage = Language.getCurrentLanguage()
 
@@ -82,10 +87,22 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
 
     val sequence = mutableListOf<String>()
 
+    var anim = imageView2.x
     for (house in images) {
       house.setOnClickListener {
         it.getLocationOnScreen(location)
-        moveObject(it, -location[0].toFloat() + 50 + (count * 190))
+
+        animate(house)
+          .y(imageView2.y)
+          .x(anim)
+          .duration = 1000
+
+        anim += 90
+
+
+        //moveObject(it, -location[0].toFloat() + 50 + (count * 190))
+
+
         count++
         // mediaPlayer.start()
 
@@ -189,7 +206,19 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
 
 
   fun gameTimer(): CountDownTimer {
-    val timer = object : CountDownTimer(Random.nextLong(30000) + 20000, 1000) {
+    val randomized = Random.nextLong(30000) + 20000
+
+    val max = randomized / 1000
+    progressBarTimer?.max = max.toInt()
+    progressBarTimer?.setInterpolator(FastOutLinearInInterpolator())
+
+
+
+
+
+
+
+    val timer = object : CountDownTimer(randomized, 1000) {
       override fun onFinish() {
         //v?.visibility = View.GONE
         //val uuid = FirebaseAuth.getInstance().currentUser?.uid
@@ -198,7 +227,10 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
       }
 
       override fun onTick(millisUntilFinished: Long) {
-        time_remaining.text = (millisUntilFinished / 1000).toString()
+        ObjectAnimator.ofInt(progressBarTimer, "progress", (millisUntilFinished / 1000).toInt())
+          .setDuration(1000)
+          .start();
+        //time_remaining.text = (millisUntilFinished / 1000).toString()
         your_score.text = (millisUntilFinished / 125).toString()
         if (isCompleted || isLoose) {
           this.cancel()
