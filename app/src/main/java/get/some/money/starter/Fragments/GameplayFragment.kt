@@ -97,7 +97,7 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
           .x(anim)
           .duration = 1000
 
-        anim += 90
+        anim += house.width + 20
 
 
         //moveObject(it, -location[0].toFloat() + 50 + (count * 190))
