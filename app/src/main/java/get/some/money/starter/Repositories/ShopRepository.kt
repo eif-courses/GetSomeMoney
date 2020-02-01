@@ -1,49 +1,82 @@
 package get.some.money.starter.Repositories
 
 import androidx.lifecycle.MutableLiveData
-import get.some.money.starter.Configuration.ChainMaster
 import get.some.money.starter.Models.Item
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 
-class ShopRepository private constructor(){
-    private val items = MutableLiveData<List<Item>>()
-    companion object {
-        val instance: ShopRepository by lazy { ShopRepository() }
-    }
+class ShopRepository private constructor() {
+  private val items = MutableLiveData<List<Item>>()
 
-    fun Int.toLocalizedString(): String = ChainMaster.getAppContext().resources.getString(this)
+  companion object {
+    val instance: ShopRepository by lazy { ShopRepository() }
+  }
 
-    fun loadItems(): MutableLiveData<List<Item>> {
+  //fun Int.toLocalizedString(): String = ChainMaster.getAppContext().resources.getString(this)
 
-        val temp = listOf(
-            Item(
-                R.string.free_gift.toLocalizedString(),
-                R.drawable.gift,
-                0
-            ),
-            Item(
-                R.string.random_item.toLocalizedString(),
-                R.drawable.random,
-                1000
-            ),
-            Item(
-                R.string.multiplier2x.toLocalizedString(),
-                R.drawable.daugiklis2,
-                10000
-            ),
-            Item(
-                R.string.multiplier3x.toLocalizedString(),
-                R.drawable.daugiklis3,
-                20000
-            ),
+  fun loadItems(): MutableLiveData<List<Item>> {
 
-            Item(
-                R.string.special_levels.toLocalizedString(),
-                R.drawable.feature,
-                30000
-            )
+    if (Language.getCurrentLanguage().equals("lt")) {
+      val temp = listOf(
+        Item(
+          "Nemokama dovana",
+          R.drawable.gift,
+          0
+        ),
+        Item(
+          "Atsitiktinis daiktas",
+          R.drawable.random,
+          1000
+        ),
+        Item(
+          "Dvigubai monetų už prizus",
+          R.drawable.daugiklis2,
+          10000
+        ),
+        Item(
+          "Trigubai monetų už prizus",
+          R.drawable.daugiklis3,
+          20000
+        ),
+
+        Item("Atrakinti slaptus lygius",
+          R.drawable.feature,
+          30000
         )
-        items.value = temp
-        return items
+      )
+      items.value = temp
+    } else {
+      val temp = listOf(
+        Item(
+          "Free gift",
+          R.drawable.gift,
+          0
+        ),
+        Item(
+          "Random item",
+          R.drawable.random,
+          1000
+        ),
+        Item(
+          "Coins multiplier x2",
+          R.drawable.daugiklis2,
+          10000
+        ),
+        Item(
+          "Coins multiplier x3",
+          R.drawable.daugiklis3,
+          20000
+        ),
+
+        Item(
+          "Unlock special levels",
+          R.drawable.feature,
+          30000
+        )
+      )
+      items.value = temp
     }
+
+    return items
+  }
 }

@@ -85,10 +85,29 @@
         android:id="@+id/sell_items_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_dark"
-        android:text="Button"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#2196F3"
+        android:text="@string/sell_item"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancel_sell_items_button"
+        app:layout_constraintTop_toBottomOf="@+id/score_sell_dialog" />
+
+    <Button
+        android:id="@+id/cancel_sell_items_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="@android:string/cancel"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sell_items_button"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_sell_dialog" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

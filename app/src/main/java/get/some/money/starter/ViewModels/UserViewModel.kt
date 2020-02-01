@@ -59,6 +59,9 @@ class UserViewModel : ViewModel() {
   fun levelComplete(uuid: String, id: Long) {
     repository.levelComplete(uuid).update("levels", FieldValue.arrayUnion(id))
   }
+  fun sellItemFromUser(uuid: String, index: Int, inventory: Inventory){
+    repository.sellItemFromUser(uuid).update("items", FieldValue.arrayRemove(inventory))
+  }
 
   fun addItemToInventory(uuid: String, inventory: Inventory) {
     repository.addItemToInventory(uuid).update("items", FieldValue.arrayUnion(inventory))

@@ -95,13 +95,14 @@
     <string name="random_item">Random item</string>
     <string name="extra_coins">Extra coins</string>
     <string name="knowledge">Knowledge</string>
-    <string name="name_updated">Your name is successfull updated!</string>
+    <string name="name_updated">Your name is successful updated!</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="game_guide">Game guide</string>
     <string name="hint_profile">Jeans, Shirt, Cap makes you stronger!</string>
     <string name="press_on_item_profile">Press on clothes to put on!</string>
     <string name="extra_stats_profile_hint">Additional points when you getting prizes</string>
     <string name="get_reward_text_message">Click on chest and grab your loot!</string>
+    <string name="sell_item">Sell item</string>
 
 
 </resources>
