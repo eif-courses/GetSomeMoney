@@ -2,15 +2,12 @@ package get.some.money.starter
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -71,8 +68,8 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
 //      )
 //      pref.save("FIRST_RUN", false)
 
-      //pref.clearSharedPreference()
-      //}
+    //pref.clearSharedPreference()
+    //}
     if (uuid == null) {
       startActivityForResult(
         AuthUI.getInstance()
@@ -97,46 +94,82 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           val _categoryName = EditText(this)
 
 
-
           var title = "Change your name or nickname!"
-          var message="Enter your name shorter than 30 characters."
-          var yes ="Apply"
+          var message = "Enter your name shorter than 30 characters."
+          var yes = "Apply"
           var no = "Cancel"
           var success = "Your name was changed successfully!"
-          var toolong="Your name is too long! Maximum 30 characters!"
+          var toolong = "Your name is too long! Maximum 30 characters!"
           var hint = "Enter your name or nickname:"
-          if(Language.getCurrentLanguage().equals("lt")){
-          title = "Pakeisti slapyvardį arba vardą!"
-          message = "Įveskite vardą neilgesnį nei 30 simbolių."
+          if (Language.getCurrentLanguage().equals("lt")) {
+            title = "Pakeisti slapyvardį arba vardą!"
+            message = "Įveskite vardą neilgesnį nei 30 simbolių."
             yes = "Patvirtinti"
             no = "Atšaukti"
             success = "Jūsų vardas sėkmingai pakeistas!"
-            toolong ="Jūsų vardas per ilgas max 30 simbolių!"
+            toolong = "Jūsų vardas per ilgas max 30 simbolių!"
             hint = "Įveskite savo vardą arba slapyvardį:"
-            }
+          }
 
-          _categoryName.hint = hint
+          //  _categoryName.hint = hint
 
 
           editName.setOnClickListener {
-            val _dialogBuilder = AlertDialog.Builder(this)
-            _dialogBuilder.setMessage(message)
-              .setTitle(title)
-              .setPositiveButton(yes) {
-                  dialog: DialogInterface?, which: Int ->
-                if(_categoryName.text.length <=30){
-                  //profileName.text = _categoryName.text
-                  userModel.updateName(_categoryName.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
 
-                  Toast.makeText(applicationContext, success, Toast.LENGTH_LONG).show()
-                }else{
-                  Toast.makeText(applicationContext, toolong, Toast.LENGTH_LONG).show()
-                }
-              }
-              .setView(_categoryName)
-            _dialogBuilder.setCancelable(false)
 
-            _dialogBuilder.show()
+            val dialogBuilder = AlertDialog.Builder(this)
+            val inflater = this.layoutInflater
+            val dialogView: View = inflater.inflate(R.layout.change_name_alert_dialog, null)
+
+            val name = dialogView.findViewById<EditText>(R.id.your_name_edittext)
+            val cancel = dialogView.findViewById<Button>(R.id.accept_your_name_edittext)
+            val accept = dialogView.findViewById<Button>(R.id.cancel_edit_name)
+
+
+
+
+            name.hint = hint
+
+            dialogBuilder.setView(dialogView)
+            val alertDialog: AlertDialog = dialogBuilder.create()
+
+            alertDialog.setTitle(title)
+            alertDialog.setMessage(message)
+            alertDialog.setCancelable(false)
+
+            alertDialog.show()
+
+            cancel.setOnClickListener {
+              alertDialog.dismiss()
+            }
+
+            accept.setOnClickListener {
+              userModel.updateName(
+                name.text.toString(),
+                FirebaseAuth.getInstance().currentUser!!.uid
+              )
+              Toast.makeText(applicationContext, success, Toast.LENGTH_LONG).show()
+            }
+
+
+//            val _dialogBuilder = AlertDialog.Builder(this)
+//            _dialogBuilder.setMessage(message)
+//              .setTitle(title)
+//              .setPositiveButton(yes) {
+//                  dialog: DialogInterface?, which: Int ->
+//                if(_categoryName.text.length <=30){
+//                  //profileName.text = _categoryName.text
+//                  userModel.updateName(_categoryName.text.toString(), FirebaseAuth.getInstance().currentUser!!.uid)
+//
+//                  Toast.makeText(applicationContext, success, Toast.LENGTH_LONG).show()
+//                }else{
+//                  Toast.makeText(applicationContext, toolong, Toast.LENGTH_LONG).show()
+//                }
+//              }
+//              .setView(_categoryName)
+//            _dialogBuilder.setCancelable(false)
+//
+//            _dialogBuilder.show()
 
 
           }
@@ -252,8 +285,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
       }
     }
   }
-
-
 
 
   override fun onBackPressed() {

@@ -184,6 +184,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
 
       this.dismiss()
 
+      activity?.onBackPressed()
         if (changeUIForOtherRewards) {
           rewardText.visibility = View.GONE
           goldImageIcon.visibility = View.GONE
