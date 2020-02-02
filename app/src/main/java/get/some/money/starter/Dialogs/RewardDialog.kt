@@ -85,6 +85,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
         it.isClickable = false
 
         next_level_btn.isVisible = true
+
         mediaPlayer.start()
         val totalEarned = Random.nextInt(50, 100)
         // Get the custom TOAST layout view.
@@ -181,7 +182,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show()
 
-
+      this.dismiss()
 
         if (changeUIForOtherRewards) {
           rewardText.visibility = View.GONE
@@ -193,7 +194,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
           )
         }
     }
-    
+
   }
 
 }
