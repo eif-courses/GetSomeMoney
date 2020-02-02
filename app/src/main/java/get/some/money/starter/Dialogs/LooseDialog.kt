@@ -3,7 +3,6 @@ package get.some.money.starter.Dialogs
 import android.app.Dialog
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -114,7 +113,9 @@ class LooseDialog : DialogFragment(){
           override fun onRewardedAdClosed() {
             it.setBackgroundResource(R.drawable.chestopen)
             it.isClickable = false
-
+            //it.visibility = View.GONE
+            textView.visibility= View.GONE
+              textView5.visibility = View.GONE
           }
           override fun onUserEarnedReward(@NonNull reward: RewardItem) {
             val toastView = getLayoutInflater().inflate(R.layout.toast_message, null);
@@ -128,27 +129,31 @@ class LooseDialog : DialogFragment(){
             rewardText.text = totalEarned.toString()
             //rewardMesageImage =
 //
-//            toastView.findViewById<TextView>(R.id.item_coins_toast).visibility = View.GONE
-//            toastView.findViewById<TextView>(R.id.item_score_toast).visibility = View.GONE
-            toastView.findViewById<ImageView>(R.id.customToastImage).visibility = View.GONE
-//            toastView.findViewById<TextView>(R.id.imageView16).visibility = View.GONE
-//            toastView.findViewById<TextView>(R.id.imageView17).visibility = View.GONE
+
+           // toastView.findViewById<TextView>(R.id.imageView16).visibility = View.GONE
+            //toastView.findViewById<TextView>(R.id.imageView17).visibility = View.GONE
 
             toast.view = toastView
+
+            toast.view.findViewById<TextView>(R.id.item_coins_toast).visibility = View.GONE
+            toast.view.findViewById<TextView>(R.id.item_score_toast).visibility = View.GONE
+            toast.view.findViewById<ImageView>(R.id.customToastImage).visibility = View.GONE
+
+
             toast.duration = Toast.LENGTH_LONG;
             toast.setGravity(Gravity.CENTER, 0,0);
             toast.show()
             mediaPlayer.start()
             userViewModel.updateCoins(gold + totalEarned, FirebaseAuth.getInstance().currentUser!!.uid)
 
-            val timer = object : CountDownTimer(3000, 1000){
-              override fun onFinish() {
-                level_restart.performClick()
-              }
-              override fun onTick(millisUntilFinished: Long) {
-              }
-            }
-            timer.start()
+//            val timer = object : CountDownTimer(3000, 1000){
+//              override fun onFinish() {
+//                level_restart.performClick()
+//              }
+//              override fun onTick(millisUntilFinished: Long) {
+//              }
+//            }
+//            timer.start()
 
 
           }
