@@ -135,13 +135,34 @@ class LooseDialog : DialogFragment(){
 
             toast.view = toastView
 
-            toast.view.findViewById<TextView>(R.id.item_coins_toast).visibility = View.GONE
-            toast.view.findViewById<TextView>(R.id.item_score_toast).visibility = View.GONE
-            toast.view.findViewById<ImageView>(R.id.customToastImage).visibility = View.GONE
+//            toast.view.findViewById<TextView>(R.id.item_coins_toast).visibility = View.GONE
+//            toast.view.findViewById<TextView>(R.id.item_score_toast).visibility = View.GONE
+//            toast.view.findViewById<ImageView>(R.id.customToastImage).visibility = View.GONE
 
 
             toast.duration = Toast.LENGTH_LONG;
-            toast.setGravity(Gravity.CENTER, 0,0);
+            toast.setGravity(Gravity.CENTER, 0,0)
+
+
+            val rewardMesageImage = toastView.findViewById<ImageView>(R.id.customToastImage)
+            val img17 = toastView.findViewById<ImageView>(R.id.imageView17)
+            val img186= toastView.findViewById<ImageView>(R.id.imageView16)
+            val item_toast_coins = toastView.findViewById<TextView>(R.id.item_coins_toast)
+            val item_toast_score = toastView.findViewById<TextView>(R.id.item_score_toast)
+            val divider = toastView.findViewById<View>(R.id.divider8)
+            val divider2 = toastView.findViewById<View>(R.id.divider9)
+            val divider3 = toastView.findViewById<View>(R.id.divider7)
+            rewardMesageImage.visibility = View.GONE
+            item_toast_coins.visibility = View.GONE
+            item_toast_score.visibility = View.GONE
+            img17.visibility = View.GONE
+            img186.visibility = View.GONE
+            divider.visibility = View.GONE
+            divider2.visibility = View.GONE
+            divider3.visibility = View.GONE
+
+
+
             toast.show()
             mediaPlayer.start()
             userViewModel.updateCoins(gold + totalEarned, FirebaseAuth.getInstance().currentUser!!.uid)
