@@ -184,7 +184,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
 
       this.dismiss()
 
-      activity?.onBackPressed()
+
         if (changeUIForOtherRewards) {
           rewardText.visibility = View.GONE
           goldImageIcon.visibility = View.GONE
@@ -193,6 +193,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
             gold + totalEarned + knowledge,
             FirebaseAuth.getInstance().currentUser!!.uid
           )
+          activity?.onBackPressed()
         }
     }
 

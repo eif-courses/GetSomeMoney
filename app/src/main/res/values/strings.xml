@@ -105,6 +105,7 @@
     <string name="get_reward_text_message">Click on chest and grab your loot!</string>
     <string name="sell_item">Sell item</string>
     <string name="back">Back to shop</string>
+    <string name="special_level_pass">You need buy special levels ticket in app shop to play here!</string>
 
 
 </resources>

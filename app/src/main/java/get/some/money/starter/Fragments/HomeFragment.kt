@@ -4,6 +4,7 @@ package get.some.money.starter.Fragments
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,9 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Adapters.CategoryListAdapter
-import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Category
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -35,6 +36,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
   val model: LevelViewModel by viewModels()
  val user: UserViewModel by viewModels()
   private val uuid = FirebaseAuth.getInstance().currentUser?.uid
+
+  var isSpecialLevelUnlocked = 0
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -72,6 +75,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
         if(it != null) {
           levelSize = it.levels.size
           completedByCategory = it.levels as MutableList<Long>
+          isSpecialLevelUnlocked = it.specialLevels
         }
       })
     }
@@ -165,8 +169,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
 
   override fun clickCategory(cat: Category) {
     //Toast.makeText(context, cat.title, Toast.LENGTH_LONG).show()
-    val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
-    findNavController().navigate(action)
+    
+    if (cat.title.equals("Slapti lygiai") || cat.titlelt.equals("Special")){
+      if(isSpecialLevelUnlocked == 1){
+        val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
+        findNavController().navigate(action)
+      }else{
+        Toast.makeText(context, R.string.special_level_pass, Toast.LENGTH_LONG).show()
+      }
+    }else{
+      val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
+      findNavController().navigate(action)
+    }
+
   }
 
 

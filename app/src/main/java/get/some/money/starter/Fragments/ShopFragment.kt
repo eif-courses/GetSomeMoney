@@ -236,9 +236,9 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
     val totalEarned = Random.nextInt(50,100)
     // Get the custom TOAST layout view.
 
-    var you_get_message = "You got an item view your profile for more details!!!"
+    var you_get_message = "Successfully completed transaction!!!"
     if(Language.getCurrentLanguage().equals("lt")){
-      you_get_message = "Jus gavote daiktą jį peržiūrėkite profilio aplinkoje!!!"
+      you_get_message = "Sėkmingai atliktas mokėjimas!!!"
     }
 
 
