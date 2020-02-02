@@ -122,9 +122,8 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
             val dialogView: View = inflater.inflate(R.layout.change_name_alert_dialog, null)
 
             val name = dialogView.findViewById<EditText>(R.id.your_name_edittext)
-            val cancel = dialogView.findViewById<Button>(R.id.accept_your_name_edittext)
-            val accept = dialogView.findViewById<Button>(R.id.cancel_edit_name)
-
+            val cancel = dialogView.findViewById<Button>(R.id.cancel_edit_name)
+            val accept = dialogView.findViewById<Button>(R.id.accept_your_name_edittext)
 
 
 
@@ -149,6 +148,8 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
                 FirebaseAuth.getInstance().currentUser!!.uid
               )
               Toast.makeText(applicationContext, success, Toast.LENGTH_LONG).show()
+              alertDialog.dismiss()
+
             }
 
 
