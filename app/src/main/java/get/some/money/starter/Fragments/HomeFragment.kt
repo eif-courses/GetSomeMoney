@@ -169,7 +169,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
 
   override fun clickCategory(cat: Category) {
     //Toast.makeText(context, cat.title, Toast.LENGTH_LONG).show()
-    
+
     if (cat.title.equals("Slapti lygiai") || cat.titlelt.equals("Special")){
       if(isSpecialLevelUnlocked == 1){
         val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
