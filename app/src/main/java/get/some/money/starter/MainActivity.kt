@@ -25,6 +25,8 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import get.some.money.starter.Adapters.IntroSliderAdapter
+import get.some.money.starter.Models.IntroSlide
 import get.some.money.starter.Models.User
 import get.some.money.starter.Util.Language
 import get.some.money.starter.ViewModels.LevelViewModel
@@ -38,6 +40,8 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   private val RC_SIGN_IN = 123
   val userModel: UserViewModel by viewModels()
   val levelModel: LevelViewModel by viewModels()
+
+
 
   var uuid = FirebaseAuth.getInstance().currentUser?.uid
   val providers = arrayListOf(
@@ -183,6 +187,10 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+
+
+
+
 
     val toolbar = findViewById<Toolbar>(R.id.toolbar)
     setSupportActionBar(toolbar) //set the toolbar

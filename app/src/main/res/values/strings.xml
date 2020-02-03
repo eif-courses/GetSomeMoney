@@ -106,6 +106,8 @@
     <string name="sell_item">Sell item</string>
     <string name="back">Back to shop</string>
     <string name="special_level_pass">You need buy special levels ticket in app shop to play here!</string>
+    <string name="next">Next</string>
+    <string name="skip_intro">SKIP INTRO</string>
 
 
 </resources>
