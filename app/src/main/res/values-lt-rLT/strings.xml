@@ -42,6 +42,7 @@
     <string name="sell_item">Parduoti</string>
     <string name="back">Grįžti į parduotuvę</string>
     <string name="special_level_pass">Norint žaisti slaptus lygius jūs privalote įsigyti bilietą, kurį rasite žaidimo parduotuvėje!</string>
-    <string name="skip_intro">PRALEISTI</string>
+    <string name="skip_intro">Pereiti prie registracijos</string>
     <string name="next">Sekantis</string>
+    <string name="sign_up">REGISTRUOTIS</string>
 </resources>

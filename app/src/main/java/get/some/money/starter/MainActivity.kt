@@ -25,8 +25,6 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import get.some.money.starter.Adapters.IntroSliderAdapter
-import get.some.money.starter.Models.IntroSlide
 import get.some.money.starter.Models.User
 import get.some.money.starter.Util.Language
 import get.some.money.starter.ViewModels.LevelViewModel
@@ -54,7 +52,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     super.onStart()
 
     // Create and launch sign-in intent
-
 
 //    val pref = SharedPreference(this)
 //

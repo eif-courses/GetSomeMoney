@@ -1,7 +1,6 @@
 package get.some.money.starter.Fragments
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -10,14 +9,15 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import get.some.money.starter.Adapters.IntroSliderAdapter
-import get.some.money.starter.MainActivity
 import get.some.money.starter.Models.IntroSlide
 import get.some.money.starter.R
 import kotlinx.android.synthetic.main.fragment_game_guide.*
 
 class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
+
 
   private val introSliderAdapter = IntroSliderAdapter(
     listOf(
@@ -48,21 +48,31 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
       override fun onPageSelected(position: Int) {
         super.onPageSelected(position)
         setCurrentIndicator(position)
+        if(introSLiderViewPager.currentItem != introSliderAdapter.itemCount-1){
+          buttonNext.text = getString(R.string.next)
+        }else{
+          buttonNext.text = getString(R.string.sign_up)        }
       }
     })
+
+
+
     buttonNext.setOnClickListener {
       if(introSLiderViewPager.currentItem + 1 < introSliderAdapter.itemCount){
         introSLiderViewPager.currentItem +=1
-      }else{
-        Intent(context, MainActivity::class.java).also {
-          startActivity(it)
+        if(introSLiderViewPager.currentItem == introSliderAdapter.itemCount-1){
+          buttonNext.text = getString(R.string.sign_up)
+        }else{
+          buttonNext.text = getString(R.string.next)
         }
+      }else{
+        val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
+        findNavController().navigate(action)
       }
     }
     skipIntro.setOnClickListener{
-      Intent(context, MainActivity::class.java).also {
-        startActivity(it)
-      }
+      val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
+      findNavController().navigate(action)
     }
   }
 

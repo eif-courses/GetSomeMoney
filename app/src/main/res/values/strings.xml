@@ -53,8 +53,6 @@
     </string-array>
 
 
-
-
     <string name="app_name">GetSomeMoney</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -107,7 +105,8 @@
     <string name="back">Back to shop</string>
     <string name="special_level_pass">You need buy special levels ticket in app shop to play here!</string>
     <string name="next">Next</string>
-    <string name="skip_intro">SKIP INTRO</string>
+    <string name="skip_intro">Move into sign up</string>
+    <string name="sign_up">SIGN UP</string>
 
 
 </resources>
