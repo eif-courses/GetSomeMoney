@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="get.some.money.starter.Fragments.SplashScreenFragment"
-        android:label="fragment_splash_screen"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_gameGuideFragment"
