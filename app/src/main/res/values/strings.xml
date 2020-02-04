@@ -110,6 +110,8 @@
     <string name="startName">Puzzle master</string>
     <string name="accept">Accept</string>
     <string name="loading">LOADING...</string>
+    <string name="share">Share with friends</string>
+    <string name="share_app_text">Share app with your friends</string>
 
 
 </resources>
