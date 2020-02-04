@@ -1,7 +1,6 @@
 package get.some.money.starter
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -46,19 +45,19 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           profileName?.text = it.name
 
 
-
-          val share = header?.findViewById<ImageView>(R.id.imageView20)
-
-          share?.setOnClickListener {
-            val sharingIntent = Intent(Intent.ACTION_SEND)
-            sharingIntent.type = "text/plain"
-            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name))
-            sharingIntent.putExtra(
-              Intent.EXTRA_TEXT,
-              resources.getString(R.string.share_app_text)
-            )
-            startActivity(Intent.createChooser(sharingIntent, "Share app via"))
-          }
+//
+//          val share = header?.findViewById<ImageView>(R.id.imageView20)
+//
+//          share?.setOnClickListener {
+//            val sharingIntent = Intent(Intent.ACTION_SEND)
+//            sharingIntent.type = "text/plain"
+//            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name))
+//            sharingIntent.putExtra(
+//              Intent.EXTRA_TEXT,
+//              resources.getString(R.string.share_app_text)
+//            )
+//            startActivity(Intent.createChooser(sharingIntent, "Share app via"))
+//          }
 
 
 
