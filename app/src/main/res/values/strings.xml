@@ -53,7 +53,7 @@
     </string-array>
 
 
-    <string name="app_name">Logic for fun</string>
+    <string name="app_name">LOGIC FOR FUN</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -105,10 +105,11 @@
     <string name="back">Back to shop</string>
     <string name="special_level_pass">You need buy special levels ticket in app shop to play here!</string>
     <string name="next">Next</string>
-    <string name="skip_intro">Move into sign up</string>
+    <string name="skip_intro">SKIP INTRO</string>
     <string name="sign_up">SIGN UP</string>
     <string name="startName">Puzzle master</string>
     <string name="accept">Accept</string>
+    <string name="loading">LOADING...</string>
 
 
 </resources>

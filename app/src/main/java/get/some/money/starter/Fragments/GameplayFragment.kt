@@ -70,10 +70,11 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
 
   fun init(score: Int) {
 
-
     Picasso.get().load(args.background).into(level_background)
 
-    val staticImages = args.imageURL.asList()
+    val staticImages = args.imageURL.asList().sortedBy {
+      it
+    }
 
     var i = 0
     for (img in staticImages.shuffled()) {
@@ -98,9 +99,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
           .duration = 1000
 
         anim += house.width + 20
-
-
-        //moveObject(it, -location[0].toFloat() + 50 + (count * 190))
 
 
         count++
@@ -211,10 +209,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
     val max = randomized / 1000
     progressBarTimer?.max = max.toInt()
     progressBarTimer?.setInterpolator(FastOutLinearInInterpolator())
-
-
-
-
 
 
 

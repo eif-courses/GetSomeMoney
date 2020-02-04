@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Logika linksmai</string>
+    <string name="app_name">LOGIKA LINKSMAI</string>
     <string name="play">Pradėti žaidimą</string>
     <string name="shop">Parduotuvė</string>
     <string name="high_scores">Rekordai</string>
@@ -42,9 +42,10 @@
     <string name="sell_item">Parduoti</string>
     <string name="back">Grįžti į parduotuvę</string>
     <string name="special_level_pass">Norint žaisti slaptus lygius jūs privalote įsigyti bilietą, kurį rasite žaidimo parduotuvėje!</string>
-    <string name="skip_intro">Pereiti prie registracijos</string>
+    <string name="skip_intro">PRALEISTI ĮVADĄ</string>
     <string name="next">Sekantis</string>
     <string name="sign_up">REGISTRUOTIS</string>
     <string name="startName">Išminčius</string>
     <string name="accept">Pavirtinti</string>
+    <string name="loading">LUKTĖLĖKITE...</string>
 </resources>

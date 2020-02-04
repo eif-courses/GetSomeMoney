@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import get.some.money.starter.Adapters.IntroSliderAdapter
 import get.some.money.starter.Models.IntroSlide
 import get.some.money.starter.R
+import get.some.money.starter.Util.SharedPreference
 import kotlinx.android.synthetic.main.fragment_game_guide.*
 
 class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
@@ -55,8 +56,12 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
       }
     })
 
+    val pref = SharedPreference(context!!)
 
-
+    if(pref.getValueBoolien("GUIDE2", false)){
+      //val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
+      //findNavController().navigate(action)
+    }
     buttonNext.setOnClickListener {
       if(introSLiderViewPager.currentItem + 1 < introSliderAdapter.itemCount){
         introSLiderViewPager.currentItem +=1
@@ -68,11 +73,15 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
       }else{
         val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
         findNavController().navigate(action)
+        val preference = SharedPreference(context!!)
+        preference.save("GUIDE2", true)
       }
     }
     skipIntro.setOnClickListener{
       val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
       findNavController().navigate(action)
+      val preference = SharedPreference(context!!)
+      preference.save("GUIDE2", true)
     }
   }
 
@@ -106,6 +115,4 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
       }
     }
   }
-
-
 }
