@@ -3,7 +3,9 @@ package get.some.money.starter.Fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import get.some.money.starter.Adapters.ParagraphListAdapter
@@ -204,5 +206,13 @@ class PrivacyPolicyFragment : Fragment(R.layout.fragment_privacy_policy){
 //    shopViewModel = ViewModelProviders.of(this)[ShopViewModel::class.java]
 //    userViewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
+  }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val action = PrivacyPolicyFragmentDirections.actionPrivacyPolicyFragmentToHomeFragment()
+    val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+      findNavController().navigate(action)
+    }
+    callback.isEnabled
   }
 }

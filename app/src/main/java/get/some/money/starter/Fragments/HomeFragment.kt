@@ -3,8 +3,10 @@ package get.some.money.starter.Fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -29,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class CompletedLevelByCategory(val name: String, val id: Long)
 
 class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Interaction {
+
 
 
   lateinit var categoryRecyclerView: RecyclerView
@@ -184,5 +187,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
 
   }
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+      Log.d("tag","back button pressed")    // Handle the back button event
+    }
+    callback.isEnabled
+  }
 
 }

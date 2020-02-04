@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -39,6 +40,15 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
       )
     )
   )
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val action = GameGuideFragmentDirections.actionGameGuideFragmentToHomeFragment()
+    val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+      findNavController().navigate(action)
+    }
+    callback.isEnabled
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val slider = view.findViewById<ViewPager2>(R.id.introSLiderViewPager)

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.core.view.ViewCompat.animate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -233,6 +234,15 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
       }
     }
     return timer
+  }
+
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+
+    }
+    callback.isEnabled
   }
 
 

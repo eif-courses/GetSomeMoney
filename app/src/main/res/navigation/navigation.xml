@@ -9,7 +9,11 @@
         android:id="@+id/shopFragment"
         android:name="get.some.money.starter.Fragments.ShopFragment"
         android:label="@string/shop"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gameplayFragment"
         android:name="get.some.money.starter.Fragments.GameplayFragment"
@@ -77,17 +81,29 @@
         android:id="@+id/privacyPolicyFragment"
         android:name="get.some.money.starter.Fragments.PrivacyPolicyFragment"
         android:label="@string/fragment_privacy_policy"
-        tools:layout="@layout/fragment_privacy_policy" />
+        tools:layout="@layout/fragment_privacy_policy" >
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/highScoresFragment"
         android:name="get.some.money.starter.Fragments.HighScoresFragment"
         android:label="@string/high_scores"
-        tools:layout="@layout/fragment_high_scores" />
+        tools:layout="@layout/fragment_high_scores" >
+        <action
+            android:id="@+id/action_highScoresFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="get.some.money.starter.Fragments.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gameGuideFragment"
         android:name="get.some.money.starter.Fragments.GameGuideFragment"
@@ -96,12 +112,19 @@
         <action
             android:id="@+id/action_gameGuideFragment_to_siginInFragment"
             app:destination="@id/siginInFragment" />
+        <action
+            android:id="@+id/action_gameGuideFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment"
         android:name="get.some.money.starter.Fragments.TermsAndConditionsFragment"
         android:label="@string/terms_and_conditions"
-        tools:layout="@layout/fragment_terms_and_conditions" />
+        tools:layout="@layout/fragment_terms_and_conditions" >
+        <action
+            android:id="@+id/action_termsAndConditionsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="get.some.money.starter.Fragments.SplashScreenFragment"

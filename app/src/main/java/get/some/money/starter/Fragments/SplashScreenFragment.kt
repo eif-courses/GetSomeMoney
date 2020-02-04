@@ -4,7 +4,9 @@ package get.some.money.starter.Fragments
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.addCallback
 import androidx.core.animation.doOnEnd
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -25,6 +27,16 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
     get() = Dispatchers.Main + Job()
   private lateinit var mInterstitialAd: InterstitialAd
 
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+      Log.d("tag","back button pressed")    // Handle the back button event
+    }
+    callback.isEnabled
+  }
+
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -41,7 +53,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
 
 
     val animator = ObjectAnimator.ofFloat(textView13, View.TRANSLATION_X, 50f)
-    animator.repeatCount = 1000
+    animator.repeatCount = 10
     animator.repeatMode = ObjectAnimator.REVERSE
     animator.start()
 
@@ -113,5 +125,6 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
         }
       }
     }
+
   }
 

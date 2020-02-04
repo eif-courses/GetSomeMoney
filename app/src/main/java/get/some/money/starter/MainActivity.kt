@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           }
         }
       })
-    }else{
+    } else {
 
     }
   }
@@ -183,5 +183,6 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
       super.onBackPressed()
     }
   }
+
 }
 

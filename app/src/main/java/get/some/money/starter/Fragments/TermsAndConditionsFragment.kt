@@ -3,13 +3,15 @@ package get.some.money.starter.Fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import get.some.money.starter.Adapters.ParagraphListAdapter
-import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Paragraph
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import kotlinx.android.synthetic.main.fragment_terms_and_conditions.*
 
 class TermsAndConditionsFragment : Fragment(R.layout.fragment_terms_and_conditions) {
@@ -126,5 +128,13 @@ class TermsAndConditionsFragment : Fragment(R.layout.fragment_terms_and_conditio
     }
 
     recyclerView.adapter = paragraphListAdapter
+  }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val action = TermsAndConditionsFragmentDirections.actionTermsAndConditionsFragmentToHomeFragment()
+    val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+      findNavController().navigate(action)
+    }
+    callback.isEnabled
   }
 }
