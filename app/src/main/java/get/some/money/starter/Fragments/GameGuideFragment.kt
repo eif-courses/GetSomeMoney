@@ -15,34 +15,87 @@ import androidx.viewpager2.widget.ViewPager2
 import get.some.money.starter.Adapters.IntroSliderAdapter
 import get.some.money.starter.Models.IntroSlide
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import get.some.money.starter.Util.SharedPreference
 import kotlinx.android.synthetic.main.fragment_game_guide.*
 
 class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
 
 
-  private val introSliderAdapter = IntroSliderAdapter(
-    listOf(
-      IntroSlide(
-        "Žaisti lengva",
-        "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
-        R.drawable.chestopen
-      ),
-      IntroSlide(
-        "Žaisti lengva",
-        "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
-        R.drawable.chestclosed
-      ),
-      IntroSlide(
-        "Žaisti lengva",
-        "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
-        R.drawable.kepure
-      )
-    )
-  )
+
+
+
+  private lateinit var introSliderAdapter:IntroSliderAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    if(Language.getCurrentLanguage().equals("lt")){
+      introSliderAdapter = IntroSliderAdapter(
+        listOf(
+          IntroSlide(
+            "ŽAISTI LENGVA",
+            "Pagal pateiktą klausimą ar teiginį! Pakanka spustelėti ant paveikslėlių ir sudėtį loginę seką!",
+            R.drawable.easyplay
+          ),
+          IntroSlide(
+            "PRIZAI",
+            "Prizai gaunami išsprendus užduotis arba peržiūrėjus vaizdo rekmlamą.",
+            R.drawable.loot
+          ),
+          IntroSlide(
+            "PARDUOTUVĖ",
+            "Parduotuvėje įsigyk daiktus, kurie suteiks galimybę gauti daugiau taškų ir monetų iš prizų.",
+            R.drawable.shop
+          ),
+          IntroSlide(
+            "APRANGA",
+            "Parduotuvėje ar sprendžiant užduotis rastus daiktus gali užsidėti savo herojui profilio meniu punkte.",
+            R.drawable.boy
+          ),
+          IntroSlide(
+            "LYDERIŲ LENTELĖ",
+            "Varžykis su kitais žaidėjais ir surinkt daugiau taškų, kad top lentelėje būtum pirmas!",
+            R.drawable.gold
+          ),
+          IntroSlide(
+            "PRIVATUMO POLITIKA",
+            "Privalote susipažinti su privatumo politika: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Ir sąlygomis bei nuostatomis: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos. Programėlėje taip pat rasite šią informaciją.",
+            R.drawable.policy
+          ),
+          IntroSlide(
+            "REGISTRUOKIS",
+            "Tik užsiregistravęs gausi prizus ir išsaugosi žaidimo progresą. ",
+            R.drawable.handfinger
+          )
+        )
+      )
+    }else{
+      introSliderAdapter = IntroSliderAdapter(
+        listOf(
+          IntroSlide(
+            "Žaisti lengva",
+            "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
+            R.drawable.chestopen
+          ),
+          IntroSlide(
+            "Žaisti lengva",
+            "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
+            R.drawable.chestclosed
+          ),
+          IntroSlide(
+            "Žaisti lengva",
+            "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
+            R.drawable.kepure
+          )
+        )
+      )
+    }
+
+
+
+
+
     val action = GameGuideFragmentDirections.actionGameGuideFragmentToHomeFragment()
     val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
       findNavController().navigate(action)
