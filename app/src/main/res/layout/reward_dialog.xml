@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:fontFamily="@font/cherry_cream_soda"
+        android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:padding="10dp"
         android:text="@string/get_reward_text_message"

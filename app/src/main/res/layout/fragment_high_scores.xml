@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C9EFFF"
+    android:background="@drawable/backcustom"
     tools:context=".Fragments.HighScoresFragment">
 
     <TextView
@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:padding="5dp"
         android:text="@string/score"
@@ -28,6 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:padding="5dp"
         android:text="@string/name"
@@ -44,6 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:padding="5dp"
         android:text="@string/solved"
@@ -60,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:padding="5dp"
         android:text="@string/id"

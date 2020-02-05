@@ -2,7 +2,6 @@ package get.some.money.starter.Fragments
 
 
 import android.animation.ObjectAnimator
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -60,7 +59,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
     ObjectAnimator.ofFloat(imageView18, View.TRANSLATION_Y, 400f).apply{
       duration = 4000
       this.doOnEnd {
-        loading_back.setBackgroundColor(Color.parseColor("#fffb00"))
+        loading_back.setBackgroundResource(R.drawable.headligth)
       }
     }.start()
 

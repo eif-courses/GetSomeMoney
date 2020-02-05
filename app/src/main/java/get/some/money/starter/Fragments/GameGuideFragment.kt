@@ -65,7 +65,7 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
           ),
           IntroSlide(
             "REGISTRUOKIS",
-            "Tik užsiregistravęs gausi prizus ir išsaugosi žaidimo progresą. ",
+            "Tik registruotas narys gauna prizus ir išsaugo žaidimo progresą. ",
             R.drawable.handfinger
           )
         )
@@ -74,25 +74,43 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
       introSliderAdapter = IntroSliderAdapter(
         listOf(
           IntroSlide(
-            "Žaisti lengva",
-            "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
-            R.drawable.chestopen
+            "EASY TO PLAY",
+            "Answer simple question! You need only click on images and choose correct sequence to complete level!",
+            R.drawable.easyplay
           ),
           IntroSlide(
-            "Žaisti lengva",
-            "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
-            R.drawable.chestclosed
+            "PRIZES",
+            "You got prizes if you watch video ad or buy random item from shop or solve logic puzzles.",
+            R.drawable.loot
           ),
           IntroSlide(
-            "Žaisti lengva",
-            "Pakanka spustelėti ant paveikslėlio štai ir sudėti loginę seką.",
-            R.drawable.kepure
+            "SHOP",
+            "In app shop you able to buy random item and get extra addition to your prizes more coins and score from prizes!",
+            R.drawable.shop
+          ),
+          IntroSlide(
+            "CLOTHES",
+            "In app shop you able to buy random items. Items you earned able to equip to your character in profile.",
+            R.drawable.boy
+          ),
+          IntroSlide(
+            "HIGH SCORES",
+            "Challenge with other players to get more coins and score points",
+            R.drawable.gold
+          ),
+          IntroSlide(
+            "PRIVACY POLICY",
+            "You must read privacy policy: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Also you need read Terms and Conditions here: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos.",
+            R.drawable.policy
+          ),
+          IntroSlide(
+            "REGISTER",
+            "Only as registered user you start getting prizes and save game progress to database.",
+            R.drawable.handfinger
           )
         )
       )
     }
-
-
 
 
 
