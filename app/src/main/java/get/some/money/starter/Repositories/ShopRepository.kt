@@ -66,12 +66,6 @@ class ShopRepository private constructor() {
           "Coins multiplier x3",
           R.drawable.daugiklis3,
           20000
-        ),
-
-        Item(
-          "Unlock special levels",
-          R.drawable.feature,
-          30000
         )
       )
       items.value = temp

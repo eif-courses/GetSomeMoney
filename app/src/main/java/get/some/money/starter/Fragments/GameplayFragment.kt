@@ -2,6 +2,7 @@ package get.some.money.starter.Fragments
 
 
 import android.animation.ObjectAnimator
+import android.app.AlertDialog
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -212,7 +214,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
     progressBarTimer?.setInterpolator(FastOutLinearInInterpolator())
 
 
-
     val timer = object : CountDownTimer(randomized, 1000) {
       override fun onFinish() {
         //v?.visibility = View.GONE
@@ -240,10 +241,32 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+      val builder = AlertDialog.Builder(context)
 
+
+
+      var tt = "Back to home"
+      var mm = "Are you sure would like back to home menu?"
+      if (Language.getCurrentLanguage().equals("lt")) {
+        tt = "Grįžti atgal"
+        mm = "Ar tikrai norite grįžti atgal į lygių pasirinkimo langą?"
+      }
+      with(builder)
+      {
+
+        setTitle(tt)
+        setMessage(mm)
+        setPositiveButton(android.R.string.yes) { dialog, id ->
+          val action = GameplayFragmentDirections.actionGameplayFragmentToHomeFragment()
+          findNavController().navigate(action)
+        }
+        setNegativeButton(android.R.string.no) { dialog, id ->
+          dialog.dismiss()
+        }
+        show()
+      }
     }
     callback.isEnabled
   }
-
 
 }

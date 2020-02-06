@@ -47,6 +47,6 @@
     <string name="sign_up">REGISTRUOTIS</string>
     <string name="startName">Išminčius</string>
     <string name="accept">Pavirtinti</string>
-    <string name="loading">LUKTĖLĖKITE...</string>
+    <string name="loading">LUKTELĖKITE...</string>
     <string name="share">Pasidalink su draugais</string>
 </resources>

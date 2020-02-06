@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
@@ -193,7 +194,10 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
             gold + totalEarned + knowledge,
             FirebaseAuth.getInstance().currentUser!!.uid
           )
-          activity?.onBackPressed()
+          //activity?.onBackPressed()
+
+          val action = RewardDialogDirections.actionRewardDialogToHomeFragment()
+          findNavController().navigate(action)
         }
     }
 

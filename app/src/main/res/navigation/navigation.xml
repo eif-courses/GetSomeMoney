@@ -51,6 +51,9 @@
         <argument
             android:name="coins"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_gameplayFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -141,6 +144,23 @@
         tools:layout="@layout/fragment_sigin_in" >
         <action
             android:id="@+id/action_siginInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/rewardDialog"
+        android:name="get.some.money.starter.Dialogs.RewardDialog"
+        android:label="RewardDialog" >
+        <action
+            android:id="@+id/action_rewardDialog_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/inGameGuideFragment"
+        android:name="get.some.money.starter.Fragments.InGameGuideFragment"
+        android:label="@string/game_guide"
+        tools:layout="@layout/fragment_in_game_guide" >
+        <action
+            android:id="@+id/action_inGameGuideFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

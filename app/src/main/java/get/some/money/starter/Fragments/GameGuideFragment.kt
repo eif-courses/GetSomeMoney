@@ -22,15 +22,12 @@ import kotlinx.android.synthetic.main.fragment_game_guide.*
 class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
 
 
-
-
-
-  private lateinit var introSliderAdapter:IntroSliderAdapter
+  private lateinit var introSliderAdapter: IntroSliderAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    if(Language.getCurrentLanguage().equals("lt")){
+    if (Language.getCurrentLanguage().equals("lt")) {
       introSliderAdapter = IntroSliderAdapter(
         listOf(
           IntroSlide(
@@ -70,7 +67,7 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
           )
         )
       )
-    }else{
+    } else {
       introSliderAdapter = IntroSliderAdapter(
         listOf(
           IntroSlide(
@@ -113,7 +110,6 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
     }
 
 
-
     val action = GameGuideFragmentDirections.actionGameGuideFragmentToHomeFragment()
     val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
       findNavController().navigate(action)
@@ -126,43 +122,52 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
     slider.adapter = introSliderAdapter
     setupIndicators()
     setCurrentIndicator()
-    introSLiderViewPager.registerOnPageChangeCallback(object  : ViewPager2.OnPageChangeCallback(){
+    introSLiderViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
       override fun onPageSelected(position: Int) {
         super.onPageSelected(position)
         setCurrentIndicator(position)
-        if(introSLiderViewPager.currentItem != introSliderAdapter.itemCount-1){
+        if (introSLiderViewPager.currentItem != introSliderAdapter.itemCount - 1) {
           buttonNext.text = getString(R.string.next)
-        }else{
-          buttonNext.text = getString(R.string.sign_up)        }
+        } else {
+          buttonNext.text = getString(R.string.sign_up)
+        }
       }
     })
 
     val pref = SharedPreference(context!!)
 
-    if(pref.getValueBoolien("GUIDE2", false)){
-      //val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
-      //findNavController().navigate(action)
-    }
-    buttonNext.setOnClickListener {
-      if(introSLiderViewPager.currentItem + 1 < introSliderAdapter.itemCount){
-        introSLiderViewPager.currentItem +=1
-        if(introSLiderViewPager.currentItem == introSliderAdapter.itemCount-1){
-          buttonNext.text = getString(R.string.sign_up)
-        }else{
-          buttonNext.text = getString(R.string.next)
-        }
-      }else{
-        val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
-        findNavController().navigate(action)
-        val preference = SharedPreference(context!!)
-        preference.save("GUIDE2", true)
-      }
-    }
-    skipIntro.setOnClickListener{
-      val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
-      findNavController().navigate(action)
+
+    switch1.setOnClickListener {
       val preference = SharedPreference(context!!)
       preference.save("GUIDE2", true)
+      it.isClickable = false
+    }
+
+
+
+    if (pref.getValueBoolien("GUIDE2", false)) {
+      val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
+      findNavController().navigate(action)
+    }
+    buttonNext.setOnClickListener {
+      if (introSLiderViewPager.currentItem + 1 < introSliderAdapter.itemCount) {
+        introSLiderViewPager.currentItem += 1
+        if (introSLiderViewPager.currentItem == introSliderAdapter.itemCount - 1) {
+          buttonNext.text = getString(R.string.sign_up)
+        } else {
+          buttonNext.text = getString(R.string.next)
+        }
+      } else {
+        val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
+        findNavController().navigate(action)
+        //  val preference = SharedPreference(context!!)
+        // preference.save("GUIDE2", true)
+      }
+    }
+    skipIntro.setOnClickListener {
+      val action = GameGuideFragmentDirections.actionGameGuideFragmentToSiginInFragment()
+      findNavController().navigate(action)
+
     }
   }
 

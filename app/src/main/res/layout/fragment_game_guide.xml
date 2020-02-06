@@ -10,7 +10,7 @@
         android:id="@+id/skipIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="70dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/skip_intro"
         android:textColor="@color/colorPrimary"
@@ -27,7 +27,7 @@
         android:layout_marginBottom="50dp"
         android:background="@color/white"
         android:fontFamily="@font/montserrat"
-        android:minWidth="110dp"
+        android:minWidth="140dp"
         android:text="@string/next"
         android:textColor="#6B6B6B"
         android:textStyle="bold"
@@ -57,4 +57,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:text="@string/do_not_show"
+        android:textColor="#949494"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
