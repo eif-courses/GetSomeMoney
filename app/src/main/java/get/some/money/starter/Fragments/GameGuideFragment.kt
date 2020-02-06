@@ -40,13 +40,13 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
           ),
           IntroSlide(
             "PRIZAI",
-            "Prizai gaunami išsprendus užduotis arba peržiūrėjus vaizdo rekmlamą.",
-            R.drawable.loot
+            "Prizai gaunami išsprendus užduotis arba peržiūrėjus vaizdo reklamą.",
+            R.drawable.chestclosed
           ),
           IntroSlide(
             "PARDUOTUVĖ",
             "Parduotuvėje įsigyk daiktus, kurie suteiks galimybę gauti daugiau taškų ir monetų iš prizų.",
-            R.drawable.shop
+            R.drawable.shopfront
           ),
           IntroSlide(
             "APRANGA",
@@ -56,17 +56,17 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
           IntroSlide(
             "LYDERIŲ LENTELĖ",
             "Varžykis su kitais žaidėjais ir surinkt daugiau taškų, kad top lentelėje būtum pirmas!",
-            R.drawable.gold
+            R.drawable.prize
           ),
           IntroSlide(
             "PRIVATUMO POLITIKA",
             "Privalote susipažinti su privatumo politika: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Ir sąlygomis bei nuostatomis: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos. Programėlėje taip pat rasite šią informaciją.",
-            R.drawable.policy
+            R.drawable.terms
           ),
           IntroSlide(
             "REGISTRUOKIS",
             "Tik registruotas narys gauna prizus ir išsaugo žaidimo progresą. ",
-            R.drawable.handfinger
+            R.drawable.member
           )
         )
       )
@@ -81,12 +81,12 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
           IntroSlide(
             "PRIZES",
             "You got prizes if you watch video ad or buy random item from shop or solve logic puzzles.",
-            R.drawable.loot
+            R.drawable.chestclosed
           ),
           IntroSlide(
             "SHOP",
             "In app shop you able to buy random item and get extra addition to your prizes more coins and score from prizes!",
-            R.drawable.shop
+            R.drawable.shopfront
           ),
           IntroSlide(
             "CLOTHES",
@@ -96,17 +96,17 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
           IntroSlide(
             "HIGH SCORES",
             "Challenge with other players to get more coins and score points",
-            R.drawable.gold
+            R.drawable.prize
           ),
           IntroSlide(
             "PRIVACY POLICY",
             "You must read privacy policy: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Also you need read Terms and Conditions here: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos.",
-            R.drawable.policy
+            R.drawable.terms
           ),
           IntroSlide(
             "REGISTER",
             "Only as registered user you start getting prizes and save game progress to database.",
-            R.drawable.handfinger
+            R.drawable.member
           )
         )
       )

@@ -81,7 +81,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
     level_complete_img.setOnClickListener {
 
         it.background
-        it.setBackgroundResource(R.drawable.chestopen)
+        it.setBackgroundResource(R.drawable.chestcopen)
         it.isClickable = false
 
         next_level_btn.isVisible = true

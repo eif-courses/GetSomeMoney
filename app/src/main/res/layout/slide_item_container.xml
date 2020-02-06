@@ -8,18 +8,20 @@
         android:id="@+id/slide_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
+        android:paddingTop="10dp"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/slide_item_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="232dp"
+        android:background="@android:color/transparent"
         android:paddingTop="10dp"
-        app:srcCompat="@drawable/chestopen" />
+        app:srcCompat="@drawable/chestcopen" />
 
     <TextView
         android:id="@+id/slide_item_description"
@@ -27,7 +29,7 @@
         android:layout_height="wrap_content"
         android:autoLink="all"
         android:fontFamily="@font/montserrat"
-        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
         android:text="Laba diena šiandien grąžus oras"
         android:textSize="18sp" />
 </LinearLayout>

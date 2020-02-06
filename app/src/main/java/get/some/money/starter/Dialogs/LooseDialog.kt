@@ -111,7 +111,7 @@ class LooseDialog : DialogFragment(){
             // Ad opened.
           }
           override fun onRewardedAdClosed() {
-            it.setBackgroundResource(R.drawable.chestopen)
+            it.setBackgroundResource(R.drawable.chestcopen)
             it.isClickable = false
             //it.visibility = View.GONE
             textView.visibility= View.GONE

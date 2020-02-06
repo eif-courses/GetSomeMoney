@@ -227,7 +227,7 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
           .start();
         //time_remaining.text = (millisUntilFinished / 1000).toString()
         your_score.text = (millisUntilFinished / 125).toString()
-        if (isCompleted || isLoose) {
+        if (isLoose) {
           this.cancel()
         }
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
