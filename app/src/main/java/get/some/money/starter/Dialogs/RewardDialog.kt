@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import get.some.money.starter.Fragments.GameplayFragmentDirections
 import get.some.money.starter.Models.Inventory
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
@@ -196,7 +197,7 @@ class RewardDialog(val changeUIForOtherRewards: Boolean=false) : DialogFragment(
           )
           //activity?.onBackPressed()
 
-          val action = RewardDialogDirections.actionRewardDialogToHomeFragment()
+          val action = GameplayFragmentDirections.actionGameplayFragmentToHomeFragment()
           findNavController().navigate(action)
         }
     }

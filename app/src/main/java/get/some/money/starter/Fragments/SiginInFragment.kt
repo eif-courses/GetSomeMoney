@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.User
 import get.some.money.starter.R
 import get.some.money.starter.ViewModels.UserViewModel
+import kotlinx.android.synthetic.main.fragment_sigin_in.*
 
 /**
  * A simple [Fragment] subclass.
@@ -34,18 +36,78 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    if (uuid == null) {
-      startActivityForResult(
-        AuthUI.getInstance()
-          .createSignInIntentBuilder()
-          .setAvailableProviders(providers)
-          .build(),
-        RC_SIGN_IN
-      )
-    } else {
-      val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
-      findNavController().navigate(action)
+
+
+
+          startActivityForResult(
+            AuthUI.getInstance()
+              .createSignInIntentBuilder()
+              .setAvailableProviders(providers)
+              .build(),
+            RC_SIGN_IN)
+
+
+
+
+    var count = 0
+    var anim = imageView27.x
+    imageView25.setOnClickListener {
+      ViewCompat.animate(it)
+        .y(imageView27.y)
+        .x(anim)
+        .duration = 1000
+
+      anim += it.width + 20
+      count++
     }
+    imageView26.setOnClickListener {
+      ViewCompat.animate(it)
+        .y(imageView27.y)
+        .x(anim)
+        .duration = 1000
+      count++
+      if(count==2){
+        imageView24.setBackgroundResource(R.drawable.light_on)
+      }
+      anim += it.width + 20
+    }
+
+    imageView27.setOnClickListener {
+
+      if(count == 2){
+        val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
+        findNavController().navigate(action)
+      }
+    }
+    imageView24.setOnClickListener {
+      if(count == 2){
+        val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
+        findNavController().navigate(action)
+      }
+    }
+
+    start_game_btn.setOnClickListener {
+       val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
+       findNavController().navigate(action)
+    }
+
+
+
+
+
+
+//    if (uuid == null) {
+//      startActivityForResult(
+//        AuthUI.getInstance()
+//          .createSignInIntentBuilder()
+//          .setAvailableProviders(providers)
+//          .build(),
+//        RC_SIGN_IN
+//      )
+//    } else {
+//      val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
+//      findNavController().navigate(action)
+//    }
   }
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
@@ -82,8 +144,7 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
 
           })
 
-        val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
-        findNavController().navigate(action)
+
 
       } else {
         println(response?.error)

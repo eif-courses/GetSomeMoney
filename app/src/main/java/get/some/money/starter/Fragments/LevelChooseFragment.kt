@@ -50,9 +50,11 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
 
     if(user != null) {
       userViewModel.getUser(user.uid).observe(this, Observer {
-        levelListAdapter.markCompletedLevels(it.levels)
-        score = it.score
-        coins = it.coins
+       if(it !=null) {
+         levelListAdapter.markCompletedLevels(it.levels)
+         score = it.score
+         coins = it.coins
+       }
       })
     }
 

@@ -27,7 +27,8 @@ class UserViewModel : ViewModel() {
         Log.w(TAG, "Listen failed.", e)
         return@addSnapshotListener
       }
-      user.value = value?.toObject(User::class.java)
+      if(value!= null)
+        user.value = value.toObject(User::class.java)
       //Log.d(TAG, "Current users list: $user")
     }
     return user

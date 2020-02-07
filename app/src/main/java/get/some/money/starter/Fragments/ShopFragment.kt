@@ -91,7 +91,9 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
 
     recycleView.adapter = shopListAdapter
 
+
     userViewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid).observe(this, Observer {
+    if(it!= null)
       gold = it.coins
     })
   }

@@ -113,6 +113,8 @@
     <string name="share">Share with friends</string>
     <string name="share_app_text">Share app with your friends</string>
     <string name="do_not_show">Do not show tips</string>
+    <string name="start_play">Start play</string>
+    <string name="demoGame">Pagal pateiktą klausimą ar teiginį! Pakanka spustelėti ant paveikslėlių ir sudėtį loginę seką!</string>
 
 
 </resources>
