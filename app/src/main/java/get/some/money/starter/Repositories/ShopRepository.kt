@@ -37,11 +37,6 @@ class ShopRepository private constructor() {
           "Trigubai monetų už prizus",
           R.drawable.daugiklis3,
           20000
-        ),
-
-        Item("Atrakinti slaptus lygius",
-          R.drawable.feature,
-          30000
         )
       )
       items.value = temp
