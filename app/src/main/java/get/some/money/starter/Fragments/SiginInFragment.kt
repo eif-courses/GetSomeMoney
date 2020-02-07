@@ -16,6 +16,8 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.User
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
+import get.some.money.starter.Util.SharedPreference
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_sigin_in.*
 
@@ -37,16 +39,34 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
     super.onViewCreated(view, savedInstanceState)
 
 
+    val sharedPreference = SharedPreference(view.context)
+
+    if (sharedPreference.getValueString("COINS").equals("90000")) {
 
 
-          startActivityForResult(
-            AuthUI.getInstance()
-              .createSignInIntentBuilder()
-              .setAvailableProviders(providers)
-              .build(),
-            RC_SIGN_IN)
+      var terms = "https://github.com/eif-courses/Logic-for-fun/blob/master/terms_and_conditions.md"
+      var policy = "https://github.com/eif-courses/Logic-for-fun/blob/master/privacy_policy.md"
+      if (Language.getCurrentLanguage().equals("lt")) {
+        terms = "https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos.md"
+        policy = "https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md"
+      }
 
-
+      startActivityForResult(
+        AuthUI.getInstance()
+          .createSignInIntentBuilder()
+          .setAvailableProviders(providers)
+          .setTosAndPrivacyPolicyUrls(
+            terms,
+            policy
+          )
+          .setLogo(R.mipmap.ic_launcher)
+          .build(),
+        RC_SIGN_IN
+      )
+    } else {
+      val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
+      findNavController().navigate(action)
+    }
 
 
     var count = 0
@@ -66,7 +86,7 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
         .x(anim)
         .duration = 1000
       count++
-      if(count==2){
+      if (count == 2) {
         imageView24.setBackgroundResource(R.drawable.light_on)
       }
       anim += it.width + 20
@@ -74,26 +94,22 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
 
     imageView27.setOnClickListener {
 
-      if(count == 2){
+      if (count == 2) {
         val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
         findNavController().navigate(action)
       }
     }
     imageView24.setOnClickListener {
-      if(count == 2){
+      if (count == 2) {
         val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
         findNavController().navigate(action)
       }
     }
 
     start_game_btn.setOnClickListener {
-       val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
-       findNavController().navigate(action)
+      val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()
+      findNavController().navigate(action)
     }
-
-
-
-
 
 
 //    if (uuid == null) {
@@ -109,6 +125,7 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
 //      findNavController().navigate(action)
 //    }
   }
+
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
 
@@ -145,7 +162,6 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
           })
 
 
-
       } else {
         println(response?.error)
         // Sign in failed. If response is null the user canceled the
@@ -155,6 +171,7 @@ class SiginInFragment : Fragment(R.layout.fragment_sigin_in) {
       }
     }
   }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     val action = SiginInFragmentDirections.actionSiginInFragmentToHomeFragment()

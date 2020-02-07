@@ -10,45 +10,37 @@
 
     <Button
         android:id="@+id/start_game_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/borders"
         android:padding="20dp"
         android:text="@string/skip_intro"
-        android:textColor="#646464"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="286dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="24dp"
-        android:padding="10dp"
-        android:text="@string/demoGame"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView24"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView25" />
 
     <ImageView
         android:id="@+id/imageView24"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/light_off"
         app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView25"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/rozeteoff"
         app:layout_constraintEnd_toStartOf="@+id/imageView26"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +50,7 @@
         android:id="@+id/imageView26"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/rozeteon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView25"
@@ -68,6 +60,7 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:padding="10dp"
         android:text="Click on images down bellow in correct order to light up the lamp!"
         android:textColor="@color/white"

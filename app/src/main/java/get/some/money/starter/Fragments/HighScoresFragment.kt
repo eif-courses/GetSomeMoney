@@ -47,4 +47,5 @@ class HighScoresFragment : Fragment(R.layout.fragment_high_scores) {
     callback.isEnabled
   }
 
+
 }

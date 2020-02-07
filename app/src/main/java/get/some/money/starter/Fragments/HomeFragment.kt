@@ -195,4 +195,5 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
     callback.isEnabled
   }
 
+
 }

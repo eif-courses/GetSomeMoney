@@ -15,7 +15,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/forest"
         app:layout_constraintBottom_toTopOf="@+id/your_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -126,5 +126,7 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory), InventoryListAd
 
 
   }
+
+
 }
 

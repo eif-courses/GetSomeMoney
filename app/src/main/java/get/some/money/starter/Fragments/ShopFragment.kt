@@ -406,4 +406,6 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
     callback.isEnabled
   }
 
+
+
 }

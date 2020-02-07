@@ -59,7 +59,7 @@ class InGameGuideFragment : Fragment(R.layout.fragment_game_guide)  {
             ),
             IntroSlide(
               "PRIVATUMO POLITIKA",
-              "Privalote susipažinti su privatumo politika: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Ir sąlygomis bei nuostatomis: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos. Programėlėje taip pat rasite šią informaciją.",
+              "Privalote susipažinti su privatumo politika: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Ir sąlygomis bei nuostatomis: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos.md. Programėlėje taip pat rasite šią informaciją.",
               R.drawable.terms
             ),
             IntroSlide(
@@ -99,7 +99,7 @@ class InGameGuideFragment : Fragment(R.layout.fragment_game_guide)  {
             ),
             IntroSlide(
               "PRIVACY POLICY",
-              "You must read privacy policy: https://github.com/eif-courses/Logic-for-fun/blob/master/privatumo_politika.md. Also you need read Terms and Conditions here: https://github.com/eif-courses/Logic-for-fun/blob/master/salygos_nuostatos.",
+              "You must read privacy policy: https://github.com/eif-courses/Logic-for-fun/blob/master/privacy_policy.md. Also you need read Terms and Conditions here: https://github.com/eif-courses/Logic-for-fun/blob/master/terms_and_conditions.md",
               R.drawable.terms
             ),
             IntroSlide(
@@ -131,7 +131,11 @@ class InGameGuideFragment : Fragment(R.layout.fragment_game_guide)  {
           if (introSLiderViewPager.currentItem != introSliderAdapter.itemCount - 1) {
             buttonNext.text = getString(R.string.next)
           } else {
-            buttonNext.text = getString(R.string.sign_up)
+            if(Language.getCurrentLanguage().equals("lt")) {
+              buttonNext.text = "Grįžti į pradžią"
+            }else{
+              buttonNext.text = "Back to Home"
+            }
           }
         }
       })

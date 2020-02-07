@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import get.some.money.starter.Util.Language
 import get.some.money.starter.Models.Level
 import get.some.money.starter.R
+import get.some.money.starter.Util.Language
 import kotlinx.android.synthetic.main.level_item.view.*
 import kotlin.random.Random
 
@@ -44,6 +44,7 @@ class LevelListAdapter(private val interaction: Interaction? = null) :
     init {
       itemView.setOnClickListener(this)
     }
+
 
     override fun onClick(v: View?) {
 
@@ -93,4 +94,5 @@ class LevelListAdapter(private val interaction: Interaction? = null) :
       return oldItem.equals(newItem)
     }
   }
+
 }

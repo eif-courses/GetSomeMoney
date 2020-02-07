@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import get.some.money.starter.Models.User
 import get.some.money.starter.R
+import get.some.money.starter.Util.SharedPreference
 import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_hud.*
@@ -23,9 +24,14 @@ class HudFragment : Fragment(R.layout.fragment_hud) {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    val sharedPreference = SharedPreference(view.context)
+
+
+
     levelModel.getLevels().observe(this, Observer {
       textView3.text = it.size.toString()
     })
+    sharedPreference.save("COINS", textView7.text.toString())
 
     userModel.getUsers()
       .observe(this, Observer<List<User>> { profiles ->
@@ -34,9 +40,12 @@ class HudFragment : Fragment(R.layout.fragment_hud) {
             textView7.text = profiles[i].coins.toString()
             textView9.text = profiles[i].score.toString()
             textView11.text = profiles[i].levels.size.toString()
+            sharedPreference.save("COINS", textView7.text.toString())
           }
         }
       })
+
+
 
   }
 

@@ -18,10 +18,11 @@ import get.some.money.starter.ViewModels.LevelViewModel
 import get.some.money.starter.ViewModels.UserViewModel
 import kotlinx.android.synthetic.main.fragment_level_choose.*
 
+
 /**
  * A simple [Fragment] subclass.
  */
-class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListAdapter.Interaction{
+class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListAdapter.Interaction {
 
   val args: LevelChooseFragmentArgs by navArgs()
   lateinit var levelRecycleView: RecyclerView
@@ -41,27 +42,27 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-   // level_textView.text = args.categoryname
+    // level_textView.text = args.categoryname
 
     levelRecycleView = level_recycleview
     levelRecycleView.layoutManager = LinearLayoutManager(context)
     //levelRecycleView.layoutManager = GridLayoutManager(context,2)
     levelListAdapter = LevelListAdapter(this)
 
-    if(user != null) {
+    if (user != null) {
       userViewModel.getUser(user.uid).observe(this, Observer {
-       if(it !=null) {
-         levelListAdapter.markCompletedLevels(it.levels)
-         score = it.score
-         coins = it.coins
-       }
+        if (it != null) {
+          levelListAdapter.markCompletedLevels(it.levels)
+          score = it.score
+          coins = it.coins
+        }
       })
     }
 
     levelViewModel.getLevels(args.categoryname).observe(this, Observer {
 
       val list = mutableListOf<Level>()
-      for (item in it){
+      for (item in it) {
         list.add(item)
       }
       levelListAdapter.swapData(list)
@@ -77,9 +78,20 @@ class LevelChooseFragment : Fragment(R.layout.fragment_level_choose), LevelListA
   override fun click(level: Level) {
     val temp: Array<String>
     temp = level.assets.toTypedArray()
-    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header, level.id, score, coins)
+    val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(
+      temp,
+      level.name,
+      level.question,
+      level.namelt,
+      level.questionlt,
+      level.header,
+      level.id,
+      score,
+      coins
+    )
     findNavController().navigate(action)
   }
+
 
 
 }
