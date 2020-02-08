@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -200,10 +199,6 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
     time.cancel()
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    time.cancel()
-  }
 
 
   fun gameTimer(): CountDownTimer {
@@ -257,16 +252,22 @@ class GameplayFragment : Fragment(R.layout.fragment_gameplay) {
         setTitle(tt)
         setMessage(mm)
         setPositiveButton(android.R.string.yes) { dialog, id ->
-          val action = GameplayFragmentDirections.actionGameplayFragmentToHomeFragment()
-          findNavController().navigate(action)
+          activity?.onBackPressed()
+//          val action = GameplayFragmentDirections.actionGameplayFragmentToHomeFragment()
+//          findNavController().navigate(action)
         }
         setNegativeButton(android.R.string.no) { dialog, id ->
           dialog.dismiss()
         }
         show()
+
       }
+      this.remove()
+
+
     }
     callback.isEnabled
+
   }
 
 }

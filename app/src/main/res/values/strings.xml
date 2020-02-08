@@ -71,8 +71,8 @@
     <string name="score">Score</string>
     <string name="solved">Completed</string>
     <string name="reward_dialog">Reward dialog</string>
-    <string name="repeat_level">Repeat Level</string>
-    <string name="next_level">Next level</string>
+    <string name="repeat_level">REPEAT LEVEL</string>
+    <string name="next_level">NEXT LEVEL</string>
     <string name="level_complete">LEVEL COMPLETE</string>
     <string name="time_left">Time</string>
     <string name="loose_dialog_title">Try again :(</string>
@@ -114,7 +114,7 @@
     <string name="share_app_text">Share app with your friends</string>
     <string name="do_not_show">Do not show tips</string>
     <string name="start_play">Start play</string>
-    <string name="demoGame">Pagal pateiktą klausimą ar teiginį! Pakanka spustelėti ant paveikslėlių ir sudėtį loginę seką!</string>
+    <string name="demoGame" translatable="false">Pagal pateiktą klausimą ar teiginį! Pakanka spustelėti ant paveikslėlių ir sudėtį loginę seką!</string>
 
 
 </resources>

@@ -34,7 +34,7 @@
     <ImageView
         android:id="@+id/restart_level_image"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/chestclosed"
         android:scaleX="0.6"
         android:visibility="gone" />

@@ -35,7 +35,7 @@ class InGameGuideFragment : Fragment(R.layout.fragment_game_guide)  {
             IntroSlide(
               "ŽAISTI LENGVA",
               "Pagal pateiktą klausimą ar teiginį! Pakanka spustelėti ant paveikslėlių ir sudėtį loginę seką!",
-              R.drawable.easyplay
+              R.drawable.light_on
             ),
             IntroSlide(
               "PRIZAI",
@@ -75,7 +75,7 @@ class InGameGuideFragment : Fragment(R.layout.fragment_game_guide)  {
             IntroSlide(
               "EASY TO PLAY",
               "Answer simple question! You need only click on images and choose correct sequence to complete level!",
-              R.drawable.easyplay
+              R.drawable.light_on
             ),
             IntroSlide(
               "PRIZES",

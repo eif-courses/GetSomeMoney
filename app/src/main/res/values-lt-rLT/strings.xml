@@ -49,4 +49,7 @@
     <string name="accept">Pavirtinti</string>
     <string name="loading">LUKTELĖKITE...</string>
     <string name="share">Pasidalink su draugais</string>
+    <string name="do_not_show">Daugiau neberodyti patarimų</string>
+    <string name="share_app_text" translatable="false">Pasidalink su draugais</string>
+    <string name="start_play" translatable="false">Pradėti žaidimą</string>
 </resources>

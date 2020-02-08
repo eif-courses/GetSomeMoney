@@ -1,6 +1,7 @@
 package get.some.money.starter
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -176,8 +177,12 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     if (navigationView == null) {
       //android needs to know what menu I need
       menuInflater.inflate(R.menu.activity_main_drawer, menu)
+
       return true
     }
+    menuInflater.inflate(R.menu.top_menu, menu)
+
+
     return retValue
   }
 
@@ -186,6 +191,17 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
     when (item!!.itemId) {
       android.R.id.home ->
         drawer_layout.openDrawer(GravityCompat.START)
+      R.id.share -> {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name)
+        sharingIntent.putExtra(
+          Intent.EXTRA_TEXT,
+          resources.getString(R.string.share_app_text)
+        )
+        startActivity(Intent.createChooser(sharingIntent, "Share app via"))
+        return true
+      }
     }
     return item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
         || super.onOptionsItemSelected(item)

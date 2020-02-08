@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import get.some.money.starter.R
+import get.some.money.starter.Util.SharedPreference
 import kotlinx.android.synthetic.main.fragment_splash_screen.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -25,6 +26,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
   override val coroutineContext: CoroutineContext
     get() = Dispatchers.Main + Job()
   private lateinit var mInterstitialAd: InterstitialAd
+  private var time = 4000L
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +51,15 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
 //    ObjectAnimator.ofPropertyValuesHolder(imageView18, pvhRotation).apply {
 //      duration = 3000
 //    }.start()
+    val sharedPreference = SharedPreference(view.context)
+
+
+
+
+
+    if(sharedPreference.getValueBoolien("FIRST_TIME", false)){
+      time = 1000
+    }
 
 
     val animator = ObjectAnimator.ofFloat(textView13, View.TRANSLATION_X, 50f)
@@ -57,7 +68,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
     animator.start()
 
     ObjectAnimator.ofFloat(imageView18, View.TRANSLATION_Y, 400f).apply{
-      duration = 4000
+      duration = time
       this.doOnEnd {
         loading_back.setBackgroundResource(R.drawable.headligth)
       }
@@ -74,7 +85,7 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
     mInterstitialAd.loadAd(AdRequest.Builder().build())
 
     launch {
-      delay(5000)
+      delay(time+200)
       withContext(Dispatchers.Main){
         //(activity as MainActivity)
 //
@@ -117,6 +128,8 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
           }
 
 
+
+          sharedPreference.save("FIRST_TIME", true)
 
 
           //val action = LevelChooseFragmentDirections.actionLevelChooseFragmentToGameplayFragment(temp, level.name, level.question, level.namelt, level.questionlt, level.header, level.id, score, coins)
