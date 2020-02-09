@@ -50,6 +50,8 @@
     <string name="loading">LUKTELĖKITE...</string>
     <string name="share">Pasidalink su draugais</string>
     <string name="do_not_show">Daugiau neberodyti patarimų</string>
-    <string name="share_app_text" translatable="false">Pasidalink su draugais</string>
+    <string name="share_app_text" translatable="false">Pasidalink \"Logika linksmai\" su draugais ❤ https://play.google.com/store/apps/details?id=get.some.money.starter</string>
     <string name="start_play" translatable="false">Pradėti žaidimą</string>
+    <string name="share_types">Pasidalink su draugais per</string>
+    <string name="production_ad_id">ca-app-pub-9087133931125731~3617917200</string>
 </resources>

@@ -62,7 +62,7 @@ class LooseDialog : DialogFragment(){
     super.onViewCreated(view, savedInstanceState)
 
     mediaPlayer = MediaPlayer.create(context, R.raw.openchest)
-    rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
+    rewardedAd = RewardedAd(activity, "ca-app-pub-9087133931125731/7265997106")
 
 
     //val coins = view.findViewById<TextView>(R.id.coins_profile)

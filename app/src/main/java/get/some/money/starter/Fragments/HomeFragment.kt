@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -112,7 +111,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
       }
 
       finalMapOfCompletedLevels.groupingBy { it.name }.eachCount().map {
-        println("RIKIUOJAM CUSTOM GAL: " + it.key + "    " + it.value)
+       // println("RIKIUOJAM CUSTOM GAL: " + it.key + "    " + it.value)
         completedSeparateByCategory.put(it.key, it.value.toLong())
 
       }
@@ -149,7 +148,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
           list.add(Category(level.category, level.header, level.category))
         }
       }
-      categoryListAdapter.swapData(list.distinct())
+      categoryListAdapter.swapData(list.distinctBy {
+        it.title
+      })
 
 
       categoryListAdapter.sendPercentageCompleted(
@@ -173,17 +174,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), CategoryListAdapter.Inter
   override fun clickCategory(cat: Category) {
     //Toast.makeText(context, cat.title, Toast.LENGTH_LONG).show()
 
-    if (cat.title.equals("Slapti lygiai") || cat.titlelt.equals("Special")){
-      if(isSpecialLevelUnlocked == 1){
-        val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
-        findNavController().navigate(action)
-      }else{
-        Toast.makeText(context, R.string.special_level_pass, Toast.LENGTH_LONG).show()
-      }
-    }else{
+
       val action = HomeFragmentDirections.actionHomeFragmentToLevelChooseFragment(cat.titlelt)
       findNavController().navigate(action)
-    }
+
 
   }
 

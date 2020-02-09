@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity(), AppBarConfiguration.OnNavigateUpListen
           Intent.EXTRA_TEXT,
           resources.getString(R.string.share_app_text)
         )
-        startActivity(Intent.createChooser(sharingIntent, "Share app via"))
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_types)))
         return true
       }
     }

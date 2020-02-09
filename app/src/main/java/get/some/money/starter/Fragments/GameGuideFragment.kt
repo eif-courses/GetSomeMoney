@@ -41,8 +41,8 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
         listOf(
           IntroSlide(
             "ŽAISTI LENGVA",
-            "Pagal pateiktą klausimą ar teiginį! Pakanka spustelėti ant paveikslėlių ir sudėtį loginę seką!",
-            R.drawable.light_on
+            "Vadovautis teiginiu arba pateiktu klausimu! Pvz. Spauskite ant paveikslėlių ir sudėkite seką, kad pradėtų groti muzika.",
+            R.drawable.seq
           ),
           IntroSlide(
             "PRIZAI",
@@ -81,8 +81,8 @@ class GameGuideFragment : Fragment(R.layout.fragment_game_guide) {
         listOf(
           IntroSlide(
             "EASY TO PLAY",
-            "Answer simple question! You need only click on images and choose correct sequence to complete level!",
-            R.drawable.light_on
+            "Answer simple question or follow instructions! For e.g. Click on images to make correct sequence to play music!",
+            R.drawable.seq
           ),
           IntroSlide(
             "PRIZES",

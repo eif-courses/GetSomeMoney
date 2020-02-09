@@ -79,9 +79,9 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
 
 
     MobileAds.initialize(context,
-      "ca-app-pub-3940256099942544~3347511713")
+      "ca-app-pub-9087133931125731~3617917200")
     mInterstitialAd = InterstitialAd(context)
-    mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+    mInterstitialAd.adUnitId = "ca-app-pub-9087133931125731/3426345517"
     mInterstitialAd.loadAd(AdRequest.Builder().build())
 
     launch {

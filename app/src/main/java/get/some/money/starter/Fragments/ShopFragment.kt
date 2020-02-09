@@ -58,7 +58,7 @@ class ShopFragment : Fragment(R.layout.fragment_shop), ShopListAdapter.Interacti
 
     buyOperationSound = MediaPlayer.create(context, R.raw.click)
 
-    rewardedAd = RewardedAd(activity, getString(R.string.ad_mob_rewarded_video_ad_test))
+    rewardedAd = RewardedAd(activity, "ca-app-pub-9087133931125731/7265997106")
 
     val adLoadCallback = object : RewardedAdLoadCallback() {
       override fun onRewardedAdLoaded() {
